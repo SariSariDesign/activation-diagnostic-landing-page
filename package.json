@@ -6,6 +6,8 @@
   "description": "The Activation Blueprint — standalone offer landing page (Sari Sari Design).",
   "scripts": {
     "dev": "next dev",
+    "inject-analytics": "node scripts/inject-analytics.mjs",
+    "prebuild": "node scripts/inject-analytics.mjs",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit"
