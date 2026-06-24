@@ -1,0 +1,249 @@
+/**
+ * The Activation Blueprint — long-form offer landing page copy.
+ * Verbatim from 01_Projects/activation-sprint/activation-blueprint-landing-page-prompt.md.
+ * One offer, one CTA, one destination. Do not add secondary links here.
+ */
+
+export const ACTIVATION_BOOKING_URL =
+  "https://calendly.com/sarisari/sari-sari-activation-sprint-intro-call";
+
+const CTA_LABEL = "Book a discovery call";
+
+export const blueprint = {
+  bookingUrl: ACTIVATION_BOOKING_URL,
+  ctaLabel: CTA_LABEL,
+
+  meta: {
+    title: "The Activation Blueprint — Sari Sari Design",
+    description:
+      "A focused 21-day UX activation diagnostic for Seed–Series A health & wellness founders. One flow, audited, prototyped, and backed by the reasoning behind every decision. Flat $2,500.",
+  },
+
+  hero: {
+    eyebrow: "For Seed–Series A health & wellness founders",
+    headline:
+      "Your users are dropping off before they ever see the value. In 21 days, we'll show you exactly where — and what to do about it.",
+    subhead:
+      "A focused diagnosis and redesign of the one user flow that's costing you the most activation. No retainer. No 8-week timeline. One high-impact flow, audited, prototyped, and backed by the reasoning behind every decision.",
+    microcopy:
+      "15 minutes. We'll tell you honestly whether this is worth your time before you spend a dollar.",
+    trust:
+      "Built by senior designers with experience spanning consumer products at Meta and fintech compliance UX.",
+  },
+
+  problem: {
+    index: "01",
+    headline:
+      "You raised the round. The board wants growth. But signups aren't turning into active users.",
+    body: [
+      "You shipped fast to get to market. The product works — but the experience around it is rough, and you can feel it in the numbers. People sign up and never come back. They hit the part of the flow where they're supposed to trust you with something personal — their data, their health, an AI recommendation — and they hesitate.",
+      "You know design is the problem. What you don't have is a designer who can tell you which part of the flow is leaking, why, and what to do about it — without a three-month commitment or a senior hire you're not ready to make.",
+      "Generic agencies will redesign your screens. They won't understand why a user in a health product needs a different kind of reassurance than a user buying software. That difference is the whole game.",
+    ],
+  },
+
+  whatThisIs: {
+    index: "02",
+    eyebrow: "What this is",
+    headline: "The Activation Blueprint",
+    body: [
+      "A 21-day engagement focused on a single outcome: find the highest-impact fix in your activation flow and prove it works before you invest another dollar in design.",
+      "We pick one flow — onboarding, signup-to-first-value, or trial-to-paid — based on what will move your activation metrics most. Then we diagnose it screen by screen, redesign the critical path, and hand you a clickable prototype with the reasoning behind every decision.",
+      "You walk away with a clear, evidence-backed answer to \u201Cwhat should we fix first, and what will it be worth?\u201D",
+    ],
+    deliverables: [
+      {
+        title: "Activation Diagnostic Report",
+        body: "A screen-by-screen teardown of your current flow. Every screen gets a friction score, a specific problem tied to user behavior, and a benchmark against the top performers in your health vertical.",
+      },
+      {
+        title: "Annotated Flow Map",
+        body: "A visual map of the user journey with every drop-off risk marked. Simple enough to forward to a cofounder who'll get it in two minutes.",
+      },
+      {
+        title: "High-Fidelity Prototype",
+        body: "Your redesigned critical path in Figma, clickable. 5–8 screens covering the path from entry to the moment a user sees value.",
+      },
+      {
+        title: "Decision Rationale",
+        body: "For every major design decision, one paragraph on why it matters and which metric it should move. So you're not taking our word for it.",
+      },
+      {
+        title: "Your Next 90 Days",
+        body: "A one-page roadmap of what we'd do next, mapped to your activation metrics. Useful whether you work with us again or not.",
+      },
+    ],
+  },
+
+  goal: {
+    index: "03",
+    eyebrow: "The goal",
+    headline:
+      "The point isn't prettier screens. It's a flow that earns trust and converts.",
+    body: [
+      "By the end of three weeks, you'll know exactly which part of your activation flow is costing you the most users, you'll have a working prototype of the fix, and you'll understand the reasoning well enough to defend it to your team and your board.",
+      "If you have analytics, we'll ground the diagnosis in your data. If you don't yet, our method still works — we lean on behavioral heuristics, competitive benchmarking, and health-specific domain expertise. Either way, you stop guessing about what to fix.",
+    ],
+  },
+
+  howItWorks: {
+    index: "04",
+    eyebrow: "How it works",
+    headline: "21 days, three phases, one flow done right.",
+    phases: [
+      {
+        tag: "Phase 1 · Diagnose",
+        week: "Week 1",
+        body: "A 60–90 minute kickoff to get product and analytics access and align on the flow. Then we walk your product as a new user, pull behavioral data where it exists, and benchmark you against the top performers in your vertical. You get the diagnostic report and flow map for review.",
+      },
+      {
+        tag: "Phase 2 · Design",
+        week: "Week 2",
+        body: "We design one direction for the critical path — not ten options to choose between. Speed and conviction over breadth. Mid-week, a short check-in so we catch any misalignment early. You get the prototype and the rationale.",
+      },
+      {
+        tag: "Phase 3 · Deliver",
+        week: "Week 3",
+        body: "One round of feedback, incorporated. Then a 45-minute results call: we walk you through the diagnosis, click through the prototype, and hand you the 90-day roadmap.",
+      },
+    ],
+    callout:
+      "Clock starts when access does. We can't audit a product we can't get into, so the 21 days begin once you've given us product access, analytics access (if you have it), and a point of contact.",
+  },
+
+  forYou: {
+    index: "05",
+    headline: "This is built for you if…",
+    items: [
+      "You're a Seed–Series A health or wellness startup that raised in the last 18 months and feels the pressure to show activation, not just signups.",
+      "You're a technical, clinical, or operator founder — not a designer — and you need someone who can tell you what \u201Cgood\u201D looks like.",
+      "Your product is live and has real users moving through a real flow.",
+      "Your users make decisions that require trust — sharing health data, following a protocol, acting on an AI recommendation.",
+      "You want proof a partner is worth it before committing to a retainer or a design hire.",
+    ],
+  },
+
+  notForYou: {
+    headline: "This isn't the right fit if…",
+    items: [
+      "You're pre-launch with no users in the flow yet. We diagnose real behavior; come back when there's something to audit.",
+      "You want production-ready code or developer handoff. This is diagnosis and a prototype, not a build.",
+      "You need ten directions to choose from. We make one strong, defensible call and show our work.",
+      "You're looking for the cheapest screens you can get. This is senior-level strategic work priced like it.",
+      "You need FDA regulatory submission or SaMD authoring. That's outside what we do (though we're strong on designing for already-cleared products).",
+    ],
+  },
+
+  comparison: {
+    index: "06",
+    eyebrow: "Why this over a bigger engagement",
+    headline: "Why not just hire an agency or sign a retainer?",
+    intro:
+      "Because you shouldn't commit three months and tens of thousands of dollars to a design partner you've never worked with. The Activation Blueprint is designed to be the low-risk way to find out if we're right for each other.",
+    columns: ["The Activation Blueprint", "A full retainer / agency"],
+    rows: [
+      {
+        criterion: "Commitment",
+        blueprint: "21 days, one flow",
+        agency: "3+ months, ongoing",
+      },
+      {
+        criterion: "Risk",
+        blueprint: "Fixed scope, fixed price",
+        agency: "Open-ended spend",
+      },
+      {
+        criterion: "Speed to value",
+        blueprint: "Working prototype in three weeks",
+        agency: "Often 8+ weeks to first deliverable",
+      },
+      {
+        criterion: "Decision needed",
+        blueprint: "A founder's call",
+        agency: "Cofounder / board sign-off",
+      },
+      {
+        criterion: "What you prove",
+        blueprint: "Whether the partnership works",
+        agency: "You find out after you've committed",
+      },
+    ],
+    outro:
+      "When the three weeks are done, you'll know exactly how we think and what our work is worth. If a retainer makes sense, the roadmap is already written. If it doesn't, you keep a diagnosis and a prototype you can act on. Either way, you're ahead.",
+  },
+
+  price: {
+    index: "07",
+    eyebrow: "Price & scope",
+    headline: "One flow. Three weeks. $2,500.",
+    body: "A flat fee — no tiers, no surprises. That's roughly what a week of guessing costs a growth-stage startup. If your activation rate is 15% when it could be 30%, that gap is worth far more than the price of finding the fix. We're not selling hours of design work — we're selling the diagnosis and the proof that could unlock the revenue you're already leaving on the table.",
+    included: [
+      "One user flow, chosen by us for highest activation impact",
+      "All five deliverables (diagnostic report, flow map, prototype, rationale, 90-day roadmap)",
+      "Kickoff call, mid-engagement check-in, and a 45-minute results call",
+      "One round of revisions on the prototype",
+    ],
+    excluded: [
+      "Additional flows or pages — a separate engagement or part of a retainer",
+      "Production-ready code or engineering handoff",
+      "FDA regulatory submission or SaMD authoring",
+      "More than one revision round",
+    ],
+    microcopy: "We'll confirm the flow and kick off on the call.",
+  },
+
+  faq: {
+    index: "08",
+    eyebrow: "FAQ",
+    headline: "Questions, answered.",
+    items: [
+      {
+        label: "How fast can we start?",
+        body: "The 21-day clock starts the moment you give us product and analytics access and a point of contact. Most engagements kick off within a week of the discovery call.",
+      },
+      {
+        label: "We don't have great analytics. Does this still work?",
+        body: "Yes. Our method works with or without data. Without it, we rely on behavioral heuristics, competitive benchmarking, and health-vertical expertise. Setting up proper activation analytics is usually one of the first things on your 90-day roadmap.",
+      },
+      {
+        label: "Who actually does the work?",
+        body: "A senior designer — the same person on your kickoff and results calls. You're not handed off to a junior team after the sale.",
+      },
+      {
+        label: "Do you write code or hand off to our engineers?",
+        body: "No. You get a clickable Figma prototype and the rationale behind it, designed so your engineers can build from it. We don't ship production code in this engagement.",
+      },
+      {
+        label: "What if we want you to look at more than one flow?",
+        body: "The Blueprint is deliberately one flow — that focus is why it's fast and high-impact. Additional flows are a separate engagement or part of a retainer. We'll talk through what makes sense on the call.",
+      },
+      {
+        label: "We handle sensitive health data. Can you work within that?",
+        body: "Yes. We design for high-trust, compliance-sensitive health products as our specialty, including HIPAA-covered and FDA-cleared-adjacent products. We don't do regulatory submissions, but designing the experience around them is exactly our lane.",
+      },
+      {
+        label: "How many rounds of revision are included?",
+        body: "One round on the prototype, scoped in the agreement, plus a mid-engagement check-in so we catch misalignment early. With a thorough diagnosis up front, feedback tends to be directional, not \u201Cstart over.\u201D",
+      },
+      {
+        label: "What happens after the three weeks?",
+        body: "You own everything we deliver. If you want to keep going, your 90-day roadmap is the starting point for a retainer. If not, you've got a diagnosis and a prototype you can run with on your own.",
+      },
+    ],
+  },
+
+  proof: {
+    index: "09",
+    eyebrow: "Proof",
+    headline: "Why founders trust us with this",
+    body: "Sari Sari is a product design studio built for health and wellness companies where trust isn't a nice-to-have — it's the product. We've spent years designing high-trust, compliance-heavy flows, with experience spanning consumer products at Meta (Instagram, Facebook, WhatsApp) and fintech compliance UX. We understand what it takes to get a user to trust a screen with something that matters.",
+    // [TO ADD — social proof] Real outcomes/testimonials/logos only. Never fabricate.
+    placeholderNote: "Client results coming soon",
+  },
+
+  finalCta: {
+    index: "10",
+    headline: "Find out what your activation flow is really costing you.",
+    body: "Book a 15-minute discovery call. We'll look at your product, tell you honestly whether the Activation Blueprint is the right fit, and if it's not, point you toward what is. No pitch deck, no pressure.",
+  },
+} as const;

@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+/*
+ * Sari-Sari DS tokens — extracted verbatim from the Figma file
+ * (dwD1O65d5WHCKBIlPiXSmm) variable collections: 01 primitives → 02 alias → 03 mapped.
+ * This file is the canonical token source; the Figma file gets backfilled to match.
+ */
+
+@theme {
+  /* ---- 01 primitives: color ramps ---- */
+  --color-grey-100: #faf9f7;
+  --color-grey-200: #efeeed;
+  --color-grey-300: #e6e5e4;
+  --color-grey-400: #dad8d6;
+  --color-grey-500: #bdbab7;
+  --color-grey-600: #999693;
+  --color-grey-700: #575452;
+  --color-grey-800: #403e3c;
+  --color-grey-900: #292826;
+  --color-grey-1000: #1f1d1c;
+
+  --color-blue-100: #ebf4ff;
+  --color-blue-200: #c4dbf5;
+  --color-blue-300: #4987cc;
+  --color-blue-400: #1f5fa6;
+  --color-blue-500: #054285;
+  --color-blue-600: #002752;
+
+  --color-green-100: #edfcf7;
+  --color-green-200: #c9f0e2;
+  --color-green-300: #51b893;
+  --color-green-400: #1d8f65;
+  --color-green-500: #086643;
+  --color-green-600: #01472d;
+
+  --color-orange-100: #fff2e5;
+  --color-orange-200: #fad4af;
+  --color-orange-300: #ebae71;
+  --color-orange-400: #d68f49;
+  --color-orange-500: #b86e25;
+  --color-orange-600: #8f4d0b;
+
+  --color-red-100: #fceded;
+  --color-red-200: #f0c9c9;
+  --color-red-300: #e08787;
+  --color-red-400: #ac4b4b;
+  --color-red-500: #8f1d1d;
+  --color-red-600: #660404;
+
+  --color-yellow-100: #fff8eb;
+  --color-yellow-200: #f7e7c6;
+  --color-yellow-300: #edce8e;
+  --color-yellow-400: #dda73a;
+  --color-yellow-500: #b88216;
+  --color-yellow-600: #8a5e06;
+
+  /* ---- 02 alias: semantic ramps ---- */
+  --color-neutral-100: var(--color-grey-100);
+  --color-neutral-200: var(--color-grey-200);
+  --color-neutral-300: var(--color-grey-300);
+  --color-neutral-400: var(--color-grey-400);
+  --color-neutral-500: var(--color-grey-500);
+  --color-neutral-600: var(--color-grey-600);
+  --color-neutral-700: var(--color-grey-700);
+  --color-neutral-800: var(--color-grey-800);
+  --color-neutral-900: var(--color-grey-900);
+  --color-neutral-1000: var(--color-grey-1000);
+
+  --color-primary-100: var(--color-blue-100);
+  --color-primary-200: var(--color-blue-200);
+  --color-primary-300: var(--color-blue-300);
+  --color-primary-400: var(--color-blue-400);
+  --color-primary-500: var(--color-blue-500);
+  --color-primary-600: var(--color-blue-600);
+
+  --color-success-100: var(--color-green-100);
+  --color-success-200: var(--color-green-200);
+  --color-success-300: var(--color-green-300);
+  --color-success-400: var(--color-green-400);
+  --color-success-500: var(--color-green-500);
+  --color-success-600: var(--color-green-600);
+
+  /* ---- type faces (PP Editorial Old / Neue Montreal / Supply, with fallbacks) ---- */
+  --font-brand: "PP Editorial Old", "Playfair Display", Georgia, serif;
+  --font-body: "Neue Montreal", "Inter", system-ui, sans-serif;
+  --font-code: "Supply", "Space Mono", ui-monospace, monospace;
+
+  /* ---- typescale (size / line-height / tracking from DS variables) ---- */
+  --text-display-l: 120px;
+  --text-display-l--line-height: 120px;
+  --text-display-l--letter-spacing: -2px;
+  --text-display-m: 72px;
+  --text-display-m--line-height: 80px;
+  --text-display-m--letter-spacing: -1px;
+  --text-display-s: 56px;
+  --text-display-s--line-height: 56px;
+  --text-display-s--letter-spacing: 0px;
+  --text-h1: 48px;
+  --text-h1--line-height: 56px;
+  --text-h2: 40px;
+  --text-h2--line-height: 48px;
+  --text-h3: 32px;
+  --text-h3--line-height: 40px;
+  --text-title-l: 24px;
+  --text-title-l--line-height: 32px;
+  --text-title-m: 18px;
+  --text-title-m--line-height: 24px;
+  --text-title-m--letter-spacing: 0.15px;
+  --text-title-s: 14px;
+  --text-title-s--line-height: 20px;
+  --text-title-s--letter-spacing: 0.25px;
+  --text-body-l: 22px;
+  --text-body-l--line-height: 32px;
+  --text-body-l--letter-spacing: 0.25px;
+  --text-body-m: 18px;
+  --text-body-m--line-height: 24px;
+  --text-body-m--letter-spacing: 0.5px;
+  --text-body-s: 14px;
+  --text-body-s--line-height: 20px;
+  --text-body-s--letter-spacing: 0.75px;
+  --text-label-l: 16px;
+  --text-label-l--line-height: 20px;
+  --text-label-l--letter-spacing: 2px;
+  --text-label-m: 14px;
+  --text-label-m--line-height: 20px;
+  --text-label-m--letter-spacing: 2px;
+  --text-label-s: 10px;
+  --text-label-s--line-height: 12px;
+  --text-label-s--letter-spacing: 1.5px;
+}
+
+/*
+ * Webfonts — Pangram Pangram faces. Files land in /public/fonts once licensed;
+ * font-display: swap keeps the fallback stacks rendering until then.
+ */
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("/fonts/NeueMontreal-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("/fonts/NeueMontreal-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("/fonts/NeueMontreal-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Supply";
+  src: url("/fonts/Supply-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Supply";
+  src: url("/fonts/Supply-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-800);
+  font-family: var(--font-body);
+}
+
+/* Supply labels are always uppercase in the DS */
+.ds-label {
+  font-family: var(--font-code);
+  text-transform: uppercase;
+}
+
+/* Film-grain overlay used on saturated sections (blue/green) — stands in for the
+   Figma "Noise & Texture" raster until the original is exported. */
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Decorative vertical gridlines (7 columns, like the comp's gridlines frame). */
+.gridlines {
+  position: absolute;
+  inset: 0;
+  max-width: 1200px;
+  margin-inline: auto;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+}
+.gridlines > i {
+  width: 1px;
+  background: currentColor;
+  opacity: 0.07;
+}
