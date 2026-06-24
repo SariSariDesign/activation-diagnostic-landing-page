@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Activation Diagnostic Report Template — Sari Sari Design
+  Version 2.0 — April 2026
+
+  HOW TO USE THIS TEMPLATE:
+  Replace all [PLACEHOLDER] values with audit-specific content.
+  Duplicate finding-card blocks (.fc) for each of the Top 5 findings.
+  Adjust badge classes: .bc (Critical), .bm (Major), .bn (Minor).
+  Adjust effort/impact tag classes:
+    Effort: .te-low | .te-med | .te-high
+    Impact: .ti-high | .ti-med | .ti-low
+  The logo SVG at top is the Sari Sari wordmark — do not remove or replace.
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Activation Diagnostic Report — SignalVerified</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap');
+
+    :root {
+      /* Warm gray scale */
+      --grey-100: #F7F5F0;
+      --grey-200: #EDEAE3;
+      --grey-300: #D5D2CA;
+      --grey-400: #BFBDB8;
+      --grey-600: #8A8884;
+      --grey-800: #575452;
+      --grey-1000: #292826;
+
+      /* Blue scale */
+      --blue-100: #EAF1FD;
+      --blue-200: #C2D7F7;
+      --blue-400: #3A84D4;
+      --blue-500: #1F5FA6;
+      --blue-600: #174A82;
+
+      /* Red scale */
+      --red-100: #FCEEF2;
+      --red-200: #F3C8D5;
+      --red-500: #AB4E68;
+
+      /* Orange scale */
+      --orange-100: #FEF4E6;
+      --orange-200: #FDE0B5;
+      --orange-500: #FB8B24;
+
+      /* Green scale */
+      --green-100: #E8F7EE;
+      --green-200: #B0E8C8;
+      --green-500: #2E6B45;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--grey-100);
+      color: var(--grey-1000);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Overline ── */
+    .ovl {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--blue-500);
+      display: block; margin-bottom: 14px;
+    }
+
+    /* ── Header ── */
+    .report-header { padding: 64px 0 48px; }
+
+    .logo-lockup { margin-bottom: 64px; }
+
+    .report-title {
+      font-size: 46px; font-weight: 700; line-height: 1.1;
+      color: var(--grey-1000); margin-bottom: 10px;
+    }
+
+    .report-caption {
+      font-size: 14px; color: var(--grey-600); margin-bottom: 40px;
+    }
+    .report-caption a { color: var(--grey-600); text-decoration: none; }
+
+    /* ── Why This Matters ── */
+    .why-block { margin-bottom: 32px; }
+    .why-block p {
+      font-size: 16px; color: var(--grey-1000); line-height: 1.7;
+    }
+
+    .rule { border: none; border-top: 1px solid var(--grey-300); margin: 32px 0; }
+
+    /* ── Business Properties Grid ── */
+    .profile-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px 32px; margin-bottom: 48px;
+    }
+    .profile-item { display: flex; gap: 8px; }
+    .profile-label {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--grey-600);
+      min-width: 110px; flex-shrink: 0; padding-top: 1px;
+    }
+    .profile-value { color: var(--grey-1000); font-weight: 500; font-size: 13px; }
+
+    /* ── Findings Section ── */
+    .findings-section { padding: 8px 0 48px; }
+    .findings-header { margin-bottom: 32px; }
+    .findings-header h2 {
+      font-size: 22px; font-weight: 700; color: var(--grey-1000); margin-bottom: 6px;
+    }
+    .findings-header p { font-size: 14px; color: var(--grey-800); }
+
+    /* ── Finding Card ── */
+    .fc {
+      background: var(--grey-200);
+      border-radius: 4px;
+      padding: 32px; margin-bottom: 16px;
+    }
+
+    .fc-meta {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+
+    .fc-num {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px; font-weight: 600; color: var(--grey-100);
+      background: var(--blue-500);
+      width: 26px; height: 26px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .fdim {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--grey-600);
+    }
+
+    /* Severity badges */
+    .badge {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .bc { background: var(--red-100); color: var(--red-500); border: 1px solid var(--red-200); }
+    .bm { background: var(--orange-100); color: var(--orange-500); border: 1px solid var(--orange-200); }
+    .bn { background: var(--blue-100); color: var(--blue-500); border: 1px solid var(--blue-200); }
+
+    .fc-title {
+      font-size: 19px; font-weight: 700; color: var(--blue-400);
+      margin-bottom: 14px; line-height: 1.3;
+    }
+
+    /* Finding screenshot */
+    .fc-shot { margin: 0 0 16px; }
+    .fc-shot img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--grey-300); border-radius: 4px;
+    }
+    .fc-shot figcaption {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10.5px; font-weight: 500; letter-spacing: 0.5px;
+      color: var(--grey-600); margin-top: 6px;
+    }
+
+    .fc-body p {
+      font-size: 14px; color: var(--grey-1000); line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    /* Why This Finding Matters callout */
+    .fc-why {
+      border-left: 3px solid var(--blue-200);
+      background: var(--grey-100);
+      border-radius: 0 4px 4px 0;
+      padding: 14px 16px;
+      margin: 4px 0 14px;
+    }
+    .fc-why-label {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--blue-500);
+      margin-bottom: 6px; display: block;
+    }
+    .fc-why p {
+      font-size: 13px; color: var(--grey-800); line-height: 1.65; margin: 0;
+    }
+
+    /* Criterion ID chips */
+    .cids { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
+    .cid {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600;
+      color: var(--blue-500); background: var(--blue-100);
+      padding: 2px 8px; border-radius: 4px;
+    }
+
+    /* Recommendation subsection */
+    .fc-rec { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--grey-300); }
+    .fc-rec-label {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--green-500);
+      margin-bottom: 8px; display: block;
+    }
+    .fc-rec ul { padding-left: 18px; margin: 0; }
+    .fc-rec li {
+      font-size: 14px; color: var(--grey-1000); line-height: 1.75;
+      margin-bottom: 4px;
+    }
+    .fc-rec li:last-child { margin-bottom: 0; }
+
+    /* Effort / Impact tags */
+    .tags-row { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+    .tag {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 500; padding: 4px 12px;
+      border-radius: 100px;
+      background: var(--grey-100);
+      border: 1px solid var(--grey-300);
+      color: var(--grey-600);
+    }
+    .te-low  { color: var(--green-500); border-color: var(--green-200); background: var(--green-100); }
+    .te-med  { color: var(--orange-500); border-color: var(--orange-200); background: var(--orange-100); }
+    .te-high { color: var(--red-500); border-color: var(--red-200); background: var(--red-100); }
+    .ti-high { color: var(--red-500); border-color: var(--red-200); background: var(--red-100); }
+    .ti-med  { color: var(--orange-500); border-color: var(--orange-200); background: var(--orange-100); }
+    .ti-low  { color: var(--grey-600); border-color: var(--grey-300); background: var(--grey-100); }
+
+    /* ── Methodology Block ── */
+    .mb {
+      background: var(--grey-200); border-radius: 4px;
+      padding: 28px 32px; margin: 0 0 0;
+    }
+    .mb-section { margin-bottom: 20px; }
+    .mb-section:last-child { margin-bottom: 0; }
+    .mb-section p {
+      font-size: 14px; color: var(--grey-800); line-height: 1.75;
+    }
+
+    /* ── CTA Block ── */
+    .fcta {
+      background: var(--blue-500);
+      border-radius: 0;
+      padding: 48px 40px;
+      text-align: center;
+      margin: 48px -32px 0;
+    }
+    .fcta .ovl { color: var(--blue-200); }
+    .fcta h3 {
+      font-size: 22px; font-weight: 700; color: var(--grey-100);
+      margin-bottom: 14px; line-height: 1.3;
+    }
+    .fcta p {
+      font-size: 14px; color: var(--blue-200);
+      line-height: 1.75; max-width: 560px;
+      margin: 0 auto 28px;
+    }
+    .cta-btn {
+      display: inline-block;
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--blue-500); background: var(--grey-100);
+      border-radius: 4px; padding: 12px 28px;
+      text-decoration: none;
+    }
+
+    /* ── Report Footer ── */
+    .report-footer { padding: 0 0 64px; }
+
+    .disclaimer {
+      font-size: 12px; color: var(--grey-600); line-height: 1.7;
+      text-align: center; padding: 24px 0;
+      border-top: 1px solid var(--grey-300);
+    }
+
+    .brand-footer {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      text-align: center; margin-top: 24px;
+      font-size: 12px; color: var(--grey-600);
+    }
+    .brand-footer span { color: var(--blue-500); font-weight: 600; }
+    .logo-lockup a { display: inline-block; line-height: 0; }
+    .brand-footer a { text-decoration: none; }
+    .brand-footer a:hover span { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .fcta { margin: 48px -20px 0; padding: 40px 24px; }
+      .report-title { font-size: 32px; }
+      .profile-grid { grid-template-columns: 1fr; }
+      .fc { padding: 24px; }
+      .mb { padding: 24px; }
+    }
+    /* ── Screen Section ── */
+    .screen-section {
+      margin-bottom: 8px;
+    }
+    .screen-header {
+      background: var(--grey-1000);
+      color: var(--grey-100);
+      padding: 16px 24px;
+      border-radius: 4px 4px 0 0;
+      margin-top: 32px;
+    }
+    .screen-header .screen-num {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--blue-200);
+      display: block; margin-bottom: 4px;
+    }
+    .screen-header h3 {
+      font-size: 18px; font-weight: 700; margin: 0;
+    }
+    .screen-context {
+      background: var(--grey-200);
+      padding: 16px 24px;
+      font-size: 13px; color: var(--grey-800); line-height: 1.7;
+    }
+    .screen-context b { color: var(--grey-1000); }
+    .screen-visual-note {
+      background: var(--green-100);
+      border-left: 3px solid var(--green-500);
+      padding: 10px 16px;
+      margin-top: 1px;
+      font-size: 12.5px; color: var(--green-500); line-height: 1.6;
+    }
+
+    /* ── Benchmark Table ── */
+    .bm-table-wrap { margin-top: 8px; overflow-x: auto; }
+    .bm-table {
+      width: 100%; border-collapse: collapse; font-size: 13px;
+    }
+    .bm-table th {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10.5px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--grey-600);
+      text-align: left; padding: 10px 14px;
+      border-bottom: 2px solid var(--grey-300);
+    }
+    .bm-table td {
+      padding: 14px; vertical-align: top;
+      border-bottom: 1px solid var(--grey-300);
+      color: var(--grey-1000); line-height: 1.6;
+    }
+    .bm-table td:first-child {
+      font-weight: 700; white-space: nowrap;
+    }
+
+    /* ── Summary Table ── */
+    .summary-table-wrap { margin-top: 24px; }
+    .summary-table {
+      width: 100%; border-collapse: collapse; font-size: 13px;
+    }
+    .summary-table th {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10.5px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--grey-600);
+      text-align: left; padding: 8px 12px;
+      border-bottom: 2px solid var(--grey-300);
+    }
+    .summary-table td {
+      padding: 10px 12px; border-bottom: 1px solid var(--grey-300);
+      color: var(--grey-1000);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── HEADER ── -->
+    <header class="report-header">
+
+      <!-- Sari Sari Wordmark — do not remove -->
+      <div class="logo-lockup">
+        <a href="https://www.sarisari.design" target="_blank" rel="noopener" aria-label="Sari Sari Design — sarisari.design">
+        <svg width="148" height="33" viewBox="0 0 248 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M113.123 18.9585V21.6722C114.373 19.2441 116.515 18.6371 118.801 18.53V24.5645C118.408 24.5645 116.087 24.4931 115.194 24.9573C114.23 25.4572 113.338 26.0999 113.338 29.6707V37.4191H106.91V18.9585H113.123Z" fill="#1F1D1C"/>
+          <path d="M87.8407 24.7429C88.4477 20.9936 91.5542 18.2441 96.3746 18.2441C100.767 18.2441 105.016 20.1366 105.016 26.8853V31.92C105.016 33.3483 104.98 35.9193 105.373 37.419H99.1597C99.0883 37.169 99.0169 36.6334 99.0169 36.2049V35.3479H98.9812C98.1242 36.8477 96.7674 37.9903 93.518 37.9903C90.0188 37.9903 87.0908 36.0621 87.0908 32.3842C87.0908 27.4923 92.4825 26.5997 94.8035 26.2426C97.1244 25.8855 98.8027 26.0283 98.8027 24.4929C98.8027 23.1718 97.4815 22.6718 96.3389 22.6718C95.1249 22.6718 93.9822 23.1718 93.6609 24.7429H87.8407ZM93.518 31.8843C93.518 32.6342 93.8751 33.5983 95.7676 33.5983C97.4101 33.5983 98.9098 32.4557 98.9098 28.8135V28.3136C98.4456 29.2063 97.4458 29.5991 96.1246 29.8847C93.9465 30.3846 93.518 31.0988 93.518 31.8843Z" fill="#1F1D1C"/>
+          <path d="M80.4265 24.3858C80.1051 23.2075 79.391 22.529 78.1412 22.529C76.8558 22.529 76.2488 23.2075 76.2488 23.8859C76.2488 24.8143 76.6772 25.2428 79.1053 25.9569C79.9623 26.2069 80.8192 26.4211 81.6762 26.6711C85.2826 27.6709 86.3895 29.492 86.3895 32.1343C86.3895 35.1694 83.9971 38.1331 78.1412 38.1331C72.9637 38.1331 70.3571 35.705 69.6787 31.563H75.856C76.0345 32.8127 76.8201 33.7411 78.1055 33.7411C79.6766 33.7411 80.1765 32.9556 80.1765 32.3128C80.1765 30.956 78.9625 30.6346 78.0341 30.3489L75.1776 29.5277C71.7497 28.5279 70.3928 26.7425 70.3928 23.8859C70.3928 20.8508 72.9994 18.2441 78.1055 18.2441C83.0688 18.2441 85.6396 20.6008 86.2467 24.3858H80.4265Z" fill="#1F1D1C"/>
+          <path d="M61.9559 19.216V37.4192H68.3832V19.3505C67.6632 20.3145 66.5133 20.9386 65.2176 20.9386C63.8626 20.9386 62.667 20.2561 61.9559 19.216Z" fill="#1F1D1C"/>
+          <path d="M68.136 16.6469C68.136 18.2587 66.8294 19.5653 65.2176 19.5653C63.6059 19.5653 62.2993 18.2587 62.2993 16.6469C62.2993 15.0351 63.6059 13.7285 65.2176 13.7285C66.8294 13.7285 68.136 15.0351 68.136 16.6469Z" fill="#1F1D1C"/>
+          <path d="M119.705 19.216V37.4192H126.133V19.3505C125.413 20.3145 124.263 20.9386 122.967 20.9386C121.612 20.9386 120.417 20.2561 119.705 19.216Z" fill="#1F1D1C"/>
+          <path d="M125.885 16.6469C125.885 18.2587 124.579 19.5653 122.967 19.5653C121.355 19.5653 120.049 18.2587 120.049 16.6469C120.049 15.0351 121.355 13.7285 122.967 13.7285C124.579 13.7285 125.885 15.0351 125.885 16.6469Z" fill="#1F1D1C"/>
+          <path d="M55.4425 18.9585V21.6722C56.6922 19.2441 58.8346 18.6371 61.1199 18.53V24.5645C60.7271 24.5645 58.4061 24.4931 57.5135 24.9573C56.5494 25.4572 55.6567 26.0999 55.6567 29.6707V37.4191H49.2295V18.9585H55.4425Z" fill="#1F1D1C"/>
+          <path d="M30.162 24.7429C30.769 20.9936 33.8755 18.2441 38.6959 18.2441C43.0878 18.2441 47.3369 20.1366 47.3369 26.8853V31.92C47.3369 33.3483 47.3012 35.9193 47.694 37.419H41.481C41.4096 37.169 41.3382 36.6334 41.3382 36.2049V35.3479H41.3025C40.4455 36.8477 39.0886 37.9903 35.8393 37.9903C32.3401 37.9903 29.4121 36.0621 29.4121 32.3842C29.4121 27.4923 34.8038 26.5997 37.1248 26.2426C39.4457 25.8855 41.1239 26.0283 41.1239 24.4929C41.1239 23.1718 39.8028 22.6718 38.6602 22.6718C37.4461 22.6718 36.3035 23.1718 35.9822 24.7429H30.162ZM35.8393 31.8843C35.8393 32.6342 36.1964 33.5983 38.0889 33.5983C39.7314 33.5983 41.2311 32.4557 41.2311 28.8135V28.3136C40.7669 29.2063 39.7671 29.5991 38.4459 29.8847C36.2678 30.3846 35.8393 31.0988 35.8393 31.8843Z" fill="#1F1D1C"/>
+          <path d="M22.7477 24.3858C22.4264 23.2075 21.7122 22.529 20.4625 22.529C19.1771 22.529 18.57 23.2075 18.57 23.8859C18.57 24.8143 18.9985 25.2428 21.4266 25.9569C22.2836 26.2069 23.1405 26.4211 23.9975 26.6711C27.6039 27.6709 28.7108 29.492 28.7108 32.1343C28.7108 35.1694 26.3184 38.1331 20.4625 38.1331C15.285 38.1331 12.6784 35.705 12 31.563H18.1773C18.3558 32.8127 19.1414 33.7411 20.4268 33.7411C21.9979 33.7411 22.4978 32.9556 22.4978 32.3128C22.4978 30.956 21.2838 30.6346 20.3554 30.3489L17.4988 29.5277C14.071 28.5279 12.7141 26.7425 12.7141 23.8859C12.7141 20.8508 15.3207 18.2441 20.4268 18.2441C25.39 18.2441 27.9609 20.6008 28.5679 24.3858H22.7477Z" fill="#1F1D1C"/>
+          <path d="M217.634 37.4435V19.0203H223.834V21.7642C224.867 19.6618 226.471 18.3789 229.322 18.3789C233.99 18.3789 235.95 21.5148 235.95 27.0382V37.4435H229.536V29.2119C229.536 27.3232 229.714 24.0805 226.899 24.0805C224.76 24.0805 224.048 26.1473 224.048 30.2096V37.4435H217.634Z" fill="#1F1D1C"/>
+          <path d="M209.757 19.02H216.67V34.8062C216.67 42.2539 211.859 44 206.514 44C200.599 44 197.534 40.7216 196.857 37.5145H203.093C203.557 38.7261 204.626 39.4388 206.407 39.4388C209.222 39.4388 209.757 38.0846 209.757 36.3742V33.6659H209.721C209.044 35.2339 207.655 36.4811 205.053 36.4811C200.456 36.4811 196.465 33.7016 196.465 27.4299C196.465 21.1938 200.349 18.4499 204.982 18.4499C207.334 18.4499 209.08 19.5189 209.721 20.98H209.757V19.02ZM202.844 27.4655C202.844 29.7461 204.34 31.6704 206.728 31.6704C209.116 31.6704 210.577 29.7461 210.577 27.4655C210.577 25.2205 209.116 23.2962 206.728 23.2962C204.34 23.2962 202.844 25.2205 202.844 27.4655Z" fill="#1F1D1C"/>
+          <path d="M182.514 24.4365C182.193 23.2605 181.481 22.5835 180.233 22.5835C178.951 22.5835 178.345 23.2605 178.345 23.9376C178.345 24.8641 178.772 25.2917 181.196 26.0044C182.051 26.2539 182.906 26.4677 183.761 26.7171C187.36 27.7149 188.465 29.5323 188.465 32.1692C188.465 35.1982 186.078 38.1559 180.233 38.1559C175.066 38.1559 172.465 35.7327 171.788 31.5991H177.953C178.131 32.8463 178.915 33.7728 180.198 33.7728C181.766 33.7728 182.265 32.9888 182.265 32.3474C182.265 30.9933 181.053 30.6726 180.127 30.3875L177.276 29.5679C173.855 28.5701 172.501 26.7884 172.501 23.9376C172.501 20.9086 175.102 18.3073 180.198 18.3073C185.151 18.3073 187.717 20.6592 188.322 24.4365H182.514Z" fill="#1F1D1C"/>
+          <path d="M171.415 32.0981C170.203 35.4121 166.889 38.156 161.9 38.156C156.199 38.156 151.994 34.2005 151.994 28.2495C151.994 22.548 156.235 18.3431 162.079 18.3431C167.851 18.3431 171.7 22.2985 171.7 28.7128C171.7 28.9622 171.7 29.4968 171.664 30.0313H158.123C158.586 31.8843 160.083 33.1671 161.972 33.1671C163.183 33.1671 164.252 32.7752 164.929 32.0981H171.415ZM158.088 26.2896H165.642C165.428 25.0068 164.502 22.9756 161.972 22.9756C159.976 22.9756 158.515 24.2941 158.088 26.2896Z" fill="#1F1D1C"/>
+          <path d="M139.524 18.4499C142.019 18.4499 143.587 19.5902 144.406 20.98H144.442V12H151.141V37.4432H144.299V35.5189H144.264C143.622 36.5523 142.339 37.9777 139.595 37.9777C134.999 37.9777 130.651 34.4855 130.651 28.2138C130.651 21.9777 134.892 18.4499 139.524 18.4499ZM136.994 28.2494C136.994 31.029 138.526 33.2383 141.056 33.2383C143.587 33.2383 145.154 31.029 145.154 28.2494C145.154 25.5056 143.587 23.2962 141.056 23.2962C138.526 23.2962 136.994 25.5056 136.994 28.2494Z" fill="#1F1D1C"/>
+          <path d="M189.2 19.2167V37.4199H195.628V19.3512C194.908 20.3152 193.758 20.9393 192.462 20.9393C191.107 20.9393 189.911 20.2567 189.2 19.2167Z" fill="#1F1D1C"/>
+          <path d="M195.38 16.6476C195.38 18.2594 194.074 19.566 192.462 19.566C190.85 19.566 189.544 18.2594 189.544 16.6476C189.544 15.0358 190.85 13.7292 192.462 13.7292C194.074 13.7292 195.38 15.0358 195.38 16.6476Z" fill="#1F1D1C"/>
+        </svg>
+        </a>
+      </div>
+
+      <span class="ovl">Activation Diagnostic Report</span>
+      <h1 class="report-title">SignalVerified</h1>
+      <p class="report-caption">
+        <a href="https://www.signalverified.net">signalverified.net</a> &nbsp;&middot;&nbsp; June 2026
+      </p>
+
+      <!-- WHY THIS MATTERS — 3 punchy sentences grounded in their business -->
+      <div class="why-block">
+        <span class="ovl">Why This Matters</span>
+        <p>This is a screen-by-screen teardown of the activation flow, built from a recorded usability session, full-page screenshots, and a structured audit. SignalVerified sells a high-price, low-frequency service through a small number of screens, so each one carries real weight in the decision to book a call or submit a job description. The findings below follow the order a real visitor encounters them, from the homepage through to the platform login.</p>
+        <p style="margin-top: 18px; font-size: 14px; color: var(--grey-600); line-height: 1.7;">Your five highest-impact findings are below — and the last section shows how the 21-Day Activation Diagnostic fixes them.<br><a href="#next-steps" style="color: var(--blue-500); font-weight: 600; text-decoration: none;">Jump to next steps &rarr;</a></p>
+      </div>
+
+      <hr class="rule">
+
+      <!-- BUSINESS PROPERTIES -->
+      <div class="profile-grid">
+        <div class="profile-item">
+          <span class="profile-label">Industry</span>
+          <span class="profile-value">Skills-based hiring verification</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Stage</span>
+          <span class="profile-value">Early-stage, founder-led</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">GTM Model</span>
+          <span class="profile-value">Sales-assisted and self-serve, hybrid</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Conversion Goal</span>
+          <span class="profile-value">Discovery call booked or audit form submitted</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Customer Type</span>
+          <span class="profile-value">B2B — HR leaders, hiring managers</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Competitors</span>
+          <span class="profile-value">TestGorilla, Criteria Corp, CodeSignal</span>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- ── ACTIVATION FLOWS ── -->
+    <section class="findings-section">
+      <div class="findings-header">
+        <span class="ovl">Activation Flows</span>
+        <h2>The two paths a visitor can take</h2>
+        <p>Both flows are short, which fits a high-price, low-frequency service. The friction is not step count — it is that the homepage does not make clear which path to choose, since CTAs for both are mixed together in the hero.</p>
+      </div>
+      <p style="font-size: 13px; color: var(--grey-800); line-height: 1.7; margin-bottom: 16px;"><b>Flow A — sales-assisted:</b> Homepage &rarr; Book a Call &rarr; Calendly &rarr; off-platform conversation.</p>
+      <p style="font-size: 13px; color: var(--grey-800); line-height: 1.7;"><b>Flow B — self-serve audit:</b> Homepage &rarr; Free Hiring Audit Brief form &rarr; email follow-up.</p>
+    </section>
+
+    <!-- ── FINDINGS ── -->
+    <section class="findings-section">
+      <div class="findings-header">
+        <span class="ovl">Findings</span>
+        <h2>Top 5 Findings</h2>
+        <p>Ranked by impact on your conversion goal — selected from an 8-finding evaluation across 11 UX dimensions.</p>
+      </div>
+
+      <!-- SCREEN 1: HOMEPAGE -->
+      <div class="screen-section">
+        <div class="screen-header">
+          <span class="screen-num">Screen 1</span>
+          <h3>Homepage</h3>
+        </div>
+        <div class="screen-context">
+          Hero with headline, five CTAs, a supporting card promoting the free audit, four problem-framing stats, and a four-step preview of how the product works.
+        </div>
+        <div class="screen-visual-note">Visual design is strong and consistent across the site — a single accent color, clear type scale, and a repeated logo mark. This is not where the product loses people.</div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-meta">
+          <div class="fc-num">1</div>
+          <span class="fdim">Conversion Rate Optimization</span>
+          <span class="badge bc">Critical</span>
+        </div>
+        <h3 class="fc-title">Five CTAs in the hero, with no shared verb, and two leading to the same place</h3>
+        <figure class="fc-shot">
+          <img src="activation-diagnostic-assets/01-hero-five-ctas.webp" alt="Homepage hero — five competing CTAs, two of them the same destination">
+          <figcaption>Homepage hero — five competing CTAs, two of them the same destination</figcaption>
+        </figure>
+        <div class="fc-body">
+          <p>The hero contains five distinct buttons — Book a Call, Platform Login, Book your discovery call, See TheSignal, and Request your free audit. Book a Call and Book your discovery call lead to the identical calendar page under different names.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>In a recorded usability session, three people unfamiliar with the product were shown this screen and asked what it does. None reached the correct answer from the hero alone, and one said directly that they would not use the site to find candidates. Industry research on this exact pattern shows single-CTA pages convert at roughly 13.5% versus 10.5% for multi-CTA pages, and a single clear CTA has produced conversion lifts as high as 371% over pages with several competing actions.</p>
+          </div>
+          <div class="cids">
+            <span class="cid">CRO-03</span>
+            <span class="cid">N-04</span>
+          </div>
+        </div>
+        <div class="fc-rec">
+          <span class="fc-rec-label">Recommendation</span>
+          <ul>
+            <li>Choose one primary action for the hero — “Book your discovery call” — and give it the most visual weight. Move “Platform Login” to a small text link in the top nav, where returning customers expect it, rather than competing in the hero.</li>
+            <li>Collapse “Book a Call” and “Book your discovery call” into that single CTA so the same action isn’t offered twice under two names, and keep “See TheSignal” as a lighter secondary link for people who want proof before they book.</li>
+          </ul>
+        </div>
+        <div class="tags-row">
+          <span class="tag te-med">Effort: Medium</span>
+          <span class="tag ti-high">Impact: High</span>
+        </div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-meta">
+          <div class="fc-num">2</div>
+          <span class="fdim">Visual &amp; Brand Design</span>
+          <span class="badge bm">Major</span>
+        </div>
+        <h3 class="fc-title">The hero card shows a different offer on desktop than on mobile</h3>
+        <figure class="fc-shot">
+          <img src="activation-diagnostic-assets/02-hero-card-desktop-vs-mobile.webp" alt="Hero card — desktop (left) promotes the free audit; mobile (right) shows a sample report">
+          <figcaption>Hero card — desktop (left) promotes the free audit; mobile (right) shows a sample report</figcaption>
+        </figure>
+        <div class="fc-body">
+          <p>The desktop hero card promotes the Free Hiring Audit Brief. The mobile version of the same card shows a sample candidate report instead, with a different layout and a different message entirely.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>A visitor’s first impression of the product depends on which device they use. Someone shown the desktop site by a colleague, then opening the same link on a phone, sees a different primary offer and may not recognize it as the same product.</p>
+          </div>
+          <div class="cids">
+            <span class="cid">VD-07</span>
+            <span class="cid">IA-09</span>
+          </div>
+        </div>
+        <div class="fc-rec">
+          <span class="fc-rec-label">Recommendation</span>
+          <ul>
+            <li>Serve the same hero offer on every screen size so a visitor who opens the link on their phone sees the product they were shown on desktop. Pick the stronger-converting card and make it the default everywhere.</li>
+            <li>If both the Free Hiring Audit and the sample report matter, keep one in the hero and move the other into its own clearly labeled section below — don’t swap them by breakpoint.</li>
+          </ul>
+        </div>
+        <div class="tags-row">
+          <span class="tag te-med">Effort: Medium</span>
+          <span class="tag ti-high">Impact: High</span>
+        </div>
+      </div>
+
+      <!-- SCREEN 2: HOW IT WORKS -->
+      <div class="screen-section">
+        <div class="screen-header">
+          <span class="screen-num">Screen 2</span>
+          <h3>How It Works</h3>
+        </div>
+        <div class="screen-context">
+          A “human-governed, AI-delivered, auditable” standard statement, a process timeline, a four-step sequence, a customer quote, and a CTA into the Free Hiring Audit Brief.
+        </div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-meta">
+          <div class="fc-num">3</div>
+          <span class="fdim">Content Hierarchy &amp; Copywriting</span>
+          <span class="badge bm">Major</span>
+        </div>
+        <h3 class="fc-title">Core terms appear before they are defined</h3>
+        <figure class="fc-shot">
+          <img src="activation-diagnostic-assets/03-thesignal-headline.webp" alt="Homepage — “TheSignal,” a proprietary name for an insights report, used as a headline before it’s defined">
+          <figcaption>Homepage — “TheSignal,” a proprietary name for an insights report, used as a headline before it’s defined</figcaption>
+        </figure>
+        <div class="fc-body">
+          <p>The product invents names for ordinary artifacts and uses them before defining them. The homepage headlines a section “TheSignal by SignalVerified is the Missing Layer” — “TheSignal” is the company’s name for what is essentially an insights report — and the How It Works page frames a three-word “human-governed, AI-delivered, auditable” standard, all presented as established terms a first-time visitor is assumed to already know.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>Shown a competitor’s homepage immediately after this page in the same recorded session, one tester said: “I understand exactly what the other website was trying to tell me in five different pages.” That competitor’s hero states its function in one sentence with no invented terms.</p>
+          </div>
+          <div class="cids">
+            <span class="cid">COPY-07</span>
+          </div>
+        </div>
+        <div class="fc-rec">
+          <span class="fc-rec-label">Recommendation</span>
+          <ul>
+            <li>Open with one plain sentence stating what SignalVerified does before the three-word standard appears — e.g. “Experienced reviewers score your finalists on real analyst work and give you a signed, defensible verdict.”</li>
+            <li>Define “human-governed,” “AI-delivered,” and “auditable” in a short line each, right where they first appear, so a hiring manager isn’t left guessing what “AI-delivered” means in a human-reviewed product.</li>
+          </ul>
+        </div>
+        <div class="tags-row">
+          <span class="tag te-low">Effort: Low</span>
+          <span class="tag ti-high">Impact: High</span>
+        </div>
+      </div>
+
+      <!-- SCREEN 3: REVIEWERS -->
+      <div class="screen-section">
+        <div class="screen-header">
+          <span class="screen-num">Screen 3</span>
+          <h3>Reviewers</h3>
+        </div>
+        <div class="screen-context">
+          “The people behind every read,” reviewer stats, client logos (Travelers, The Hartford, Nike, Verizon, Reebok, Intel), a reviewer testimonial, governance safeguards, and a reviewer FAQ.
+        </div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-meta">
+          <div class="fc-num">4</div>
+          <span class="fdim">Conversion Rate Optimization</span>
+          <span class="badge bc">Critical</span>
+        </div>
+        <h3 class="fc-title">The strongest proof on the site is also the hardest screen to reach</h3>
+        <figure class="fc-shot">
+          <img src="activation-diagnostic-assets/04-reviewers-proof.webp" alt="Reviewers — client logos and the rigor stat, several clicks deep and absent from the homepage">
+          <figcaption>Reviewers — client logos and the rigor stat, several clicks deep and absent from the homepage</figcaption>
+        </figure>
+        <div class="fc-body">
+          <p>Real client logos, named governance controls, and a specific rejection-rate statistic all live on this screen — several clicks deep in the path, after How It Works and Compare vs. Take-Home. None of this content appears on the homepage.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>Social proof placed near a call to action has been shown to increase conversion by 84 to 270%, while the same proof buried deep in a site loses most of its effect. A visitor who leaves before reaching this screen never sees the evidence that would have answered their skepticism.</p>
+          </div>
+          <div class="cids">
+            <span class="cid">CRO-06</span>
+            <span class="cid">CRO-07</span>
+          </div>
+        </div>
+        <div class="fc-rec">
+          <span class="fc-rec-label">Recommendation</span>
+          <ul>
+            <li>Surface the strongest proof on the homepage near the primary CTA: the client logos, the “56% don’t pass” rigor stat, and the named governance controls. Don’t make a skeptical buyer click several screens deep to find it.</li>
+            <li>Add one proof line to the hero itself — e.g. “Reviewed by senior operators from Travelers, Nike, and Intel” — so credibility lands before the visitor decides whether to keep reading.</li>
+          </ul>
+        </div>
+        <div class="tags-row">
+          <span class="tag te-med">Effort: Medium</span>
+          <span class="tag ti-high">Impact: High</span>
+        </div>
+      </div>
+
+      <!-- SCREEN 4: BOOK A CALL -->
+      <div class="screen-section">
+        <div class="screen-header">
+          <span class="screen-num">Screen 4</span>
+          <h3>Book a Call</h3>
+        </div>
+        <div class="screen-context">
+          A standard calendar booking page with a short note from the founder, a LinkedIn link, and a date picker.
+        </div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-meta">
+          <div class="fc-num">5</div>
+          <span class="fdim">Conversion Rate Optimization</span>
+          <span class="badge bm">Major</span>
+        </div>
+        <h3 class="fc-title">No agenda is given for the call before booking</h3>
+        <figure class="fc-shot">
+          <img src="activation-diagnostic-assets/05-calendly-card.webp" alt="Book a Call — a thank-you note from the founder, but no agenda for the 30 minutes">
+          <figcaption>Book a Call — a thank-you note from the founder, but no agenda for the 30 minutes</figcaption>
+        </figure>
+        <div class="fc-body">
+          <p>The only context offered is a thank-you note for the visitor’s “willingness to talk about SignalVerified.” There is no stated agenda, no expected outcome, and no guidance on what to bring to the call.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>A visitor has to commit 30 minutes without knowing what will be covered, which raises the perceived cost of saying yes at the final step of this flow.</p>
+          </div>
+          <div class="cids">
+            <span class="cid">CRO-10</span>
+          </div>
+        </div>
+        <div class="fc-rec">
+          <span class="fc-rec-label">Recommendation</span>
+          <ul>
+            <li>Add a short agenda to the booking page: what the 30 minutes covers, what the visitor walks away with, and what (if anything) to bring. Three bullets is enough to lower the perceived cost of saying yes.</li>
+            <li>State the outcome and fit up front — e.g. “We’ll look at your current hiring flow and where verification fits; no prep needed” — so the final step feels like a low-risk next move rather than an open-ended commitment.</li>
+          </ul>
+        </div>
+        <div class="tags-row">
+          <span class="tag te-low">Effort: Low</span>
+          <span class="tag ti-med">Impact: Medium</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── COMPETITOR BENCHMARKING ── -->
+    <section class="findings-section">
+      <div class="findings-header">
+        <span class="ovl">Benchmarks</span>
+        <h2>What to compare against for this flow</h2>
+        <p>Chosen for the activation moment, not general brand positioning: a hiring decision-maker evaluating a verification or assessment product before committing budget.</p>
+      </div>
+      <div class="bm-table-wrap">
+        <table class="bm-table">
+          <tr><th>Benchmark</th><th>What it does well</th><th>Where it applies here</th></tr>
+          <tr>
+            <td>TestGorilla</td>
+            <td>States the product and the outcome in one sentence, with no invented terms, before any further claim.</td>
+            <td>Compress the hero to one sentence a hiring manager could repeat back correctly after reading it once.</td>
+          </tr>
+          <tr>
+            <td>Criteria Corp</td>
+            <td>Leads with outcome language and a single, clear category stated immediately.</td>
+            <td>Settle on one category name and use it consistently, rather than "verification," "evidence," and "signal" interchangeably.</td>
+          </tr>
+          <tr>
+            <td>CodeSignal</td>
+            <td>Positions itself clearly at the top of the hiring funnel, with one primary action and no competing offers in the hero.</td>
+            <td>Use as the contrast case for the after-interview positioning argument — show, rather than assert, why later-stage verification fits this buyer.</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── SUPPORTING RESEARCH ── -->
+    <section class="findings-section">
+      <div class="findings-header">
+        <span class="ovl">Supporting Research</span>
+        <h2>The same fixes have moved real metrics for other companies</h2>
+        <p>Each finding maps to published research where the same kind of design change improved a real business metric. Two things to keep in mind: these are controlled studies and industry benchmarks from other companies, so the numbers won&rsquo;t carry over one-to-one to SignalVerified &mdash; the industry, audience, and context are different, and we&rsquo;re not promising the same results. What they show is that the moves we recommend aren&rsquo;t hunches; they&rsquo;re the same interventions that have produced meaningful gains elsewhere.</p>
+      </div>
+      <div class="bm-table-wrap">
+        <table class="bm-table">
+          <tr><th>Finding</th><th>What the research shows</th><th>Source</th></tr>
+          <tr>
+            <td>1 &middot; Competing CTAs</td>
+            <td>When the next step is ambiguous or several CTAs compete for the click, action is suppressed; clarity research recommends one clearly-labeled primary action over many.</td>
+            <td><a href="https://baymard.com/learn/payment-ux" target="_blank" rel="noopener">Baymard &mdash; Button &amp; CTA clarity</a></td>
+          </tr>
+          <tr>
+            <td>2 &middot; Desktop vs. mobile offer</td>
+            <td>Cross-device experience quality decides whether mobile visitors stay: 53% of mobile visits are abandoned when a page takes over 3 seconds, and bounce probability rises 113% as load goes from 1s to 7s.</td>
+            <td><a href="https://blog.google/products/admanager/the-need-for-mobile-speed/" target="_blank" rel="noopener">Google &mdash; The need for mobile speed</a></td>
+          </tr>
+          <tr>
+            <td>3 &middot; Undefined proprietary terms</td>
+            <td>Content that&rsquo;s hard to parse raises cognitive load, makes it harder to build a mental model of the product, and lowers perceived trustworthiness in usability testing.</td>
+            <td><a href="https://www.nngroup.com/articles/content-dispersion/" target="_blank" rel="noopener">Nielsen Norman Group &mdash; Content dispersion</a></td>
+          </tr>
+          <tr>
+            <td>4 &middot; Proof buried deep</td>
+            <td>Reassurance placed at the decision point shapes whether users trust an unfamiliar brand; in Baymard&rsquo;s research, perceived credibility matters more to most users than technical credentials.</td>
+            <td><a href="https://baymard.com/blog/site-seal-trust" target="_blank" rel="noopener">Baymard &mdash; Trust signals</a></td>
+          </tr>
+          <tr>
+            <td>5 &middot; No agenda before booking</td>
+            <td>Reducing friction and unknowns at the final conversion step is a large lever: Baymard estimates better checkout and sign-up flow design as up to a ~35% conversion-rate opportunity across 300+ benchmarked sites.</td>
+            <td><a href="https://baymard.com/research/checkout-usability" target="_blank" rel="noopener">Baymard &mdash; Checkout usability</a></td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── METHODOLOGY ── -->
+    <div class="mb">
+      <div class="mb-section">
+        <span class="ovl">Methodology</span>
+        <p>This diagnostic was built from a recorded usability session with three first-time visitors, full-page screenshots of every primary screen, and a structured 11-dimension UX framework covering Nielsen's heuristics, conversion rate optimization, information architecture, visual and brand design, accessibility, mobile responsiveness, performance, SEO, competitor benchmarking, and content hierarchy. Findings were prioritized using the recorded session as the primary evidence source, supported by current conversion-rate research where relevant. The tags on each finding (for example CRO-03 or ACC-02) are codified criterion IDs that map the finding to the specific principle it relates to within our 11-dimension framework, so every call traces back to an established standard rather than opinion.</p>
+      </div>
+      <div class="mb-section">
+        <span class="ovl">Evaluation Lens</span>
+        <p>SignalVerified sells a high-price, low-frequency service through a small number of screens, so each one carries real weight in a visitor's decision to book a call or submit a job description. This diagnostic follows the order a real visitor encounters those screens, rather than grouping findings by category, to show exactly where the activation flow gains or loses a visitor's trust.</p>
+      </div>
+    </div>
+
+    <!-- ── CTA ── -->
+    <div class="fcta" id="next-steps">
+      <span class="ovl">Go Deeper</span>
+      <h3>These 5 findings are costing you discovery calls.<br>The 21-Day Activation Diagnostic is how you fix them.</h3>
+      <p>A split homepage path, reviewer stats that contradict each other, and a slow, half-empty-looking page all chip away at the same thing: a hiring leader’s confidence to book that first call. For a sales-led business where pipeline is the constraint, every one of these is a conversation that quietly doesn’t happen. It’s a focused 3-week engagement where we audit, diagnose, and redesign the flow behind these issues, then hand you a clickable high-fidelity prototype, an annotated flow map, and the rationale behind every decision — so your team can build with confidence.</p>
+      <a href="https://calendly.com/sarisari/sari-sari-activation-sprint-intro-call" class="cta-btn">Book an Intro Call</a>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="report-footer">
+      <p class="disclaimer">
+        This diagnostic is based on SignalVerified's publicly available marketing site, a set of screenshots provided directly, and a recorded usability session. Direct access to the product, supporting flows, and analytics would enable a deeper, more comprehensive review.
+      </p>
+      <div class="brand-footer">
+        <a href="https://www.sarisari.design" target="_blank" rel="noopener"><span>Sari Sari Design</span></a> &nbsp;&middot;&nbsp; Activation Diagnostic &nbsp;&middot;&nbsp; June 2026
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
