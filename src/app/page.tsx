@@ -99,7 +99,11 @@ function Hero() {
           {hero.headline}
         </h1>
         <p className="max-w-[640px] text-body-l text-neutral-700">
-          {hero.subhead}
+          {hero.subhead.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
         </p>
         <div className="mt-2 flex flex-col gap-4">
           <div>
@@ -145,45 +149,87 @@ function Problem() {
  * 3 — What this is + 5 deliverables
  * ------------------------------------------------------------------------- */
 
+/** Descending left-indent per step — literal classes so Tailwind keeps them. */
+const STAIR = ["lg:pl-0", "lg:pl-24", "lg:pl-48", "lg:pl-72", "lg:pl-96"];
+
 function WhatThisIs() {
   const { whatThisIs } = blueprint;
   return (
-    <Section index={whatThisIs.index} noise className="bg-primary-400">
-      <div className="grid gap-12 lg:grid-cols-[1fr_576px]">
-        <div className="flex flex-col gap-4">
-          <span className="ds-label text-label-l text-primary-200">
-            {whatThisIs.eyebrow}
-          </span>
-          <h2 className="font-brand text-display-s text-neutral-100">
-            {whatThisIs.headline}
-          </h2>
-        </div>
-        <div className="flex flex-col gap-6">
-          {whatThisIs.body.map((p) => (
-            <p key={p.slice(0, 28)} className="text-body-l text-primary-100">
-              {p}
-            </p>
-          ))}
-        </div>
+    <Section index={whatThisIs.index} indexTone="light" noise className="bg-primary-600">
+      <div className="flex flex-col gap-5">
+        <span className="ds-label text-label-l text-primary-300">
+          {whatThisIs.eyebrow}
+        </span>
+        <h2 className="font-brand text-display-s font-medium text-neutral-100">
+          {whatThisIs.headline}
+        </h2>
       </div>
 
-      <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {whatThisIs.deliverables.map((d, i) => (
-          <div
-            key={d.title}
-            className={`flex flex-col gap-3 bg-neutral-100 p-6 ${
-              i === 4 ? "sm:col-span-2 lg:col-span-1" : ""
-            }`}
-          >
-            <span className="ds-label text-label-m text-primary-400">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h3 className="text-title-l font-medium text-neutral-900">
-              {d.title}
-            </h3>
-            <p className="text-body-m text-neutral-700">{d.body}</p>
-          </div>
+      <div className="mt-8 flex max-w-[68ch] flex-col gap-6">
+        {whatThisIs.body.map((p) => (
+          <p key={p.slice(0, 28)} className="text-body-l text-primary-100">
+            {p}
+          </p>
         ))}
+      </div>
+
+      <div className="mt-16 flex flex-col gap-6">
+        {whatThisIs.deliverables.map((d, i) => {
+          const climax = i === 4;
+          return (
+            <div
+              key={d.title}
+              className={`flex flex-col items-start gap-6 lg:flex-row lg:items-center ${STAIR[i]}`}
+            >
+              <div
+                className={`flex w-full items-center gap-6 p-6 lg:max-w-[700px] ${
+                  climax ? "bg-primary-400" : "bg-neutral-100"
+                }`}
+              >
+                <span
+                  className={`w-[74px] shrink-0 font-brand text-[52px] font-semibold leading-none ${
+                    climax ? "text-primary-200" : "text-primary-400"
+                  }`}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span
+                  className={`w-px self-stretch shrink-0 ${
+                    climax ? "bg-primary-300" : "bg-neutral-400"
+                  }`}
+                  aria-hidden
+                />
+                <div className="flex flex-col gap-1.5">
+                  <h3
+                    className={`text-title-l font-semibold ${
+                      climax ? "text-neutral-100" : "text-neutral-1000"
+                    }`}
+                  >
+                    {d.title}
+                  </h3>
+                  <p
+                    className={`text-body-s ${
+                      climax ? "text-primary-100" : "text-neutral-700"
+                    }`}
+                  >
+                    {d.body}
+                  </p>
+                </div>
+              </div>
+
+              {i === 0 && (
+                <div className="flex max-w-[360px] flex-col gap-2 border-l-2 border-primary-400 pl-5">
+                  <span className="ds-label text-label-s text-primary-300">
+                    {whatThisIs.aside.label}
+                  </span>
+                  <p className="text-body-m text-primary-200">
+                    {whatThisIs.aside.body}
+                  </p>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </Section>
   );
@@ -451,7 +497,7 @@ function ComparisonTable({
 function PriceAndScope() {
   const { price } = blueprint;
   return (
-    <Section index={price.index} noise className="bg-primary-400">
+    <Section index={price.index} indexTone="light" noise className="bg-primary-400">
       <div className="flex max-w-[760px] flex-col gap-4">
         <span className="ds-label text-label-l text-primary-200">
           {price.eyebrow}
