@@ -1,6 +1,7 @@
 import { Accordion } from "@/components/Accordion";
 import { Button } from "@/components/Button";
 import { HeroGraphic } from "@/components/HeroGraphic";
+import { HeroWithDials } from "@/components/hero/HeroWithDials";
 import { Section } from "@/components/Section";
 import { Wordmark } from "@/components/Wordmark";
 import { diagnostic } from "@/content/activation-diagnostic";
@@ -90,36 +91,10 @@ function OfferFooter() {
  * ------------------------------------------------------------------------- */
 
 function Hero() {
-  const { hero } = diagnostic;
   return (
-    <Section gridlines className="bg-neutral-100">
+    <Section gridlines tightTop className="bg-neutral-100">
       <div className="grid items-center gap-12 lg:grid-cols-[1fr_500px]">
-        <div className="flex flex-col gap-6 py-6 md:py-10">
-          <span className="ds-label text-label-l text-primary-400">
-            {hero.eyebrow}
-          </span>
-          <h1 className="max-w-[16ch] font-brand text-[clamp(38px,6.2vw,72px)] leading-[1.04] tracking-[-0.02em] text-neutral-900 sm:max-w-[20ch]">
-            {hero.headline}
-          </h1>
-          <p className="max-w-[640px] text-body-l text-neutral-700">
-            {hero.subhead.map((line) => (
-              <span key={line} className="block">
-                {line}
-              </span>
-            ))}
-          </p>
-          <div className="mt-2 flex flex-col gap-4">
-            <div>
-              <CTA />
-            </div>
-            <p className="max-w-[420px] text-body-s text-neutral-600">
-              {hero.microcopy}
-            </p>
-          </div>
-          <p className="mt-6 max-w-[560px] border-t border-neutral-300 pt-6 text-body-s text-neutral-600">
-            {hero.trust}
-          </p>
-        </div>
+        <HeroWithDials />
         <HeroGraphic className="hidden justify-self-end lg:block" />
       </div>
     </Section>
