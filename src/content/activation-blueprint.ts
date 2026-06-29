@@ -21,10 +21,12 @@ export const blueprint = {
 
   hero: {
     eyebrow: "For Seed–Series A health & wellness founders",
-    headline:
-      "Your users are dropping off before they ever see the value. In 21 days, we'll show you exactly where — and what to do about it.",
-    subhead:
-      "A focused diagnosis and redesign of the one user flow that's costing you the most activation. No retainer. No 8-week timeline. One high-impact flow, audited, prototyped, and backed by the reasoning behind every decision.",
+    headline: "Eliminate drop-off. Activate more users in 21 days.",
+    subhead: [
+      "No retainer.",
+      "No 8-week timeline.",
+      "One high-impact flow that's audited, rebuilt, and proven to work",
+    ],
     microcopy:
       "15 minutes. We'll tell you honestly whether this is worth your time before you spend a dollar.",
     trust:
@@ -44,8 +46,12 @@ export const blueprint = {
 
   whatThisIs: {
     index: "02",
-    eyebrow: "What this is",
-    headline: "The Activation Blueprint",
+    eyebrow: "The solution",
+    headline: "The 21 Day Activation Diagnostic",
+    aside: {
+      label: "One step at a time",
+      body: "Each deliverable builds on the one before it — descending from first diagnosis to your 90-day plan.",
+    },
     body: [
       "A 21-day engagement focused on a single outcome: find the highest-impact fix in your activation flow and prove it works before you invest another dollar in design.",
       "We pick one flow — onboarding, signup-to-first-value, or trial-to-paid — based on what will move your activation metrics most. Then we diagnose it screen by screen, redesign the critical path, and hand you a clickable prototype with the reasoning behind every decision.",
@@ -242,7 +248,6 @@ export const blueprint = {
   },
 
   finalCta: {
-    index: "10",
     headline: "Find out what your activation flow is really costing you.",
     body: "Book a 15-minute discovery call. We'll look at your product, tell you honestly whether the Activation Blueprint is the right fit, and if it's not, point you toward what is. No pitch deck, no pressure.",
   },

@@ -1,0 +1,8 @@
+"$schema" = "https://conductor.build/schemas/settings.repo.schema.json"
+
+# Force origin onto the Sari Sari SSH alias so pushes authenticate as the
+# SariSariDesign account, not the personal GitHub account. The `github-sarisari`
+# host is defined in ~/.ssh/config and pins the dedicated key via IdentitiesOnly.
+# Idempotent: only rewrites when the remote has drifted off the alias (e.g. HTTPS).
+[scripts]
+setup = "git remote get-url origin | grep -q '^git@github-sarisari:' || git remote set-url origin git@github-sarisari:SariSariDesign/activation-diagnostic-landing-page.git"
