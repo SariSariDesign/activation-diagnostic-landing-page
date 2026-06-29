@@ -7,7 +7,7 @@
 export const ACTIVATION_BOOKING_URL =
   "https://calendly.com/sarisari/sari-sari-activation-sprint-intro-call";
 
-const CTA_LABEL = "Book a discovery call";
+const CTA_LABEL = "Book an intro call";
 
 export const blueprint = {
   bookingUrl: ACTIVATION_BOOKING_URL,
