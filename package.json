@@ -1,9 +1,9 @@
 {
-  "name": "activation-blueprint-landing-page",
+  "name": "activation-diagnostic-landing-page",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "The Activation Blueprint — standalone offer landing page (Sari Sari Design).",
+  "description": "The Activation Diagnostic: standalone offer landing page (Sari Sari Design).",
   "scripts": {
     "dev": "next dev",
     "inject-analytics": "node scripts/inject-analytics.mjs",

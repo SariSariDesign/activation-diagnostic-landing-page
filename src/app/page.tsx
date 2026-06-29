@@ -2,7 +2,7 @@ import { Accordion } from "@/components/Accordion";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { Wordmark } from "@/components/Wordmark";
-import { blueprint } from "@/content/activation-blueprint";
+import { diagnostic } from "@/content/activation-diagnostic";
 
 const PILL = "rounded-full";
 
@@ -16,18 +16,18 @@ function CTA({
 }) {
   return (
     <Button
-      href={blueprint.bookingUrl}
+      href={diagnostic.bookingUrl}
       variant={variant}
       size={size}
       external
       className={PILL}
     >
-      {blueprint.ctaLabel}
+      {diagnostic.ctaLabel}
     </Button>
   );
 }
 
-export default function ActivationBlueprintPage() {
+export default function ActivationDiagnosticPage() {
   return (
     <>
       <OfferHeader />
@@ -88,7 +88,7 @@ function OfferFooter() {
  * ------------------------------------------------------------------------- */
 
 function Hero() {
-  const { hero } = blueprint;
+  const { hero } = diagnostic;
   return (
     <Section gridlines className="bg-neutral-100">
       <div className="flex flex-col gap-6 py-6 md:py-10">
@@ -126,7 +126,7 @@ function Hero() {
  * ------------------------------------------------------------------------- */
 
 function Problem() {
-  const { problem } = blueprint;
+  const { problem } = diagnostic;
   return (
     <Section index={problem.index} className="bg-neutral-200">
       <div className="grid gap-12 lg:grid-cols-[1fr_576px]">
@@ -153,7 +153,7 @@ function Problem() {
 const STAIR = ["lg:pl-0", "lg:pl-24", "lg:pl-48", "lg:pl-72", "lg:pl-96"];
 
 function WhatThisIs() {
-  const { whatThisIs } = blueprint;
+  const { whatThisIs } = diagnostic;
   return (
     <Section index={whatThisIs.index} indexTone="light" noise className="bg-primary-600">
       <div className="flex flex-col gap-5">
@@ -240,7 +240,7 @@ function WhatThisIs() {
  * ------------------------------------------------------------------------- */
 
 function Goal() {
-  const { goal } = blueprint;
+  const { goal } = diagnostic;
   return (
     <Section index={goal.index} className="bg-neutral-100">
       <div className="grid gap-12 lg:grid-cols-[1fr_576px]">
@@ -269,7 +269,7 @@ function Goal() {
  * ------------------------------------------------------------------------- */
 
 function HowItWorks() {
-  const { howItWorks } = blueprint;
+  const { howItWorks } = diagnostic;
   return (
     <Section index={howItWorks.index} className="bg-neutral-200">
       <div className="flex flex-col gap-4">
@@ -312,7 +312,7 @@ function HowItWorks() {
  * ------------------------------------------------------------------------- */
 
 function ForAndNotFor() {
-  const { forYou, notForYou } = blueprint;
+  const { forYou, notForYou } = diagnostic;
   return (
     <Section index={forYou.index} className="bg-neutral-100">
       <div className="grid gap-12 md:grid-cols-2">
@@ -403,7 +403,7 @@ function Cross() {
  * ------------------------------------------------------------------------- */
 
 function Comparison() {
-  const { comparison } = blueprint;
+  const { comparison } = diagnostic;
   return (
     <Section index={comparison.index} className="bg-neutral-200">
       <div className="flex max-w-[760px] flex-col gap-4">
@@ -435,11 +435,11 @@ function ComparisonTable({
   columns: readonly [string, string] | readonly string[];
   rows: readonly {
     criterion: string;
-    blueprint: string;
+    diagnostic: string;
     agency: string;
   }[];
 }) {
-  const [blueprintCol, agencyCol] = columns;
+  const [diagnosticCol, agencyCol] = columns;
   return (
     <table className="mt-12 w-full border-collapse text-left">
       <thead className="hidden md:table-header-group">
@@ -449,7 +449,7 @@ function ComparisonTable({
             scope="col"
             className="ds-label w-[37.5%] py-4 pr-4 text-label-m text-primary-400"
           >
-            {blueprintCol}
+            {diagnosticCol}
           </th>
           <th
             scope="col"
@@ -473,9 +473,9 @@ function ComparisonTable({
             </th>
             <td className="block py-1 text-body-m text-neutral-900 md:table-cell md:py-5 md:pr-4 md:align-top">
               <span className="ds-label mr-2 text-label-s text-primary-400 md:hidden">
-                {blueprintCol}:
+                {diagnosticCol}:
               </span>
-              {row.blueprint}
+              {row.diagnostic}
             </td>
             <td className="block py-1 text-body-m text-neutral-600 md:table-cell md:py-5 md:align-top">
               <span className="ds-label mr-2 text-label-s text-neutral-500 md:hidden">
@@ -495,7 +495,7 @@ function ComparisonTable({
  * ------------------------------------------------------------------------- */
 
 function PriceAndScope() {
-  const { price } = blueprint;
+  const { price } = diagnostic;
   return (
     <Section index={price.index} indexTone="light" noise className="bg-primary-400">
       <div className="flex max-w-[760px] flex-col gap-4">
@@ -560,7 +560,7 @@ function ScopeColumn({
  * ------------------------------------------------------------------------- */
 
 function Faq() {
-  const { faq } = blueprint;
+  const { faq } = diagnostic;
   return (
     <Section index={faq.index} className="bg-neutral-100">
       <div className="grid gap-12 lg:grid-cols-[1fr_576px]">
@@ -583,7 +583,7 @@ function Faq() {
  * ------------------------------------------------------------------------- */
 
 function Proof() {
-  const { proof } = blueprint;
+  const { proof } = diagnostic;
   return (
     <Section index={proof.index} className="bg-neutral-200">
       <div className="grid gap-12 lg:grid-cols-[1fr_576px]">
@@ -617,7 +617,7 @@ function Proof() {
  * ------------------------------------------------------------------------- */
 
 function FinalCta() {
-  const { finalCta, hero } = blueprint;
+  const { finalCta, hero } = diagnostic;
   return (
     <Section noise className="bg-primary-400">
       <div className="flex max-w-[800px] flex-col gap-6">
