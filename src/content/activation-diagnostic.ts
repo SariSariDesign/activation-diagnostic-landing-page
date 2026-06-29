@@ -28,9 +28,9 @@ export const diagnostic = {
       "One high-impact flow that's audited, rebuilt, and proven to work",
     ],
     microcopy:
-      "15 minutes. We'll tell you honestly whether this is worth your time before you spend a dollar.",
+      "30 minutes. We'll tell you honestly whether this is worth your time before you spend a dollar.",
     trust:
-      "Built by senior designers with experience spanning consumer products at Meta and fintech compliance UX.",
+      "Built by senior designers, and trusted by Fortune 500 companies and 15+ clients.",
   },
 
   problem: {
@@ -247,8 +247,32 @@ export const diagnostic = {
     placeholderNote: "Client results coming soon",
   },
 
+  team: {
+    index: "10",
+    eyebrow: "The team",
+    headline: "Meet the team",
+    members: [
+      {
+        name: "Zach Chaco",
+        role: "CEO",
+        credential: "Producer, Ex-Meta and Disney",
+        image: "/team/zach-chaco.jpg",
+      },
+      {
+        name: "Patricia Capiral",
+        role: "Chief Creative Officer",
+        credential: "15+ years of Design Expertise",
+        image: "/team/patricia-capiral.jpg",
+      },
+    ],
+    link: {
+      label: "More about us",
+      href: "https://www.sarisari.design",
+    },
+  },
+
   finalCta: {
     headline: "Find out what your activation flow is really costing you.",
-    body: "Book a 15-minute discovery call. We'll look at your product, tell you honestly whether the Activation Diagnostic is the right fit, and if it's not, point you toward what is. No pitch deck, no pressure.",
+    body: "Book a 30-minute discovery call. We'll look at your product, tell you honestly whether the Activation Diagnostic is the right fit, and if it's not, point you toward what is. No pitch deck, no pressure.",
   },
 } as const;
