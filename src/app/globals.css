@@ -199,6 +199,18 @@ body {
   text-transform: uppercase;
 }
 
+/* Hero typewriter caret blink (see src/components/hero/Typewriter.tsx) */
+@keyframes hero-caret-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
 /* Film-grain overlay used on saturated sections (blue/green) — stands in for the
    Figma "Noise & Texture" raster until the original is exported. */
 .noise::after {

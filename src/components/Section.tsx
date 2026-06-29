@@ -6,6 +6,8 @@ type SectionProps = {
   className?: string;
   noise?: boolean;
   gridlines?: boolean;
+  /** Trim the top padding ~25% — used for the hero so it sits closer to the header. */
+  tightTop?: boolean;
   children: React.ReactNode;
 };
 
@@ -23,6 +25,7 @@ export function Section({
   className = "",
   noise,
   gridlines,
+  tightTop,
   children,
 }: SectionProps) {
   const indexClass =
@@ -38,7 +41,11 @@ export function Section({
           ))}
         </div>
       )}
-      <div className="relative mx-auto max-w-[1200px] px-6 py-24 md:py-36 lg:pl-20 lg:pr-4">
+      <div
+        className={`relative mx-auto max-w-[1200px] px-6 ${
+          tightTop ? "pt-[72px] md:pt-[108px]" : "pt-24 md:pt-36"
+        } pb-24 md:pb-36 lg:pl-20 lg:pr-4`}
+      >
         {index && (
           <span
             className={`ds-label mb-10 block text-label-l lg:absolute lg:left-4 lg:top-36 lg:mb-0 ${indexClass}`}
