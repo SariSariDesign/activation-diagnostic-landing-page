@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { blueprint } from "@/content/activation-blueprint";
+import { diagnostic } from "@/content/activation-diagnostic";
 import { GA_ID, CLARITY_ID } from "@/lib/analytics";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: blueprint.meta.title,
-  description: blueprint.meta.description,
+  title: diagnostic.meta.title,
+  description: diagnostic.meta.description,
   openGraph: {
     type: "website",
     siteName: "Sari Sari Design",
-    title: blueprint.meta.title,
-    description: blueprint.meta.description,
+    title: diagnostic.meta.title,
+    description: diagnostic.meta.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: blueprint.meta.title,
-    description: blueprint.meta.description,
+    title: diagnostic.meta.title,
+    description: diagnostic.meta.description,
   },
 };
 
