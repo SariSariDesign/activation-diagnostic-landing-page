@@ -42,6 +42,7 @@ export default function ActivationDiagnosticPage() {
         <PriceAndScope />
         <Faq />
         <Proof />
+        <MeetTheTeam />
         <FinalCta />
       </main>
       <OfferFooter />
@@ -613,7 +614,67 @@ function Proof() {
 }
 
 /* ----------------------------------------------------------------------------
- * 12 — Final CTA
+ * 12 — Meet the team
+ * ------------------------------------------------------------------------- */
+
+function MeetTheTeam() {
+  const { team } = diagnostic;
+  return (
+    <Section index={team.index} className="bg-neutral-100">
+      <div className="flex flex-col gap-4">
+        <span className="ds-label text-label-l text-primary-400">
+          {team.eyebrow}
+        </span>
+        <h2 className="font-brand text-display-s text-neutral-900">
+          {team.headline}
+        </h2>
+      </div>
+
+      <div className="mt-16 flex flex-col items-center gap-12 md:flex-row md:justify-center md:gap-24">
+        {team.members.map((member) => (
+          <div
+            key={member.name}
+            className="flex flex-col items-center text-center"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={member.image}
+              alt={`Portrait of ${member.name}`}
+              width={280}
+              height={280}
+              loading="lazy"
+              className="h-[220px] w-[220px] rounded-full object-cover md:h-[280px] md:w-[280px]"
+            />
+            <span className="ds-label mt-6 text-label-m text-primary-400">
+              {member.role}
+            </span>
+            <h3 className="mt-2 font-brand text-h3 text-neutral-900">
+              {member.name}
+            </h3>
+            <p className="mt-1 text-body-m text-neutral-700">
+              {member.credential}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-16 flex justify-center">
+        <a
+          href={team.link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ds-label inline-flex items-center gap-2 border-b border-primary-200 pb-1 text-label-m text-primary-500 transition-colors hover:border-primary-400"
+        >
+          {team.link.label}
+          <span aria-hidden>&rarr;</span>
+        </a>
+      </div>
+    </Section>
+  );
+}
+
+/* ----------------------------------------------------------------------------
+ * 13 — Final CTA
  * ------------------------------------------------------------------------- */
 
 function FinalCta() {
