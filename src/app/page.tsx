@@ -3,6 +3,8 @@ import { Button } from "@/components/Button";
 import { HeroGraphic } from "@/components/HeroGraphic";
 import { HeroWithDials } from "@/components/hero/HeroWithDials";
 import { Section } from "@/components/Section";
+import { TestimonialsCarousel } from "@/components/testimonials/TestimonialsCarousel";
+import { TESTIMONIAL_DEFAULTS } from "@/components/testimonials/testimonial";
 import { Wordmark } from "@/components/Wordmark";
 import { diagnostic } from "@/content/activation-diagnostic";
 
@@ -576,17 +578,14 @@ function Proof() {
           </h2>
         </div>
         <div className="flex flex-col gap-8">
-          <p className="text-body-l text-neutral-700">{proof.body}</p>
-          {/* [TO ADD — social proof]: real outcomes / testimonial / logos only. */}
-          <div
-            className="flex min-h-[120px] items-center justify-center border border-dashed border-neutral-400 p-6"
-            aria-hidden
-          >
-            <span className="ds-label text-label-m text-neutral-500">
-              {proof.placeholderNote}
-            </span>
-          </div>
+          <p className="text-body-l text-neutral-700 whitespace-pre-line">{proof.body}</p>
         </div>
+      </div>
+      <div className="mt-16 md:mt-24">
+        <TestimonialsCarousel
+          testimonials={proof.testimonials}
+          config={TESTIMONIAL_DEFAULTS}
+        />
       </div>
     </Section>
   );
