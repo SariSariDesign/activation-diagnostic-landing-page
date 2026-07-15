@@ -242,9 +242,20 @@ export const diagnostic = {
     index: "09",
     eyebrow: "Proof",
     headline: "Why founders trust us with this",
-    body: "Sari Sari is a product design studio built for health and wellness companies where trust isn't a nice-to-have. It's the product. We've spent years designing high-trust, compliance-heavy flows, with experience spanning consumer products at Meta (Instagram, Facebook, WhatsApp) and fintech compliance UX. We understand what it takes to get a user to trust a screen with something that matters.",
+    body: "Sari Sari is a product design studio built for health and wellness companies where trust isn't a nice-to-have. It's the product.\n\nWe spent years designing high-trust, compliance-heavy flows with experience spanning consumer products at startups and Fortune 500 companies like Meta and Disney.",
     // [TO ADD — social proof] Real outcomes/testimonials/logos only. Never fabricate.
     placeholderNote: "Client results coming soon",
+    // Real client testimonials only. Never fabricate — add entries as they come in.
+    testimonials: [
+      {
+        quote:
+          "The five findings are spot on, and the usability session data makes them hard to argue with. The competing CTAs, the undefined proprietary terms, and the buried proof are all things I knew felt off but couldn't articulate this clearly.\n\nHighly recommend giving your process a shot; you have nothing to lose.",
+        name: "Michael Campbell",
+        role: "CEO",
+        company: "Signal Verified",
+        image: "/testimonials/michael-campbell.png",
+      },
+    ],
   },
 
   team: {
