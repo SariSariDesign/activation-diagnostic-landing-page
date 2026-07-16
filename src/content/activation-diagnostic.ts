@@ -31,6 +31,7 @@ export const diagnostic = {
       "30 minutes. We'll tell you honestly whether this is worth your time before you spend a dollar.",
     trust:
       "Built by senior designers, and trusted by Fortune 500 companies and 15+ clients.",
+    logosLabel: "Trusted by 20+ global teams",
   },
 
   problem: {
