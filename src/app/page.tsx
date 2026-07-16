@@ -95,7 +95,7 @@ function OfferFooter() {
 function Hero() {
   return (
     <Section gridlines tightTop className="bg-neutral-100">
-      <div className="grid items-center gap-12 lg:grid-cols-[1fr_500px]">
+      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_500px]">
         <HeroWithDials />
         <HeroGraphic className="hidden justify-self-end lg:block" />
       </div>

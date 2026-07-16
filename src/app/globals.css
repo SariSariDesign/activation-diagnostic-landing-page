@@ -199,6 +199,18 @@ body {
   text-transform: uppercase;
 }
 
+/* Logo crawl marquee (see src/components/logos/LogoCrawl.tsx). The track holds two
+   identical logo sets laid end-to-end; translating it -50% scrolls exactly one set,
+   so the loop is seamless. Speed/direction/pause are driven from LogoCrawlConfig. */
+@keyframes logo-crawl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* Hero typewriter caret blink (see src/components/hero/Typewriter.tsx) */
 @keyframes hero-caret-blink {
   0%,

@@ -6,6 +6,8 @@ import { Button } from "@/components/Button";
 import { Reveal } from "./Reveal";
 import { Typewriter } from "./Typewriter";
 import { HERO_MOTION_DEFAULTS, type HeroMotionConfig } from "./motion";
+import { LogoCrawl } from "@/components/logos/LogoCrawl";
+import { LOGO_CRAWL_DEFAULTS } from "@/components/logos/logos";
 
 /**
  * Stage gate for the choreographed entrance:
@@ -145,23 +147,24 @@ export function AnimatedHero({
         "cta",
         stage >= 4,
         0,
-        "mt-2 flex flex-col gap-4",
-        <>
-          <div>
-            <CTA />
-          </div>
-          <p className="max-w-[420px] text-body-s text-neutral-600">
-            {hero.microcopy}
-          </p>
-        </>,
+        "mt-2",
+        <CTA />,
       )}
 
       {reveal(
         "trust",
         stage >= 5,
         0,
-        "mt-6 max-w-[560px] border-t border-neutral-300 pt-6 text-body-s text-neutral-600",
-        hero.trust,
+        "mt-8 max-w-[560px] border-t border-neutral-300 pt-6 text-body-s text-neutral-500",
+        hero.logosLabel,
+      )}
+
+      {reveal(
+        "logos",
+        stage >= 5,
+        config.revealDurationMs,
+        "mt-3 max-w-[600px]",
+        <LogoCrawl config={LOGO_CRAWL_DEFAULTS} />,
       )}
     </div>
   );
