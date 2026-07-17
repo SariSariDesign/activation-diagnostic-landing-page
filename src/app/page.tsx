@@ -656,7 +656,7 @@ function MeetTheTeam() {
  * ------------------------------------------------------------------------- */
 
 function FinalCta() {
-  const { finalCta, hero } = diagnostic;
+  const { finalCta } = diagnostic;
   return (
     <Section noise className="bg-primary-400">
       <div className="flex max-w-[800px] flex-col gap-6">
@@ -667,9 +667,6 @@ function FinalCta() {
         <div className="mt-2">
           <CTA variant="light" />
         </div>
-        <p className="mt-4 max-w-[560px] border-t border-primary-300/50 pt-6 text-body-s text-primary-200">
-          {hero.trust}
-        </p>
       </div>
     </Section>
   );
