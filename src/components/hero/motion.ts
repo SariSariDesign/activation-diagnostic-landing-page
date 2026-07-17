@@ -46,17 +46,17 @@ export type HeroMotionConfig = {
 
 export const HERO_MOTION_DEFAULTS: HeroMotionConfig = {
   mode: "char",
-  charSpeedMs: 38,
+  charSpeedMs: 40,
   wordSpeedMs: 110,
-  humanizeJitter: 0.4,
+  humanizeJitter: 0.15,
 
   caretEnabled: true,
-  caretBlinkMs: 560,
-  caretChar: "▍",
+  caretBlinkMs: 440,
+  caretChar: "|",
 
-  startDelayMs: 180,
+  startDelayMs: 100,
   stageGapMs: 260,
-  subheadLineStaggerMs: 120,
+  subheadLineStaggerMs: 220,
 
   revealMode: "slide-up",
   revealDistancePx: 14,

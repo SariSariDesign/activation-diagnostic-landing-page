@@ -250,7 +250,7 @@ export function HeroGraphic({ className = "" }: { className?: string }) {
     <div
       aria-hidden
       className={className}
-      style={{ position: "relative", width: 500, height: 620 }}
+      style={{ position: "relative", width: 500, height: 620, transform: "translate(100px, -50px)" }}
     >
       {/* Device shell */}
       <div
