@@ -136,7 +136,6 @@ function Caret({ blinkMs, glyph }: { blinkMs: number; glyph: string }) {
     <span
       aria-hidden="true"
       style={{
-        position: "relative",
         display: "inline-block",
         width: 0,
         overflow: "visible",
@@ -144,9 +143,6 @@ function Caret({ blinkMs, glyph }: { blinkMs: number; glyph: string }) {
     >
       <span
         style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
           color: "var(--color-primary-400)",
           animation: `hero-caret-blink ${blinkMs}ms steps(1, end) infinite`,
         }}
