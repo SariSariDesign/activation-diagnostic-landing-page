@@ -46,8 +46,8 @@ export default function ActivationDiagnosticPage() {
         <PriceAndScope />
         <Faq />
         <Proof />
-        <MeetTheTeam />
         <FinalCta />
+        <MeetTheTeam />
       </main>
       <OfferFooter />
     </>
@@ -200,7 +200,7 @@ function WhatThisIs() {
               </div>
 
               {i === 0 && (
-                <div className="flex max-w-[360px] flex-col gap-2 border-l-2 border-primary-400 pl-5">
+                <div className="order-first flex max-w-[360px] flex-col gap-2 border-l-2 border-primary-400 pl-5 lg:order-none">
                   <span className="ds-label text-label-s text-primary-300">
                     {whatThisIs.aside.label}
                   </span>
@@ -598,15 +598,10 @@ function Proof() {
 function MeetTheTeam() {
   const { team } = diagnostic;
   return (
-    <Section index={team.index} className="bg-neutral-100">
-      <div className="flex flex-col gap-4">
-        <span className="ds-label text-label-l text-primary-400">
-          {team.eyebrow}
-        </span>
-        <h2 className="font-brand text-display-s text-neutral-900">
-          {team.headline}
-        </h2>
-      </div>
+    <Section className="bg-neutral-100">
+      <h2 className="font-brand text-display-s text-neutral-900">
+        {team.headline}
+      </h2>
 
       <div className="mt-16 flex flex-col items-center gap-12 md:flex-row md:justify-center md:gap-24">
         {team.members.map((member) => (
