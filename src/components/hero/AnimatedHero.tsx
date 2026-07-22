@@ -106,7 +106,7 @@ export function AnimatedHero({
   );
 
   return (
-    <div className="flex flex-col gap-6 py-6 md:py-10">
+    <div className="flex w-full min-w-0 flex-col gap-6 py-6 md:py-10">
       {reveal(
         "eyebrow",
         stage >= 1,
@@ -163,7 +163,7 @@ export function AnimatedHero({
         "logos",
         stage >= 5,
         config.revealDurationMs,
-        "mt-3 max-w-[600px]",
+        "mt-3 w-full min-w-0 max-w-[600px]",
         <LogoCrawl config={LOGO_CRAWL_DEFAULTS} />,
       )}
     </div>

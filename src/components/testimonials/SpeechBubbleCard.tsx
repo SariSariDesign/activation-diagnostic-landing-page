@@ -30,6 +30,15 @@ export function SpeechBubbleCard({ testimonial, config }: Props) {
   // Tail apex leans slightly toward the avatar (left when left-aligned).
   const apexX = isCenter ? tailW / 2 : tailW * 0.2;
 
+  // Responsive sizing: the dial-kit px values are the desktop maximum; on small
+  // screens these shrink via clamp() so the card isn't oversized on mobile.
+  const bubblePadding = `clamp(22px, 6vw, ${bubblePaddingPx}px)`;
+  const bubbleRadius = `clamp(18px, 4vw, ${bubbleRadiusPx}px)`;
+  const quoteFontSize = `clamp(19px, 4.6vw, ${quoteFontSizePx}px)`;
+  // Unitless so line-height tracks the clamped font-size instead of staying fixed.
+  const quoteLineHeight = quoteLineHeightPx / quoteFontSizePx;
+  const avatarSize = `clamp(56px, 14vw, ${avatarSizePx}px)`;
+
   return (
     <div
       style={{
@@ -48,8 +57,8 @@ export function SpeechBubbleCard({ testimonial, config }: Props) {
           width: "100%",
           background: "#ffffff",
           border: "1px solid var(--color-neutral-300)",
-          borderRadius: bubbleRadiusPx,
-          padding: bubblePaddingPx,
+          borderRadius: bubbleRadius,
+          padding: bubblePadding,
           boxShadow: "0px 18px 40px -24px rgba(31,29,28,0.28)",
         }}
       >
@@ -59,9 +68,9 @@ export function SpeechBubbleCard({ testimonial, config }: Props) {
             className="font-brand text-neutral-900"
             style={{
               margin: 0,
-              marginTop: i === 0 ? 0 : Math.round(quoteLineHeightPx * 0.6),
-              fontSize: quoteFontSizePx,
-              lineHeight: `${quoteLineHeightPx}px`,
+              marginTop: i === 0 ? 0 : `${quoteLineHeight * 0.6}em`,
+              fontSize: quoteFontSize,
+              lineHeight: quoteLineHeight,
             }}
           >
             {i === 0 ? (
@@ -124,8 +133,8 @@ export function SpeechBubbleCard({ testimonial, config }: Props) {
           loading="lazy"
           className="rounded-full object-cover"
           style={{
-            width: avatarSizePx,
-            height: avatarSizePx,
+            width: avatarSize,
+            height: avatarSize,
             flexShrink: 0,
           }}
         />
