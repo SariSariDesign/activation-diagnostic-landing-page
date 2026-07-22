@@ -6,9 +6,16 @@
  * purpose: dev tooling, never shipped in a normal production load.
  */
 
+/**
+ * Horizontal offset from the right edge. Leaves room for the Agentation toolbar
+ * (its collapsed circle sits ~44px wide in the bottom-right corner) so the dial
+ * kit and Agentation line up as a single toolbar row instead of stacking.
+ */
+const AGENTATION_CLEARANCE = 72;
+
 export const panelWrap = (open: boolean): React.CSSProperties => ({
   position: "fixed",
-  right: 16,
+  right: AGENTATION_CLEARANCE,
   bottom: 16,
   zIndex: 9999,
   width: open ? 280 : "auto",

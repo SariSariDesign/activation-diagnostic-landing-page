@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import dynamic from "next/dynamic";
 import { diagnostic } from "@/content/activation-diagnostic";
 import { GA_ID, CLARITY_ID } from "@/lib/analytics";
 import "./globals.css";
+
+/**
+ * Dev-only annotation widget. The dynamic import lives inside a statically-false
+ * branch in production (NODE_ENV is inlined at build time), so the whole
+ * `agentation` module is tree-shaken out of the production bundle and never ships.
+ */
+const AgentationDev =
+  process.env.NODE_ENV === "development"
+    ? dynamic(() =>
+        import("@/components/dev/AgentationDev").then((m) => m.AgentationDev),
+      )
+    : null;
 
 export const metadata: Metadata = {
   title: diagnostic.meta.title,
@@ -25,6 +38,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="antialiased">
         {children}
+
+        {AgentationDev ? <AgentationDev /> : null}
 
         {GA_ID && (
           <>
