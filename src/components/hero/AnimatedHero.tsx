@@ -8,6 +8,7 @@ import { Typewriter } from "./Typewriter";
 import { HERO_MOTION_DEFAULTS, type HeroMotionConfig } from "./motion";
 import { LogoCrawl } from "@/components/logos/LogoCrawl";
 import { LOGO_CRAWL_DEFAULTS } from "@/components/logos/logos";
+import { HeroGraphicMobile } from "@/components/HeroGraphicMobile";
 
 /**
  * Stage gate for the choreographed entrance:
@@ -111,7 +112,8 @@ export function AnimatedHero({
         "eyebrow",
         stage >= 1,
         0,
-        "ds-label text-label-l text-primary-400",
+        // Hidden on mobile to reclaim top-of-fold space (see HeroGraphicMobile).
+        "ds-label text-label-l text-primary-400 hidden lg:block",
         hero.eyebrow,
       )}
 
@@ -131,7 +133,15 @@ export function AnimatedHero({
         />
       </h1>
 
-      <div className="max-w-[640px] text-body-l text-neutral-700">
+      {/* Mobile: one running paragraph. Desktop: the three stacked lines. */}
+      {reveal(
+        "subheadParagraph",
+        stage >= 3,
+        0,
+        "max-w-[640px] text-body-l text-neutral-700 lg:hidden",
+        hero.subheadParagraph,
+      )}
+      <div className="hidden max-w-[640px] text-body-l text-neutral-700 lg:block">
         {hero.subhead.map((line, i) =>
           reveal(
             line,
@@ -165,6 +175,15 @@ export function AnimatedHero({
         config.revealDurationMs,
         "mt-3 w-full min-w-0 max-w-[600px]",
         <LogoCrawl config={LOGO_CRAWL_DEFAULTS} />,
+      )}
+
+      {/* Mobile-only visual anchor below the trust row; desktop uses HeroGraphic. */}
+      {reveal(
+        "hero-anchor",
+        stage >= 5,
+        config.revealDurationMs,
+        "mt-8 lg:hidden",
+        <HeroGraphicMobile />,
       )}
     </div>
   );
