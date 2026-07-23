@@ -2,6 +2,7 @@ import { Accordion } from "@/components/Accordion";
 import { Button } from "@/components/Button";
 import { HeroGraphic } from "@/components/HeroGraphic";
 import { HeroWithDials } from "@/components/hero/HeroWithDials";
+import { OfferHeader } from "@/components/OfferHeader";
 import { Section } from "@/components/Section";
 import { TestimonialsCarousel } from "@/components/testimonials/TestimonialsCarousel";
 import { TESTIMONIAL_DEFAULTS } from "@/components/testimonials/testimonial";
@@ -60,21 +61,6 @@ export default function ActivationDiagnosticPage() {
  * job (book the call) and no escape routes.
  * ------------------------------------------------------------------------- */
 
-function OfferHeader() {
-  return (
-    <header
-      className="sticky top-0 z-50 backdrop-blur-md"
-      style={{ background: "#faf8f880" }}
-    >
-      <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-6 py-3 lg:px-4">
-        {/* Non-clickable brand mark — keeps the page to one destination. */}
-        <Wordmark className="text-[26px] text-neutral-1000" />
-        <CTA size="medium" />
-      </div>
-    </header>
-  );
-}
-
 function OfferFooter() {
   return (
     <footer className="bg-neutral-900 text-neutral-400">
@@ -112,7 +98,7 @@ function Problem() {
   return (
     <Section index={problem.index} className="bg-neutral-200">
       <div className="grid gap-12 lg:grid-cols-[1fr_576px]">
-        <h2 className="max-w-[12ch] font-brand text-display-s text-neutral-900">
+        <h2 className="lg:max-w-[12ch] font-brand text-display-s text-neutral-900">
           {problem.headline}
         </h2>
         <div className="flex flex-col gap-6">
@@ -230,7 +216,7 @@ function Goal() {
           <span className="ds-label text-label-l text-primary-400">
             {goal.eyebrow}
           </span>
-          <h2 className="max-w-[14ch] font-brand text-display-s text-neutral-900">
+          <h2 className="lg:max-w-[14ch] font-brand text-display-s text-neutral-900">
             {goal.headline}
           </h2>
         </div>
@@ -258,7 +244,7 @@ function HowItWorks() {
         <span className="ds-label text-label-l text-primary-400">
           {howItWorks.eyebrow}
         </span>
-        <h2 className="max-w-[16ch] font-brand text-display-s text-neutral-900">
+        <h2 className="lg:max-w-[16ch] font-brand text-display-s text-neutral-900">
           {howItWorks.headline}
         </h2>
       </div>
@@ -445,23 +431,23 @@ function ComparisonTable({
         {rows.map((row) => (
           <tr
             key={row.criterion}
-            className="block border-b border-neutral-400 py-4 last:border-b-0 md:table-row md:py-0"
+            className="block border-b border-neutral-400 py-5 last:border-b-0 md:table-row md:py-0"
           >
             <th
               scope="row"
-              className="block py-1 text-body-m font-bold text-neutral-900 md:table-cell md:py-5 md:pr-4 md:align-top"
+              className="block pb-3 text-body-m font-bold text-neutral-900 md:table-cell md:py-5 md:pr-4 md:align-top"
             >
               {row.criterion}
             </th>
-            <td className="block py-1 text-body-m text-neutral-900 md:table-cell md:py-5 md:pr-4 md:align-top">
-              <span className="ds-label mr-2 text-label-s text-primary-400 md:hidden">
-                {diagnosticCol}:
+            <td className="mb-2 block border-l-2 border-primary-400 pl-3 text-body-m text-neutral-900 md:mb-0 md:table-cell md:border-l-0 md:py-5 md:pl-0 md:pr-4 md:align-top">
+              <span className="ds-label mb-0.5 block text-label-s text-primary-400 md:hidden">
+                {diagnosticCol}
               </span>
               {row.diagnostic}
             </td>
-            <td className="block py-1 text-body-m text-neutral-600 md:table-cell md:py-5 md:align-top">
-              <span className="ds-label mr-2 text-label-s text-neutral-500 md:hidden">
-                {agencyCol}:
+            <td className="block border-l-2 border-neutral-300 pl-3 text-body-m text-neutral-600 md:table-cell md:border-l-0 md:py-5 md:pl-0 md:align-top">
+              <span className="ds-label mb-0.5 block text-label-s text-neutral-500 md:hidden">
+                {agencyCol}
               </span>
               {row.agency}
             </td>
