@@ -292,4 +292,61 @@ export const diagnostic = {
     headline: "Find out what your activation flow is really costing you.",
     body: "Book a 30-minute discovery call. We'll look at your product, tell you honestly whether the Activation Diagnostic is the right fit, and if it's not, point you toward what is. No pitch deck, no pressure.",
   },
+
+  /**
+   * Free lead-magnet modal ("Try it for free"). This is the deliberate exception
+   * to the one-CTA rule above: a secondary, no-cost entry point that captures a
+   * lead and emails back a personalized Activation Scorecard preview.
+   */
+  scorecard: {
+    tryItLabel: "Try it for free",
+    modalTitle: "Get your free Activation Scorecard preview",
+    sampleScore: 79,
+    headline: "The top 5 points keeping your users from converting",
+    body: [
+      "This free tool identifies the top 5 points of friction on your landing page that keep users from converting — the friction standing between them and the “a-ha” moment in your product. Remove it, and more users reach the moment your product proves its worth.",
+      "The score is backed by the latest UX research across 11 dimensions — the same techniques we use to help growth-stage companies convert, activate, and retain more users.",
+      "Fill out the form and we'll email your personalized Activation Scorecard within minutes. Free.",
+    ],
+    form: {
+      submitLabel: "Get your free Activation Scorecard",
+      fields: {
+        name: "Name",
+        company: "Company",
+        email: "Work email",
+        stage: "Funding stage",
+        url: "Company website, landing page, or product page",
+      },
+      urlPlaceholder: "https://",
+      stageOptions: [
+        "Pre-seed",
+        "Seed",
+        "Series A",
+        "Series B",
+        "Series C+",
+        "Bootstrapped / Other",
+      ],
+    },
+    confirmation: {
+      headline: "Your scorecard is on its way.",
+      body: "We're analyzing your page now. Check your inbox in a few minutes for your personalized Activation Scorecard — the top 5 points of friction keeping users from converting, and how to fix them.",
+      bookPrompt: "Want to talk it through sooner?",
+    },
+    duplicate: {
+      headline: "You've already got one on the way.",
+      body: "We've already sent an Activation Scorecard to this email. Check your inbox (and spam) — or book a call and we'll walk through it together.",
+      bookPrompt: "Rather talk it through?",
+    },
+    error: {
+      headline: "Something went wrong.",
+      body: "We couldn't submit your request just now. Please try again — if it keeps happening, email us and we'll sort it out.",
+      retryLabel: "Try again",
+    },
+    legal: {
+      entity: "Sari Sari Design LLC",
+      privacyHref: "/privacy",
+      termsHref: "/terms",
+      note: "By submitting, you agree to our",
+    },
+  },
 } as const;

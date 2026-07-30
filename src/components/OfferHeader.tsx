@@ -30,7 +30,7 @@ export function OfferHeader() {
     >
       <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-6 py-3 lg:px-4">
         {/* Non-clickable brand mark — keeps the page to one destination. */}
-        <Wordmark className="text-[26px] text-neutral-1000" />
+        <Wordmark className="h-[22px]" />
         <div
           className={`transition-opacity duration-200 lg:!opacity-100 ${
             scrolledPastFold ? "opacity-100" : "pointer-events-none opacity-0 lg:pointer-events-auto"
