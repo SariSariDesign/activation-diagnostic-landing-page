@@ -70,11 +70,11 @@ export const diagnostic = {
       },
       {
         title: "Annotated Flow Map",
-        body: "A screen-by-screen map of the user journey with every drop-off risk marked, each paired with a specific, data-backed recommendation and prioritized by severity — from trust-breaking blockers to quick wins. Clear enough to forward to a cofounder who'll get it in two minutes.",
+        body: "A screen-by-screen map of the user journey with every drop-off risk marked. Each one comes with a specific recommendation backed by the data and ranked by severity, from trust-breaking blockers down to quick wins. Clear enough to forward to a cofounder who'll get it in two minutes.",
       },
       {
         title: "High-Fidelity Prototype",
-        body: "Your redesigned critical path in Figma, clickable — 5–8 screens from entry to the moment a user sees value. This is where we earn our keep: senior design judgment and deep product expertise, grounded in your data and driven by the metric each decision is built to move.",
+        body: "Your redesigned critical path in Figma, clickable. 5–8 screens from entry to the moment a user sees value. This is where we earn our keep: senior design judgment and deep product expertise, grounded in your data and driven by the metric each decision is built to move.",
       },
       {
         title: "Decision Rationale",
@@ -304,8 +304,8 @@ export const diagnostic = {
     sampleScore: 79,
     headline: "The top 5 points keeping your users from converting",
     body: [
-      "This free tool identifies the top 5 points of friction on your landing page that keep users from converting — the friction standing between them and the “a-ha” moment in your product. Remove it, and more users reach the moment your product proves its worth.",
-      "The score is backed by the latest UX research across 11 dimensions — the same techniques we use to help growth-stage companies convert, activate, and retain more users.",
+      "This free tool identifies the top 5 points of friction on your landing page that keep users from converting: the friction standing between them and the “a-ha” moment in your product. Remove it, and more users reach the moment your product proves its worth.",
+      "The score is backed by the latest UX research across 11 dimensions, the same techniques we use to help growth-stage companies convert, activate, and retain more users.",
       "Fill out the form and we'll email your personalized Activation Scorecard within minutes. Free.",
     ],
     form: {
@@ -329,17 +329,17 @@ export const diagnostic = {
     },
     confirmation: {
       headline: "Your scorecard is on its way.",
-      body: "We're analyzing your page now. Check your inbox in a few minutes for your personalized Activation Scorecard — the top 5 points of friction keeping users from converting, and how to fix them.",
+      body: "We're analyzing your page now. Check your inbox in a few minutes for your personalized Activation Scorecard: the top 5 points of friction keeping users from converting, and how to fix them.",
       bookPrompt: "Want to talk it through sooner?",
     },
     duplicate: {
       headline: "You've already got one on the way.",
-      body: "We've already sent an Activation Scorecard to this email. Check your inbox (and spam) — or book a call and we'll walk through it together.",
+      body: "We've already sent an Activation Scorecard to this email. Check your inbox (and spam), or book a call and we'll walk through it together.",
       bookPrompt: "Rather talk it through?",
     },
     error: {
       headline: "Something went wrong.",
-      body: "We couldn't submit your request just now. Please try again — if it keeps happening, email us and we'll sort it out.",
+      body: "We couldn't submit your request just now. Please try again. If it keeps happening, email us and we'll sort it out.",
       retryLabel: "Try again",
     },
     legal: {
