@@ -68,7 +68,7 @@ function OfferFooter() {
       <div className="mx-auto flex max-w-[1200px] flex-col gap-3 px-6 py-12 lg:px-4">
         <Wordmark invert className="h-6" />
         <p className="ds-label text-label-m text-neutral-500">
-          © Sari Sari Design LLC — Product design for health & wellness
+          © Sari Sari Design LLC — Product design for Seed to Series A
         </p>
         <p className="ds-label text-label-m text-neutral-500">
           <a href="/privacy" className="underline underline-offset-2 hover:text-neutral-200">

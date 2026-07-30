@@ -16,11 +16,11 @@ export const diagnostic = {
   meta: {
     title: "The Activation Diagnostic | Sari Sari Design",
     description:
-      "A focused 21-day UX activation diagnostic for Seed–Series A health & wellness founders. One flow, audited, prototyped, and backed by the reasoning behind every decision. Flat $2,500.",
+      "A focused 21-day UX activation diagnostic for Seed–Series A founders. One flow, audited, prototyped, and backed by the reasoning behind every decision. Flat $2,500.",
   },
 
   hero: {
-    eyebrow: "For Seed–Series A health & wellness founders",
+    eyebrow: "For Seed–Series A founders",
     headline: "Eliminate drop-off. Activate more users in 21 days.",
     subhead: [
       "No retainer.",
@@ -65,16 +65,16 @@ export const diagnostic = {
     ],
     deliverables: [
       {
-        title: "Activation Diagnostic Report",
-        body: "A screen-by-screen teardown of your current flow. Every screen gets a friction score, a specific problem tied to user behavior, and a benchmark against the top performers in your health vertical.",
+        title: "Activation Scorecard",
+        body: "A 0–100 Activation Score with a clear band, a rating breakdown across ~11 UX dimensions, a benchmark against the top performers in your vertical, and the top 5 friction areas costing you conversions.",
       },
       {
         title: "Annotated Flow Map",
-        body: "A visual map of the user journey with every drop-off risk marked. Simple enough to forward to a cofounder who'll get it in two minutes.",
+        body: "A screen-by-screen map of the user journey with every drop-off risk marked, each paired with a specific, data-backed recommendation and prioritized by severity — from trust-breaking blockers to quick wins. Clear enough to forward to a cofounder who'll get it in two minutes.",
       },
       {
         title: "High-Fidelity Prototype",
-        body: "Your redesigned critical path in Figma, clickable. 5–8 screens covering the path from entry to the moment a user sees value.",
+        body: "Your redesigned critical path in Figma, clickable — 5–8 screens from entry to the moment a user sees value. This is where we earn our keep: senior design judgment and deep product expertise, grounded in your data and driven by the metric each decision is built to move.",
       },
       {
         title: "Decision Rationale",
@@ -91,10 +91,10 @@ export const diagnostic = {
     index: "03",
     eyebrow: "The goal",
     headline:
-      "The point isn't prettier screens. It's a flow that earns trust and converts.",
+      "The point isn't prettier screens. It's a flow that earns trust and activates more users.",
     body: [
       "By the end of three weeks, you'll know exactly which part of your activation flow is costing you the most users, you'll have a working prototype of the fix, and you'll understand the reasoning well enough to defend it to your team and your board.",
-      "If you have analytics, we'll ground the diagnosis in your data. If you don't yet, our method still works. We lean on behavioral heuristics, competitive benchmarking, and health-specific domain expertise. Either way, you stop guessing about what to fix.",
+      "If you have analytics, we'll ground the diagnosis in your data. If you don't yet, our method still works. We lean on behavioral heuristics, competitive benchmarking, and early to growth stage domain expertise. Either way, you stop guessing about what to fix.",
     ],
   },
 
@@ -106,12 +106,12 @@ export const diagnostic = {
       {
         tag: "Phase 1 · Diagnose",
         week: "Week 1",
-        body: "A 60–90 minute kickoff to get product and analytics access and align on the flow. Then we walk your product as a new user, pull behavioral data where it exists, and benchmark you against the top performers in your vertical. You get the diagnostic report and flow map for review.",
+        body: "A 60 minute discovery call to get product and analytics access and align on the flow. Then we walk your product as a new user, pull behavioral data where it exists, and benchmark you against the top performers in your vertical. You get the activation scorecard and flow map for review.",
       },
       {
         tag: "Phase 2 · Design",
         week: "Week 2",
-        body: "We design one direction for the critical path, not ten options to choose between. Speed and conviction over breadth. Mid-week, a short check-in so we catch any misalignment early. You get the prototype and the rationale.",
+        body: "We design one direction for the critical path, not ten options to choose between. Speed and conviction over breadth. Mid-week, a short check-in so we catch any misalignment early. You get the prototype and the rationale.",
       },
       {
         tag: "Phase 3 · Deliver",
@@ -191,7 +191,7 @@ export const diagnostic = {
     body: "A flat fee, no tiers, no surprises. That's less than what a week of guessing costs a growth-stage startup. If your activation rate is 15% when it could be 30%, that gap is worth far more than the price of finding the fix. We're not selling hours of design work. We're selling the diagnosis and the proof that could unlock the revenue you're already leaving on the table.",
     included: [
       "One user flow, chosen by us for highest activation impact",
-      "All five deliverables (diagnostic report, flow map, prototype, rationale, 90-day roadmap)",
+      "All five deliverables (activation scorecard, flow map, prototype, rationale, 90-day roadmap)",
       "Kickoff call, mid-engagement check-in, and a 45-minute results call",
       "One round of revisions on the prototype",
     ],
@@ -230,7 +230,7 @@ export const diagnostic = {
         body: "The Diagnostic is deliberately one flow, and that focus is why it's fast and high-impact. Additional flows are a separate engagement or part of a retainer. We'll talk through what makes sense on the call.",
       },
       {
-        label: "We handle sensitive health data. Can you work within that?",
+        label: "We handle sensitive data. Can you work within that?",
         body: "Yes. We design for high-trust, compliance-sensitive health products as our specialty, including HIPAA-covered and FDA-cleared-adjacent products. We don't do regulatory submissions, but designing the experience around them is exactly our lane.",
       },
       {
@@ -248,7 +248,7 @@ export const diagnostic = {
     index: "09",
     eyebrow: "Proof",
     headline: "Why founders trust us with this",
-    body: "Sari Sari is a product design studio built for health and wellness companies where trust isn't a nice-to-have. It's the product.\n\nWe spent years designing high-trust, compliance-heavy flows with experience spanning consumer products at startups and Fortune 500 companies like Meta and Disney.",
+    body: "Sari Sari is a product design studio built for early stage companies where trust isn't a nice-to-have. It's the product.\n\nWe spent years designing high-trust, compliance-heavy flows with experience spanning consumer products at startups and Fortune 500 companies like Meta and Disney.",
     // [TO ADD — social proof] Real outcomes/testimonials/logos only. Never fabricate.
     placeholderNote: "Client results coming soon",
     // Real client testimonials only. Never fabricate — add entries as they come in.
