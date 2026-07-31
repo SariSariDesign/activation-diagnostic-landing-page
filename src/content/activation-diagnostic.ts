@@ -16,11 +16,11 @@ export const diagnostic = {
   meta: {
     title: "The Activation Diagnostic | Sari Sari Design",
     description:
-      "A focused 21-day UX activation diagnostic for Seed–Series A health & wellness founders. One flow, audited, prototyped, and backed by the reasoning behind every decision. Flat $2,500.",
+      "A focused 21-day UX activation diagnostic for Seed–Series A founders. One flow, audited, prototyped, and backed by the reasoning behind every decision. Flat $2,500.",
   },
 
   hero: {
-    eyebrow: "For Seed–Series A health & wellness founders",
+    eyebrow: "For Seed–Series A founders",
     headline: "Eliminate drop-off. Activate more users in 21 days.",
     subhead: [
       "No retainer.",
@@ -65,16 +65,16 @@ export const diagnostic = {
     ],
     deliverables: [
       {
-        title: "Activation Diagnostic Report",
-        body: "A screen-by-screen teardown of your current flow. Every screen gets a friction score, a specific problem tied to user behavior, and a benchmark against the top performers in your health vertical.",
+        title: "Activation Scorecard",
+        body: "A 0–100 Activation Score with a clear band, a rating breakdown across ~11 UX dimensions, a benchmark against the top performers in your vertical, and the top 5 friction areas costing you conversions.",
       },
       {
         title: "Annotated Flow Map",
-        body: "A visual map of the user journey with every drop-off risk marked. Simple enough to forward to a cofounder who'll get it in two minutes.",
+        body: "A screen-by-screen map of the user journey with every drop-off risk marked. Each one comes with a specific recommendation backed by the data and ranked by severity, from trust-breaking blockers down to quick wins. Clear enough to forward to a cofounder who'll get it in two minutes.",
       },
       {
         title: "High-Fidelity Prototype",
-        body: "Your redesigned critical path in Figma, clickable. 5–8 screens covering the path from entry to the moment a user sees value.",
+        body: "Your redesigned critical path in Figma, clickable. 5–8 screens from entry to the moment a user sees value. This is where we earn our keep: senior design judgment and deep product expertise, grounded in your data and driven by the metric each decision is built to move.",
       },
       {
         title: "Decision Rationale",
@@ -91,10 +91,10 @@ export const diagnostic = {
     index: "03",
     eyebrow: "The goal",
     headline:
-      "The point isn't prettier screens. It's a flow that earns trust and converts.",
+      "The point isn't prettier screens. It's a flow that earns trust and activates more users.",
     body: [
       "By the end of three weeks, you'll know exactly which part of your activation flow is costing you the most users, you'll have a working prototype of the fix, and you'll understand the reasoning well enough to defend it to your team and your board.",
-      "If you have analytics, we'll ground the diagnosis in your data. If you don't yet, our method still works. We lean on behavioral heuristics, competitive benchmarking, and health-specific domain expertise. Either way, you stop guessing about what to fix.",
+      "If you have analytics, we'll ground the diagnosis in your data. If you don't yet, our method still works. We lean on behavioral heuristics, competitive benchmarking, and early to growth stage domain expertise. Either way, you stop guessing about what to fix.",
     ],
   },
 
@@ -106,12 +106,12 @@ export const diagnostic = {
       {
         tag: "Phase 1 · Diagnose",
         week: "Week 1",
-        body: "A 60–90 minute kickoff to get product and analytics access and align on the flow. Then we walk your product as a new user, pull behavioral data where it exists, and benchmark you against the top performers in your vertical. You get the diagnostic report and flow map for review.",
+        body: "A 60 minute discovery call to get product and analytics access and align on the flow. Then we walk your product as a new user, pull behavioral data where it exists, and benchmark you against the top performers in your vertical. You get the activation scorecard and flow map for review.",
       },
       {
         tag: "Phase 2 · Design",
         week: "Week 2",
-        body: "We design one direction for the critical path, not ten options to choose between. Speed and conviction over breadth. Mid-week, a short check-in so we catch any misalignment early. You get the prototype and the rationale.",
+        body: "We design one direction for the critical path, not ten options to choose between. Speed and conviction over breadth. Mid-week, a short check-in so we catch any misalignment early. You get the prototype and the rationale.",
       },
       {
         tag: "Phase 3 · Deliver",
@@ -191,7 +191,7 @@ export const diagnostic = {
     body: "A flat fee, no tiers, no surprises. That's less than what a week of guessing costs a growth-stage startup. If your activation rate is 15% when it could be 30%, that gap is worth far more than the price of finding the fix. We're not selling hours of design work. We're selling the diagnosis and the proof that could unlock the revenue you're already leaving on the table.",
     included: [
       "One user flow, chosen by us for highest activation impact",
-      "All five deliverables (diagnostic report, flow map, prototype, rationale, 90-day roadmap)",
+      "All five deliverables (activation scorecard, flow map, prototype, rationale, 90-day roadmap)",
       "Kickoff call, mid-engagement check-in, and a 45-minute results call",
       "One round of revisions on the prototype",
     ],
@@ -230,7 +230,7 @@ export const diagnostic = {
         body: "The Diagnostic is deliberately one flow, and that focus is why it's fast and high-impact. Additional flows are a separate engagement or part of a retainer. We'll talk through what makes sense on the call.",
       },
       {
-        label: "We handle sensitive health data. Can you work within that?",
+        label: "We handle sensitive data. Can you work within that?",
         body: "Yes. We design for high-trust, compliance-sensitive health products as our specialty, including HIPAA-covered and FDA-cleared-adjacent products. We don't do regulatory submissions, but designing the experience around them is exactly our lane.",
       },
       {
@@ -248,7 +248,7 @@ export const diagnostic = {
     index: "09",
     eyebrow: "Proof",
     headline: "Why founders trust us with this",
-    body: "Sari Sari is a product design studio built for health and wellness companies where trust isn't a nice-to-have. It's the product.\n\nWe spent years designing high-trust, compliance-heavy flows with experience spanning consumer products at startups and Fortune 500 companies like Meta and Disney.",
+    body: "Sari Sari is a product design studio built for early stage companies where trust isn't a nice-to-have. It's the product.\n\nWe spent years designing high-trust, compliance-heavy flows with experience spanning consumer products at startups and Fortune 500 companies like Meta and Disney.",
     // [TO ADD — social proof] Real outcomes/testimonials/logos only. Never fabricate.
     placeholderNote: "Client results coming soon",
     // Real client testimonials only. Never fabricate — add entries as they come in.
@@ -291,5 +291,62 @@ export const diagnostic = {
   finalCta: {
     headline: "Find out what your activation flow is really costing you.",
     body: "Book a 30-minute discovery call. We'll look at your product, tell you honestly whether the Activation Diagnostic is the right fit, and if it's not, point you toward what is. No pitch deck, no pressure.",
+  },
+
+  /**
+   * Free lead-magnet modal ("Try it for free"). This is the deliberate exception
+   * to the one-CTA rule above: a secondary, no-cost entry point that captures a
+   * lead and emails back a personalized Activation Scorecard preview.
+   */
+  scorecard: {
+    tryItLabel: "Try it for free",
+    modalTitle: "Get your free Activation Scorecard preview",
+    sampleScore: 79,
+    headline: "The top 5 points keeping your users from converting",
+    body: [
+      "This free tool identifies the top 5 points of friction on your landing page that keep users from converting: the friction standing between them and the “a-ha” moment in your product. Remove it, and more users reach the moment your product proves its worth.",
+      "The score is backed by the latest UX research across 11 dimensions, the same techniques we use to help growth-stage companies convert, activate, and retain more users.",
+      "Fill out the form and we'll email your personalized Activation Scorecard within minutes. Free.",
+    ],
+    form: {
+      submitLabel: "Get your free Activation Scorecard",
+      fields: {
+        name: "Name",
+        company: "Company",
+        email: "Work email",
+        stage: "Funding stage",
+        url: "Company website, landing page, or product page",
+      },
+      urlPlaceholder: "https://",
+      stageOptions: [
+        "Pre-seed",
+        "Seed",
+        "Series A",
+        "Series B",
+        "Series C+",
+        "Bootstrapped / Other",
+      ],
+    },
+    confirmation: {
+      headline: "Your scorecard is on its way.",
+      body: "We're analyzing your page now. Check your inbox in a few minutes for your personalized Activation Scorecard: the top 5 points of friction keeping users from converting, and how to fix them.",
+      bookPrompt: "Want to talk it through sooner?",
+    },
+    duplicate: {
+      headline: "You've already got one on the way.",
+      body: "We've already sent an Activation Scorecard to this email. Check your inbox (and spam), or book a call and we'll walk through it together.",
+      bookPrompt: "Rather talk it through?",
+    },
+    error: {
+      headline: "Something went wrong.",
+      body: "We couldn't submit your request just now. Please try again. If it keeps happening, email us and we'll sort it out.",
+      retryLabel: "Try again",
+    },
+    legal: {
+      entity: "Sari Sari Design LLC",
+      privacyHref: "/privacy",
+      termsHref: "/terms",
+      note: "By submitting, you agree to our",
+    },
   },
 } as const;
