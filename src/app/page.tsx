@@ -3,6 +3,7 @@ import { Button } from "@/components/Button";
 import { HeroGraphic } from "@/components/HeroGraphic";
 import { HeroWithDials } from "@/components/hero/HeroWithDials";
 import { OfferHeader } from "@/components/OfferHeader";
+import { ScorecardCta } from "@/components/scorecard/ScorecardCta";
 import { Section } from "@/components/Section";
 import { TestimonialsCarousel } from "@/components/testimonials/TestimonialsCarousel";
 import { TESTIMONIAL_DEFAULTS } from "@/components/testimonials/testimonial";
@@ -65,9 +66,20 @@ function OfferFooter() {
   return (
     <footer className="bg-neutral-900 text-neutral-400">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-3 px-6 py-12 lg:px-4">
-        <Wordmark className="text-[28px] text-neutral-100" />
+        <Wordmark invert className="h-6" />
         <p className="ds-label text-label-m text-neutral-500">
-          © Sari Sari LLC — Product design for health & wellness
+          © Sari Sari Design LLC — Product design for Seed to Series A
+        </p>
+        <p className="ds-label text-label-m text-neutral-500">
+          <a href="/privacy" className="underline underline-offset-2 hover:text-neutral-200">
+            Privacy Policy
+          </a>
+          <span className="px-2" aria-hidden="true">
+            ·
+          </span>
+          <a href="/terms" className="underline underline-offset-2 hover:text-neutral-200">
+            Terms of Service
+          </a>
         </p>
       </div>
     </footer>
@@ -645,8 +657,10 @@ function FinalCta() {
           {finalCta.headline}
         </h2>
         <p className="text-body-l text-primary-100">{finalCta.body}</p>
-        <div className="mt-2">
+        <div className="mt-2 flex flex-col items-start gap-2">
           <CTA variant="light" />
+          {/* Secondary, no-cost entry point — quieter than the booking CTA. */}
+          <ScorecardCta tone="onDark" />
         </div>
       </div>
     </Section>
