@@ -216,17 +216,6 @@ body {
   }
 }
 
-/* Scorecard modal submit indicator — an indeterminate bar sliding across its track
-   (see src/components/scorecard/ScorecardModal.tsx). */
-@keyframes scorecard-load {
-  0% {
-    transform: translateX(-120%);
-  }
-  100% {
-    transform: translateX(320%);
-  }
-}
-
 /* Hero typewriter caret blink (see src/components/hero/Typewriter.tsx) */
 @keyframes hero-caret-blink {
   0%,

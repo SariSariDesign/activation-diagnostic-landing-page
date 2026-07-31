@@ -9,7 +9,6 @@ import { HERO_MOTION_DEFAULTS, type HeroMotionConfig } from "./motion";
 import { LogoCrawl } from "@/components/logos/LogoCrawl";
 import { LOGO_CRAWL_DEFAULTS } from "@/components/logos/logos";
 import { HeroGraphicMobile } from "@/components/HeroGraphicMobile";
-import { ScorecardCta } from "@/components/scorecard/ScorecardCta";
 
 /**
  * Stage gate for the choreographed entrance:
@@ -159,11 +158,7 @@ export function AnimatedHero({
         stage >= 4,
         0,
         "mt-2",
-        <div className="flex flex-col items-start gap-2">
-          <CTA />
-          {/* Secondary, no-cost entry point — deliberately quieter than the booking CTA. */}
-          <ScorecardCta />
-        </div>,
+        <CTA />,
       )}
 
       {reveal(

@@ -1,22 +1,11 @@
 /**
- * "sari sari" brand mark. Renders the logo SVG from /public. The source art is
- * near-black on transparent, so `invert` flips it to white for dark backgrounds
- * (e.g. the footer). Height is set by the caller via `className` (e.g. `h-[22px]`).
+ * "sari sari" wordmark — text rendering in the brand serif as a stand-in until the
+ * SVG vectors are exported from the Figma COVER page (node 8188:2402).
  */
-export function Wordmark({
-  className = "",
-  invert = false,
-}: {
-  className?: string;
-  invert?: boolean;
-}) {
+export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/sarisari-logo.svg"
-      alt="Sari Sari Design"
-      draggable={false}
-      className={`w-auto select-none ${invert ? "[filter:invert(1)]" : ""} ${className}`}
-    />
+    <span className={`font-brand italic lowercase leading-none tracking-tight ${className}`}>
+      sarisari
+    </span>
   );
 }
