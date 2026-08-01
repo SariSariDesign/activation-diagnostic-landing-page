@@ -8,7 +8,7 @@ const DAY = 24 * 60 * 60 * 1000;
 
 function stored(over: Partial<StoredScorecard>): StoredScorecard {
   return {
-    id: "1", url: "https://acme.com/", domain: "acme.com",
+    id: "1", slug: "acme-1", url: "https://acme.com/", domain: "acme.com",
     email: "a@acme.com", name: "A", company: "Acme", stage: "Seed",
     overallScore: 70, result: SAMPLE_SCORECARD,
     previousScore: null, delta: null, servedFromCache: false,
@@ -51,6 +51,7 @@ it("fails open to analyze when the store throws", async () => {
     async latestForUrl() { throw new Error("db down"); },
     async hasRowForUrlEmail() { throw new Error("db down"); },
     async insert() { throw new Error("db down"); },
+    async getBySlug() { throw new Error("db down"); },
   };
   const a = await decideScorecardAction({ store: broken, url: "https://acme.com/", email: "a@acme.com", now });
   expect(a).toEqual({ kind: "analyze", previous: null });

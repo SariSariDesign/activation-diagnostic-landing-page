@@ -13,10 +13,16 @@ const nextConfig = {
   },
 
   // Keep diagnostic reports out of search indexes (matches prior prod behavior).
+  // Both the static /reports/ deliverables and the dynamic /s/<slug> scorecard
+  // pages are unguessable, per-lead, and must not be indexed.
   async headers() {
     return [
       {
         source: "/reports/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        source: "/s/:path*",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
     ];
