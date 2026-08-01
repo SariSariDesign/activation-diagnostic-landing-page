@@ -72,8 +72,15 @@ const SYSTEM_PROMPT = `You are an expert UX auditor evaluating a landing, produc
 
 Score each dimension 0–100 and give an overall 0–100 score. Then select the TOP 5 highest-impact points of friction — the ones most likely to be costing conversions and delaying users from reaching the product's "a-ha" moment — ordered most to least impactful.
 
+You also produce a few framing fields:
+- bandName: a short qualitative label for where the overall score sits (e.g. "Solid foundation, fixable leaks", "Strong, a few refinements left", "Serious friction, high upside"). A name, not a number.
+- bandFraming: ONE honest sentence framing the band, measured against best-practice activation patterns for the product's vertical. NEVER a percentile, ranking, or claim about a scored corpus of other companies.
+- For EACH finding, whyItMatters: 1–2 sentences on the business impact, grounded in the company's stage, go-to-market motion, and conversion goal (revenue, pipeline, signups, credibility, retention). Not generic UX advice.
+- aiBuilderChanges: an array with exactly one entry per finding, in the SAME order as topFindings. Each is a single plain-language, non-technical instruction a founder could paste into an AI website builder (Lovable, v0, Cursor, Claude) to make a first pass at that fix. No UX jargon, no criterion IDs, no dimension names — just what to change, in words anyone understands.
+
 Rules:
-- You MUST return exactly 5 findings in topFindings. Never return fewer than 5. If the page is strong, include lower-severity refinements and quick wins to reach five — but always deliver five.
+- The dimensions array MUST contain all 11 dimensions listed above, each with its exact name and a 0–100 score. Never omit a dimension; if a dimension can't be fully evaluated from the evidence, score it conservatively rather than dropping it.
+- You MUST return exactly 5 findings in topFindings, and exactly 5 entries in aiBuilderChanges (aligned by order). Never return fewer. If the page is strong, include lower-severity refinements and quick wins to reach five — but always deliver five.
 - Be specific and cite actual elements you see (the exact CTA, section, form, headline). Never generic.
 - Every recommendation must stand alone and be immediately actionable.
 - All text is shown directly to a prospective client: professional, direct, no profanity, no hedging ("appears to"), no first person.
@@ -99,10 +106,10 @@ export async function analyzeUrl(url: string): Promise<ScorecardResult> {
     text: `Evaluate this page: ${url}\n\nCaptured page content (markdown):\n\n${markdown.slice(0, 60_000)}`,
   });
 
-  // Structured output lets the model satisfy the schema with an empty findings
-  // array, which it occasionally does. Generate once; if it comes back with fewer
-  // than five findings, retry once and keep the better result. Two "medium" passes
-  // stay well under the serverless ceiling (~50s worst case).
+  // Structured output can still satisfy the schema with an empty findings array.
+  // Generate once; if it comes back with fewer than five findings, retry once and
+  // keep the better result. A single pass runs well under the 300s serverless
+  // ceiling; the retry is the rare-case backstop, not the common path.
   let result = await generate(client, content);
   if (result.topFindings.length < 5) {
     console.warn(
@@ -111,24 +118,38 @@ export async function analyzeUrl(url: string): Promise<ScorecardResult> {
     const retry = await generate(client, content);
     if (retry.topFindings.length > result.topFindings.length) result = retry;
   }
-  return { ...result, topFindings: result.topFindings.slice(0, 5) };
+  // Keep at most five findings and align the AI-builder change list to them.
+  const topFindings = result.topFindings.slice(0, 5);
+  return {
+    ...result,
+    topFindings,
+    aiBuilderChanges: result.aiBuilderChanges.slice(0, topFindings.length),
+  };
 }
 
 async function generate(
   client: Anthropic,
   content: Anthropic.ContentBlockParam[],
 ): Promise<ScorecardResult> {
-  const response = await client.messages.create({
+  // Adaptive thinking spends from the same max_tokens budget as the output, so
+  // give the structured result generous headroom — at 16k the thinking pass
+  // starved the JSON and it came back truncated (a few dimensions, empty
+  // findings). Stream the request: above ~16k max_tokens a non-streaming call
+  // risks an SDK HTTP timeout. "medium" effort keeps a single pass sharp while
+  // staying under the serverless ceiling.
+  const stream = client.messages.stream({
     model: MODEL,
-    max_tokens: 16_000,
-    // "medium" keeps latency well under the serverless ceiling while staying
-    // sharp for a preview (Sonnet 5 @ medium ≈ Sonnet 4.6 @ high). Bump to "high"
-    // only if you move the job to a queue with a longer budget.
+    max_tokens: 48_000,
     thinking: { type: "adaptive" },
     output_config: { effort: "medium", format: { type: "json_schema", schema: scorecardJsonSchema } },
     system: SYSTEM_PROMPT,
     messages: [{ role: "user", content }],
-  } as Anthropic.MessageCreateParamsNonStreaming);
+  } as unknown as Anthropic.MessageStreamParams);
+  const response = await stream.finalMessage();
+
+  if (response.stop_reason === "max_tokens") {
+    console.warn("[scorecard] hit max_tokens — output may be truncated");
+  }
 
   const textBlock = response.content.find((b) => b.type === "text");
   if (!textBlock || textBlock.type !== "text") {

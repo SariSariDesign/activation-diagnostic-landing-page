@@ -16,6 +16,9 @@ export function Scorecard({ result }: { result: ScorecardResult }) {
             Activation Scorecard
           </span>
           <h2 className="font-brand text-h2 text-neutral-900">{result.headline}</h2>
+          <p className="text-body-s font-semibold text-neutral-900">
+            {result.bandName}
+          </p>
           <p className="text-body-m text-neutral-700">{result.summary}</p>
         </div>
       </header>
@@ -80,6 +83,12 @@ function FindingCard({ finding, index }: { finding: Finding; index: number }) {
       </div>
 
       <p className="text-body-s text-neutral-700">{finding.description}</p>
+      <p className="border-l-2 border-primary-200 pl-3 text-body-s text-neutral-700">
+        <span className="ds-label text-label-s text-primary-400">
+          Why it matters —{" "}
+        </span>
+        {finding.whyItMatters}
+      </p>
       <p className="text-body-s text-neutral-900">
         <span className="ds-label text-label-s text-primary-400">Fix — </span>
         {finding.recommendation}
