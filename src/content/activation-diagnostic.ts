@@ -302,6 +302,22 @@ export const diagnostic = {
     tryItLabel: "Try it for free",
     modalTitle: "Get your free Activation Scorecard preview",
     sampleScore: 79,
+    // Shared eyebrow above the form headline (modal + /preview).
+    eyebrow: "Free Activation Scorecard",
+    // The packaged "report cover" shown beside the form (modal + /preview).
+    cover: {
+      title: "Activation Scorecard",
+      subhead: "A preview across 11 UX dimensions",
+    },
+    // Standalone /preview page (shareable link). Reuses the shared form + all
+    // form/confirmation copy below.
+    page: {
+      meta: {
+        title: "Free Activation Scorecard | Sari Sari Design",
+        description:
+          "Get a free Activation Scorecard: the top 5 points of friction keeping users from converting on your landing page, scored across 11 UX dimensions and emailed within minutes.",
+      },
+    },
     headline: "The top 5 points keeping your users from converting",
     body: [
       "This free tool identifies the top 5 points of friction on your landing page that keep users from converting: the friction standing between them and the “a-ha” moment in your product. Remove it, and more users reach the moment your product proves its worth.",
