@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import { Accordion } from "@/components/Accordion";
 import { Button } from "@/components/Button";
 import { HeroGraphic } from "@/components/HeroGraphic";
@@ -261,22 +263,29 @@ function HowItWorks() {
         </h2>
       </div>
 
-      <ol className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-neutral-300 bg-neutral-300 md:grid-cols-3">
-        {howItWorks.phases.map((phase) => (
-          <li
-            key={phase.tag}
-            className="flex flex-col gap-3 bg-neutral-100 p-6"
-          >
-            <div className="flex items-baseline justify-between gap-3">
+      <ol className="mt-12 flex flex-col gap-4 md:flex-row md:items-stretch md:gap-0">
+        {howItWorks.phases.map((phase, i) => (
+          <Fragment key={phase.tag}>
+            <li className="flex flex-1 flex-col gap-3">
               <span className="ds-label text-label-m text-primary-400">
                 {phase.tag}
               </span>
-              <span className="ds-label text-label-s text-neutral-600">
-                {phase.week}
-              </span>
-            </div>
-            <p className="text-body-m text-neutral-700">{phase.body}</p>
-          </li>
+              <div className="flex flex-1 flex-col gap-3 rounded-2xl border border-neutral-300 bg-neutral-100 p-6">
+                <h3 className="ds-label text-label-l text-neutral-900">
+                  {phase.week}
+                </h3>
+                <p className="text-body-m text-neutral-700">{phase.body}</p>
+              </div>
+            </li>
+            {i < howItWorks.phases.length - 1 && (
+              <div
+                className="flex shrink-0 items-center justify-center text-2xl text-primary-400 md:px-4 md:pt-9"
+                aria-hidden
+              >
+                <span className="rotate-90 md:rotate-0">&rarr;</span>
+              </div>
+            )}
+          </Fragment>
         ))}
       </ol>
 
@@ -295,16 +304,21 @@ function ForAndNotFor() {
   const { forYou, notForYou } = diagnostic;
   return (
     <Section index={forYou.index} className="bg-neutral-100">
-      <div className="grid gap-12 md:grid-cols-2">
+      <span className="ds-label text-label-l text-primary-400">
+        Who is this for
+      </span>
+      <div className="mt-8 grid gap-12 md:grid-cols-2 md:gap-0">
         <ChecklistColumn
           headline={forYou.headline}
           items={forYou.items}
           tone="for"
+          className="md:pr-12"
         />
         <ChecklistColumn
           headline={notForYou.headline}
           items={notForYou.items}
           tone="not"
+          className="md:border-l md:border-neutral-300 md:pl-12"
         />
       </div>
     </Section>
@@ -315,13 +329,15 @@ function ChecklistColumn({
   headline,
   items,
   tone,
+  className = "",
 }: {
   headline: string;
   items: readonly string[];
   tone: "for" | "not";
+  className?: string;
 }) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className={`flex flex-col gap-6 ${className}`}>
       <h2 className="font-brand text-h2 text-neutral-900">{headline}</h2>
       <ul className="flex flex-col gap-4">
         {items.map((item) => (
@@ -379,7 +395,7 @@ function Cross() {
 }
 
 /* ----------------------------------------------------------------------------
- * 8 — Why this over a bigger engagement (comparison table)
+ * 8 — Why This? (comparison table)
  * ------------------------------------------------------------------------- */
 
 function Comparison() {
@@ -424,16 +440,16 @@ function ComparisonTable({
     <table className="mt-12 w-full border-collapse text-left">
       <thead className="hidden md:table-header-group">
         <tr className="border-b border-neutral-400">
-          <th scope="col" className="w-1/4 py-4 pr-4" />
+          <th scope="col" className="w-1/4 py-4 pr-6" />
           <th
             scope="col"
-            className="ds-label w-[37.5%] py-4 pr-4 text-label-m text-primary-400"
+            className="ds-label w-[37.5%] border-l border-neutral-300 py-4 pl-6 pr-4 text-label-m text-primary-400"
           >
             {diagnosticCol}
           </th>
           <th
             scope="col"
-            className="ds-label w-[37.5%] py-4 text-label-m text-neutral-600"
+            className="ds-label w-[37.5%] border-l border-neutral-300 py-4 pl-6 text-label-m text-neutral-600"
           >
             {agencyCol}
           </th>
@@ -447,17 +463,17 @@ function ComparisonTable({
           >
             <th
               scope="row"
-              className="block pb-3 text-body-m font-bold text-neutral-900 md:table-cell md:py-5 md:pr-4 md:align-top"
+              className="block pb-3 text-body-m font-bold text-neutral-900 md:table-cell md:py-5 md:pr-6 md:align-top"
             >
               {row.criterion}
             </th>
-            <td className="mb-2 block border-l-2 border-primary-400 pl-3 text-body-m text-neutral-900 md:mb-0 md:table-cell md:border-l-0 md:py-5 md:pl-0 md:pr-4 md:align-top">
+            <td className="mb-2 block border-l-2 border-primary-400 pl-3 text-body-m text-neutral-900 md:mb-0 md:table-cell md:border-l md:border-neutral-300 md:py-5 md:pl-6 md:pr-4 md:align-top">
               <span className="ds-label mb-0.5 block text-label-s text-primary-400 md:hidden">
                 {diagnosticCol}
               </span>
               {row.diagnostic}
             </td>
-            <td className="block border-l-2 border-neutral-300 pl-3 text-body-m text-neutral-600 md:table-cell md:border-l-0 md:py-5 md:pl-0 md:align-top">
+            <td className="block border-l-2 border-neutral-300 pl-3 text-body-m text-neutral-600 md:table-cell md:border-l md:border-neutral-300 md:py-5 md:pl-6 md:align-top">
               <span className="ds-label mb-0.5 block text-label-s text-neutral-500 md:hidden">
                 {agencyCol}
               </span>
@@ -485,7 +501,16 @@ function PriceAndScope() {
         <h2 className="font-brand text-display-m text-neutral-100">
           {price.headline}
         </h2>
-        <p className="text-body-l text-primary-100">{price.body}</p>
+        <p className="font-brand text-display-m italic text-neutral-100 underline decoration-primary-200 decoration-4 underline-offset-8">
+          {price.priceValue}
+        </p>
+        <div className="mt-2 flex flex-col gap-5">
+          {price.body.map((p) => (
+            <p key={p.slice(0, 28)} className="text-body-l text-primary-100">
+              {p}
+            </p>
+          ))}
+        </div>
       </div>
 
       <div className="mt-12 grid gap-4 md:grid-cols-2">
