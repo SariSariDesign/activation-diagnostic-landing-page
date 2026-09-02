@@ -16,7 +16,7 @@ export const diagnostic = {
   meta: {
     title: "The Activation Diagnostic | Sari Sari Design",
     description:
-      "A focused 21-day UX activation diagnostic for Seed–Series A founders. One flow, audited, prototyped, and backed by the reasoning behind every decision. Flat $2,500.",
+      "A focused 21-day UX activation diagnostic for Seed–Series A founders. One flow, audited, prototyped, and backed by the reasoning behind every decision. Flat $6,000.",
   },
 
   hero: {
@@ -61,7 +61,7 @@ export const diagnostic = {
     body: [
       "A 21-day engagement focused on a single outcome: find the highest-impact fix in your activation flow and prove it works before you invest another dollar in design.",
       "By focusing on one core part of your flow, we can raise your conversion, retention, or activation to industry benchmarks, so you can focus on landing the next raise and growing your user base.",
-      "You walk away with a clear, evidence-backed answer to \u201Cwhat should we fix first, and what will it be worth?\u201D",
+      "You walk away with a clear, evidence-backed answer to \u201Cwhat should we fix first, and what will it be worth?\u201D We hand you the diagnostic and the prescription.",
     ],
     deliverables: [
       {
@@ -77,8 +77,8 @@ export const diagnostic = {
         body: "Your redesigned critical path in Figma, clickable. 5–8 screens from entry to the moment a user sees value. This is where we earn our keep: senior design judgment and deep product expertise, grounded in your data and driven by the metric each decision is built to move.",
       },
       {
-        title: "Decision Rationale",
-        body: "For every major design decision, we explain why it matters and which metric it should move. So you're not taking our word for it.",
+        title: "Validation Guide",
+        body: "A guide on how to validate the assumptions we made in the prototyping stage, so you can test with real users and watch your metrics climb, or see the real numbers change. You're not taking our word for it.",
       },
       {
         title: "Your Next 90 Days",
@@ -94,7 +94,8 @@ export const diagnostic = {
       "The point isn't prettier screens. It's a flow that earns trust and activates more users.",
     body: [
       "By the end of three weeks, you'll know exactly which part of your activation flow is costing you the most users, you'll have a working prototype of the fix, and you'll understand the reasoning well enough to defend it to your team and your board.",
-      "If you have analytics, we'll ground the diagnosis in your data. If you don't yet, our method still works. We lean on behavioral heuristics, competitive benchmarking, and early to growth stage domain expertise. Either way, you stop guessing about what to fix.",
+      "If you have analytics, we'll ground the diagnosis in your data. If you don't yet, our method still works. We lean on behavioral heuristics, competitive benchmarking, and early to growth stage domain expertise.",
+      "Either way, you stop guessing about what to fix.",
     ],
   },
 
@@ -148,7 +149,7 @@ export const diagnostic = {
 
   comparison: {
     index: "06",
-    eyebrow: "Why this over a bigger engagement",
+    eyebrow: "Why This?",
     headline: "Why not just hire an agency or sign a retainer?",
     intro:
       "You shouldn't commit three months and tens of thousands of dollars to a design partner you've never worked with. The Activation Diagnostic is designed to be the low-risk way to find out if we're right for each other.",
@@ -181,14 +182,19 @@ export const diagnostic = {
       },
     ],
     outro:
-      "When the three weeks are done, you'll know exactly how we think and what our work is worth. If a retainer makes sense, the roadmap is already written. If it doesn't, you keep a diagnosis and a prototype you can act on. Either way, you're ahead.",
+      "When the three weeks are done, you'll know exactly how we think and what our work is worth. If you're ready to implement after, the 90-Day Roadmap is already written and tells you exactly what to build. If it doesn't, you keep a diagnosis and a prototype you can act on. Either way, you're ahead.",
   },
 
   price: {
     index: "07",
     eyebrow: "Price & scope",
-    headline: "One flow. Three weeks. $2,500.",
-    body: "A flat fee, no tiers, no surprises. That's less than what a week of guessing costs a growth-stage startup. If your activation rate is 15% when it could be 30%, that gap is worth far more than the price of finding the fix. We're not selling hours of design work. We're selling the diagnosis and the proof that could unlock the revenue you're already leaving on the table.",
+    headline: "One flow. Three weeks. One price.",
+    priceValue: "$6,000",
+    body: [
+      "No tiers, no surprises. A flat fee that costs less than what a week of guessing costs at a growth-stage startup. If your activation rate is 15% when it could be 30%, that is worth far more than the price of finding the fix.",
+      "If this money would be spent on acquiring more users, you're spending more just to lose them once they're in.",
+      "Fix activation so you know you're building the right thing.",
+    ],
     included: [
       "One user flow, chosen by us for highest activation impact",
       "All five deliverables (activation scorecard, flow map, prototype, rationale, 90-day roadmap)",
@@ -198,6 +204,7 @@ export const diagnostic = {
     excluded: [
       "Additional flows or pages (a separate engagement or part of a retainer)",
       "Production-ready code or engineering handoff",
+      "Branding or marketing assets",
       "FDA regulatory submission or SaMD authoring",
       "More than one revision round",
     ],
