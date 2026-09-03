@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Activation Scorecard — Virilitas Labs — 2026-09-03
+  Rendered from scorecard-template.html v1.0 (Sari Sari Design).
+  Rubric 0.2-DRAFT pinned. Slug: virilitas-labs-scorecard-b3a81600d74e
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activation Scorecard — Virilitas Labs</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap');
+
+    :root {
+      /* Warm gray scale */
+      --grey-100: #F7F5F0;
+      --grey-200: #EDEAE3;
+      --grey-300: #D5D2CA;
+      --grey-400: #BFBDB8;
+      --grey-600: #8A8884;
+      --grey-800: #575452;
+      --grey-1000: #292826;
+
+      /* Blue scale */
+      --blue-100: #EAF1FD;
+      --blue-200: #C2D7F7;
+      --blue-400: #3A84D4;
+      --blue-500: #1F5FA6;
+      --blue-600: #174A82;
+
+      /* Red scale */
+      --red-100: #FCEEF2;
+      --red-200: #F3C8D5;
+      --red-500: #AB4E68;
+
+      /* Orange scale */
+      --orange-100: #FEF4E6;
+      --orange-200: #FDE0B5;
+      --orange-500: #FB8B24;
+
+      /* Green scale */
+      --green-100: #E8F7EE;
+      --green-200: #B0E8C8;
+      --green-500: #2E6B45;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--grey-100);
+      color: var(--grey-1000);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+    .ovl {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--blue-500);
+      display: block; margin-bottom: 14px;
+    }
+
+    .report-header { padding: 64px 0 48px; }
+
+    .logo-lockup { margin-bottom: 64px; }
+
+    .report-title {
+      font-size: 46px; font-weight: 700; line-height: 1.1;
+      color: var(--grey-1000); margin-bottom: 10px;
+    }
+
+    .report-caption {
+      font-size: 14px; color: var(--grey-600); margin-bottom: 40px;
+    }
+    .report-caption a { color: var(--grey-600); text-decoration: none; }
+
+    .why-block { margin-bottom: 32px; }
+    .why-block p {
+      font-size: 16px; color: var(--grey-1000); line-height: 1.7;
+    }
+
+    .rule { border: none; border-top: 1px solid var(--grey-300); margin: 32px 0; }
+
+    .sec-head { margin-bottom: 16px; }
+    .sec-head h2 { font-size: 22px; font-weight: 700; color: var(--grey-1000); margin-bottom: 6px; }
+    .sec-head p { font-size: 14px; color: var(--grey-800); }
+
+    .score-hero {
+      background: var(--grey-200); border-radius: 4px;
+      padding: 40px; margin: 0 0 48px;
+      display: flex; align-items: center; gap: 40px;
+    }
+    .score-meter { flex: 0 0 auto; }
+    .score-meter svg { display: block; }
+    .score-copy { flex: 1 1 auto; min-width: 0; }
+    .score-band-name {
+      font-size: 26px; font-weight: 700; color: var(--grey-1000);
+      line-height: 1.2; margin-bottom: 12px;
+    }
+    .score-framing {
+      font-size: 14px; color: var(--grey-800); line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .score-method-note {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px; color: var(--grey-600); line-height: 1.6;
+      border-top: 1px solid var(--grey-300); padding-top: 12px;
+    }
+
+    .dims { margin: 0 0 48px; }
+    .dim-row {
+      display: grid;
+      grid-template-columns: 220px 1fr 34px;
+      gap: 8px 16px; align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--grey-300);
+    }
+    .dim-row:last-child { border-bottom: none; }
+    .dim-name-cell { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .dim-name { font-size: 14px; font-weight: 600; color: var(--grey-1000); }
+    .dim-weight {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+      color: var(--grey-600); background: var(--grey-100);
+      border: 1px solid var(--grey-300);
+      padding: 1px 8px; border-radius: 100px; white-space: nowrap;
+    }
+    .dim-bar-track {
+      background: var(--grey-300); border-radius: 100px;
+      height: 8px; overflow: hidden;
+    }
+    .dim-bar-fill {
+      background: var(--blue-500); border-radius: 100px;
+      height: 100%;
+    }
+    .dim-rating {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 14px; font-weight: 600; color: var(--grey-1000);
+      text-align: right; white-space: nowrap;
+    }
+    .dim-note {
+      grid-column: 1 / -1;
+      font-size: 13px; color: var(--grey-800); line-height: 1.6;
+    }
+    .cap-mark {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--red-500); background: var(--red-100);
+      border: 1px solid var(--red-200);
+      padding: 1px 8px; border-radius: 100px; white-space: nowrap;
+    }
+    .dim-bar-fill.capped { background: var(--red-500); }
+
+    .bench { margin: 0 0 48px; }
+    .bench-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 4px; }
+    .bench table {
+      border-collapse: collapse; width: 100%; min-width: 520px;
+      background: var(--grey-200); border-radius: 4px;
+    }
+    .bench th, .bench td {
+      text-align: left; padding: 12px 16px; font-size: 13px;
+      border-bottom: 1px solid var(--grey-300); color: var(--grey-1000);
+      vertical-align: top;
+    }
+    .bench thead th {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--grey-600); white-space: nowrap;
+    }
+    .bench thead th.bench-brand { color: var(--blue-500); }
+    .bench tbody tr:last-child td { border-bottom: none; }
+    .bench td:first-child, .bench thead th:first-child {
+      font-weight: 600; position: sticky; left: 0; background: var(--grey-200);
+    }
+    .bench-footnote {
+      font-size: 12px; color: var(--grey-600); line-height: 1.7;
+      margin-top: 12px;
+    }
+
+    .findings-section { padding: 8px 0 48px; }
+    .findings-header { margin-bottom: 32px; }
+    .findings-header h2 {
+      font-size: 22px; font-weight: 700; color: var(--grey-1000); margin-bottom: 6px;
+    }
+    .findings-header p { font-size: 14px; color: var(--grey-800); }
+
+    .page-head {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--grey-800);
+      margin: 32px 0 14px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--grey-300);
+    }
+    .findings-section > .page-head:first-of-type { margin-top: 4px; }
+
+    .fc {
+      background: var(--grey-200);
+      border-radius: 4px;
+      padding: 32px; margin-bottom: 16px;
+    }
+
+    .fc-meta {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+
+    .fc-num {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px; font-weight: 600; color: var(--grey-100);
+      background: var(--blue-500);
+      width: 26px; height: 26px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .fdim {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--grey-600);
+    }
+
+    .badge {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .bc { background: var(--red-100); color: var(--red-500); border: 1px solid var(--red-200); }
+    .bm { background: var(--orange-100); color: var(--orange-500); border: 1px solid var(--orange-200); }
+    .bn { background: var(--blue-100); color: var(--blue-500); border: 1px solid var(--blue-200); }
+
+    .fc-title {
+      font-size: 19px; font-weight: 700; color: var(--blue-400);
+      margin-bottom: 14px; line-height: 1.3;
+    }
+
+    .fc-body p {
+      font-size: 14px; color: var(--grey-1000); line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .fc-why {
+      border-left: 3px solid var(--blue-200);
+      background: var(--grey-100);
+      border-radius: 0 4px 4px 0;
+      padding: 14px 16px;
+      margin: 4px 0 14px;
+    }
+    .fc-why-label {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--blue-500);
+      margin-bottom: 6px; display: block;
+    }
+    .fc-why p {
+      font-size: 13px; color: var(--grey-800); line-height: 1.65; margin: 0;
+    }
+
+    .cids { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
+    .cid {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600;
+      color: var(--blue-500); background: var(--blue-100);
+      padding: 2px 8px; border-radius: 4px;
+    }
+
+    .fc-rec { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--grey-300); }
+    .fc-rec-label {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--green-500);
+      margin-bottom: 8px; display: block;
+    }
+    .fc-rec ul { padding-left: 18px; margin: 0; }
+    .fc-rec li {
+      font-size: 14px; color: var(--grey-1000); line-height: 1.75;
+      margin-bottom: 4px;
+    }
+    .fc-rec li:last-child { margin-bottom: 0; }
+
+    .fc-evidence { margin: 16px 0 4px; }
+    .fc-evidence img {
+      display: block; width: 100%; height: auto;
+      border-radius: 4px; border: 1px solid var(--grey-300);
+    }
+    .fc-evidence.fc-evidence-app img {
+      max-width: 320px; margin: 0 auto;
+    }
+    .fc-evidence figcaption {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; color: var(--grey-600); margin-top: 6px;
+    }
+
+    .tags-row { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+    .tag {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 500; padding: 4px 12px;
+      border-radius: 100px;
+      background: var(--grey-100);
+      border: 1px solid var(--grey-300);
+      color: var(--grey-600);
+    }
+    .te-low  { color: var(--green-500); border-color: var(--green-200); background: var(--green-100); }
+    .te-med  { color: var(--orange-500); border-color: var(--orange-200); background: var(--orange-100); }
+    .te-high { color: var(--red-500); border-color: var(--red-200); background: var(--red-100); }
+    .ti-high { color: var(--red-500); border-color: var(--red-200); background: var(--red-100); }
+    .ti-med  { color: var(--orange-500); border-color: var(--orange-200); background: var(--orange-100); }
+    .ti-low  { color: var(--grey-600); border-color: var(--grey-300); background: var(--grey-100); }
+
+    details.fc > summary { list-style: none; cursor: pointer; outline: none; }
+    details.fc > summary::-webkit-details-marker { display: none; }
+    .fc-lead {
+      font-size: 14px; color: var(--grey-1000); line-height: 1.75;
+      margin: 0 0 14px;
+    }
+    .fc-toggle {
+      display: inline-flex; align-items: center; gap: 7px; margin-top: 4px;
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.2px;
+      color: var(--blue-500);
+      padding: 8px 14px; border-radius: 6px;
+      border: 1px solid var(--blue-200); background: var(--blue-100);
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .fc-toggle::before { content: 'See more details'; }
+    .fc-toggle::after {
+      content: '\25BE'; display: inline-block; font-size: 10px; line-height: 1;
+      transition: transform 0.15s ease;
+    }
+    summary:hover .fc-toggle { background: var(--blue-200); border-color: var(--blue-400); }
+    details[open] > summary .fc-toggle::before { content: 'Hide details'; }
+    details[open] > summary .fc-toggle::after { transform: rotate(180deg); }
+    .fc-detail {
+      margin-top: 18px; padding-top: 18px;
+      border-top: 1px solid var(--grey-300);
+    }
+
+    .af-block {
+      margin-top: 40px; padding-top: 32px;
+      border-top: 1px solid var(--grey-300);
+    }
+    .af-head {
+      font-size: 22px; font-weight: 700; color: var(--grey-1000);
+      margin: 0 0 6px;
+    }
+    .af-intro { font-size: 14px; color: var(--grey-800); margin: 0 0 18px; line-height: 1.6; }
+    .af-item { padding: 16px 0; border-bottom: 1px solid var(--grey-300); }
+    .af-item:last-child { border-bottom: none; }
+    .af-meta {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 8px; flex-wrap: wrap;
+    }
+    .af-title {
+      font-size: 15px; font-weight: 700; color: var(--grey-1000);
+      margin-bottom: 6px; line-height: 1.4;
+    }
+    .af-obs { font-size: 13px; color: var(--grey-800); line-height: 1.65; margin: 0; }
+
+    .rsp {
+      background: var(--blue-100);
+      border: 1px solid var(--blue-200);
+      border-radius: 4px;
+      padding: 28px 32px; margin: 0 0 48px;
+    }
+    .rsp h3 {
+      font-size: 18px; font-weight: 700; color: var(--blue-600);
+      margin-bottom: 10px; line-height: 1.3;
+    }
+    .rsp p {
+      font-size: 14px; color: var(--grey-800); line-height: 1.75;
+      margin-bottom: 10px;
+    }
+    .rsp p:last-of-type { margin-bottom: 0; }
+    .rsp-version {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; color: var(--grey-600); letter-spacing: 0.5px;
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--blue-200);
+    }
+
+    .mb {
+      background: var(--grey-200); border-radius: 4px;
+      padding: 28px 32px; margin: 0 0 0;
+    }
+    .mb-section { margin-bottom: 20px; }
+    .mb-section:last-child { margin-bottom: 0; }
+    .mb-section p {
+      font-size: 14px; color: var(--grey-800); line-height: 1.75;
+    }
+
+    .report-footer { padding: 0 0 64px; }
+
+    .disclaimer {
+      font-size: 12px; color: var(--grey-600); line-height: 1.7;
+      text-align: center; padding: 24px 0;
+      border-top: 1px solid var(--grey-300);
+    }
+
+    .brand-footer {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      text-align: center; margin-top: 24px;
+      font-size: 12px; color: var(--grey-600);
+    }
+    .brand-footer span { color: var(--blue-500); font-weight: 600; }
+
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .report-title { font-size: 32px; }
+      .fc { padding: 24px; }
+      .mb { padding: 24px; }
+      .rsp { padding: 24px; }
+      .score-hero {
+        flex-direction: column; align-items: flex-start;
+        gap: 24px; padding: 28px 24px;
+      }
+      .dim-row { grid-template-columns: 1fr 34px; }
+      .dim-name-cell { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── HEADER ── -->
+    <header class="report-header">
+
+      <!-- Sari Sari Wordmark — do not remove -->
+      <div class="logo-lockup">
+        <svg width="148" height="33" viewBox="0 0 248 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M113.123 18.9585V21.6722C114.373 19.2441 116.515 18.6371 118.801 18.53V24.5645C118.408 24.5645 116.087 24.4931 115.194 24.9573C114.23 25.4572 113.338 26.0999 113.338 29.6707V37.4191H106.91V18.9585H113.123Z" fill="#1F1D1C"/>
+          <path d="M87.8407 24.7429C88.4477 20.9936 91.5542 18.2441 96.3746 18.2441C100.767 18.2441 105.016 20.1366 105.016 26.8853V31.92C105.016 33.3483 104.98 35.9193 105.373 37.419H99.1597C99.0883 37.169 99.0169 36.6334 99.0169 36.2049V35.3479H98.9812C98.1242 36.8477 96.7674 37.9903 93.518 37.9903C90.0188 37.9903 87.0908 36.0621 87.0908 32.3842C87.0908 27.4923 92.4825 26.5997 94.8035 26.2426C97.1244 25.8855 98.8027 26.0283 98.8027 24.4929C98.8027 23.1718 97.4815 22.6718 96.3389 22.6718C95.1249 22.6718 93.9822 23.1718 93.6609 24.7429H87.8407ZM93.518 31.8843C93.518 32.6342 93.8751 33.5983 95.7676 33.5983C97.4101 33.5983 98.9098 32.4557 98.9098 28.8135V28.3136C98.4456 29.2063 97.4458 29.5991 96.1246 29.8847C93.9465 30.3846 93.518 31.0988 93.518 31.8843Z" fill="#1F1D1C"/>
+          <path d="M80.4265 24.3858C80.1051 23.2075 79.391 22.529 78.1412 22.529C76.8558 22.529 76.2488 23.2075 76.2488 23.8859C76.2488 24.8143 76.6772 25.2428 79.1053 25.9569C79.9623 26.2069 80.8192 26.4211 81.6762 26.6711C85.2826 27.6709 86.3895 29.492 86.3895 32.1343C86.3895 35.1694 83.9971 38.1331 78.1412 38.1331C72.9637 38.1331 70.3571 35.705 69.6787 31.563H75.856C76.0345 32.8127 76.8201 33.7411 78.1055 33.7411C79.6766 33.7411 80.1765 32.9556 80.1765 32.3128C80.1765 30.956 78.9625 30.6346 78.0341 30.3489L75.1776 29.5277C71.7497 28.5279 70.3928 26.7425 70.3928 23.8859C70.3928 20.8508 72.9994 18.2441 78.1055 18.2441C83.0688 18.2441 85.6396 20.6008 86.2467 24.3858H80.4265Z" fill="#1F1D1C"/>
+          <path d="M61.9559 19.216V37.4192H68.3832V19.3505C67.6632 20.3145 66.5133 20.9386 65.2176 20.9386C63.8626 20.9386 62.667 20.2561 61.9559 19.216Z" fill="#1F1D1C"/>
+          <path d="M68.136 16.6469C68.136 18.2587 66.8294 19.5653 65.2176 19.5653C63.6059 19.5653 62.2993 18.2587 62.2993 16.6469C62.2993 15.0351 63.6059 13.7285 65.2176 13.7285C66.8294 13.7285 68.136 15.0351 68.136 16.6469Z" fill="#1F1D1C"/>
+          <path d="M119.705 19.216V37.4192H126.133V19.3505C125.413 20.3145 124.263 20.9386 122.967 20.9386C121.612 20.9386 120.417 20.2561 119.705 19.216Z" fill="#1F1D1C"/>
+          <path d="M125.885 16.6469C125.885 18.2587 124.579 19.5653 122.967 19.5653C121.355 19.5653 120.049 18.2587 120.049 16.6469C120.049 15.0351 121.355 13.7285 122.967 13.7285C124.579 13.7285 125.885 15.0351 125.885 16.6469Z" fill="#1F1D1C"/>
+          <path d="M55.4425 18.9585V21.6722C56.6922 19.2441 58.8346 18.6371 61.1199 18.53V24.5645C60.7271 24.5645 58.4061 24.4931 57.5135 24.9573C56.5494 25.4572 55.6567 26.0999 55.6567 29.6707V37.4191H49.2295V18.9585H55.4425Z" fill="#1F1D1C"/>
+          <path d="M30.162 24.7429C30.769 20.9936 33.8755 18.2441 38.6959 18.2441C43.0878 18.2441 47.3369 20.1366 47.3369 26.8853V31.92C47.3369 33.3483 47.3012 35.9193 47.694 37.419H41.481C41.4096 37.169 41.3382 36.6334 41.3382 36.2049V35.3479H41.3025C40.4455 36.8477 39.0886 37.9903 35.8393 37.9903C32.3401 37.9903 29.4121 36.0621 29.4121 32.3842C29.4121 27.4923 34.8038 26.5997 37.1248 26.2426C39.4457 25.8855 41.1239 26.0283 41.1239 24.4929C41.1239 23.1718 39.8028 22.6718 38.6602 22.6718C37.4461 22.6718 36.3035 23.1718 35.9822 24.7429H30.162ZM35.8393 31.8843C35.8393 32.6342 36.1964 33.5983 38.0889 33.5983C39.7314 33.5983 41.2311 32.4557 41.2311 28.8135V28.3136C40.7669 29.2063 39.7671 29.5991 38.4459 29.8847C36.2678 30.3846 35.8393 31.0988 35.8393 31.8843Z" fill="#1F1D1C"/>
+          <path d="M22.7477 24.3858C22.4264 23.2075 21.7122 22.529 20.4625 22.529C19.1771 22.529 18.57 23.2075 18.57 23.8859C18.57 24.8143 18.9985 25.2428 21.4266 25.9569C22.2836 26.2069 23.1405 26.4211 23.9975 26.6711C27.6039 27.6709 28.7108 29.492 28.7108 32.1343C28.7108 35.1694 26.3184 38.1331 20.4625 38.1331C15.285 38.1331 12.6784 35.705 12 31.563H18.1773C18.3558 32.8127 19.1414 33.7411 20.4268 33.7411C21.9979 33.7411 22.4978 32.9556 22.4978 32.3128C22.4978 30.956 21.2838 30.6346 20.3554 30.3489L17.4988 29.5277C14.071 28.5279 12.7141 26.7425 12.7141 23.8859C12.7141 20.8508 15.3207 18.2441 20.4268 18.2441C25.39 18.2441 27.9609 20.6008 28.5679 24.3858H22.7477Z" fill="#1F1D1C"/>
+          <path d="M217.634 37.4435V19.0203H223.834V21.7642C224.867 19.6618 226.471 18.3789 229.322 18.3789C233.99 18.3789 235.95 21.5148 235.95 27.0382V37.4435H229.536V29.2119C229.536 27.3232 229.714 24.0805 226.899 24.0805C224.76 24.0805 224.048 26.1473 224.048 30.2096V37.4435H217.634Z" fill="#1F1D1C"/>
+          <path d="M209.757 19.02H216.67V34.8062C216.67 42.2539 211.859 44 206.514 44C200.599 44 197.534 40.7216 196.857 37.5145H203.093C203.557 38.7261 204.626 39.4388 206.407 39.4388C209.222 39.4388 209.757 38.0846 209.757 36.3742V33.6659H209.721C209.044 35.2339 207.655 36.4811 205.053 36.4811C200.456 36.4811 196.465 33.7016 196.465 27.4299C196.465 21.1938 200.349 18.4499 204.982 18.4499C207.334 18.4499 209.08 19.5189 209.721 20.98H209.757V19.02ZM202.844 27.4655C202.844 29.7461 204.34 31.6704 206.728 31.6704C209.116 31.6704 210.577 29.7461 210.577 27.4655C210.577 25.2205 209.116 23.2962 206.728 23.2962C204.34 23.2962 202.844 25.2205 202.844 27.4655Z" fill="#1F1D1C"/>
+          <path d="M182.514 24.4365C182.193 23.2605 181.481 22.5835 180.233 22.5835C178.951 22.5835 178.345 23.2605 178.345 23.9376C178.345 24.8641 178.772 25.2917 181.196 26.0044C182.051 26.2539 182.906 26.4677 183.761 26.7171C187.36 27.7149 188.465 29.5323 188.465 32.1692C188.465 35.1982 186.078 38.1559 180.233 38.1559C175.066 38.1559 172.465 35.7327 171.788 31.5991H177.953C178.131 32.8463 178.915 33.7728 180.198 33.7728C181.766 33.7728 182.265 32.9888 182.265 32.3474C182.265 30.9933 181.053 30.6726 180.127 30.3875L177.276 29.5679C173.855 28.5701 172.501 26.7884 172.501 23.9376C172.501 20.9086 175.102 18.3073 180.198 18.3073C185.151 18.3073 187.717 20.6592 188.322 24.4365H182.514Z" fill="#1F1D1C"/>
+          <path d="M171.415 32.0981C170.203 35.4121 166.889 38.156 161.9 38.156C156.199 38.156 151.994 34.2005 151.994 28.2495C151.994 22.548 156.235 18.3431 162.079 18.3431C167.851 18.3431 171.7 22.2985 171.7 28.7128C171.7 28.9622 171.7 29.4968 171.664 30.0313H158.123C158.586 31.8843 160.083 33.1671 161.972 33.1671C163.183 33.1671 164.252 32.7752 164.929 32.0981H171.415ZM158.088 26.2896H165.642C165.428 25.0068 164.502 22.9756 161.972 22.9756C159.976 22.9756 158.515 24.2941 158.088 26.2896Z" fill="#1F1D1C"/>
+          <path d="M139.524 18.4499C142.019 18.4499 143.587 19.5902 144.406 20.98H144.442V12H151.141V37.4432H144.299V35.5189H144.264C143.622 36.5523 142.339 37.9777 139.595 37.9777C134.999 37.9777 130.651 34.4855 130.651 28.2138C130.651 21.9777 134.892 18.4499 139.524 18.4499ZM136.994 28.2494C136.994 31.029 138.526 33.2383 141.056 33.2383C143.587 33.2383 145.154 31.029 145.154 28.2494C145.154 25.5056 143.587 23.2962 141.056 23.2962C138.526 23.2962 136.994 25.5056 136.994 28.2494Z" fill="#1F1D1C"/>
+          <path d="M189.2 19.2167V37.4199H195.628V19.3512C194.908 20.3152 193.758 20.9393 192.462 20.9393C191.107 20.9393 189.911 20.2567 189.2 19.2167Z" fill="#1F1D1C"/>
+          <path d="M195.38 16.6476C195.38 18.2594 194.074 19.566 192.462 19.566C190.85 19.566 189.544 18.2594 189.544 16.6476C189.544 15.0358 190.85 13.7292 192.462 13.7292C194.074 13.7292 195.38 15.0358 195.38 16.6476Z" fill="#1F1D1C"/>
+        </svg>
+      </div>
+
+      <span class="ovl">Activation Scorecard</span>
+      <h1 class="report-title">Virilitas Labs</h1>
+      <p class="report-caption">
+        <a href="https://virilitaslabs.com/">virilitaslabs.com</a> &nbsp;&middot;&nbsp; September 3, 2026
+      </p>
+
+      <div class="why-block">
+        <span class="ovl">Why This Matters</span>
+        <p>Virilitas Labs has assets most health startups would trade for: peer-reviewed science, credentialed founders, and a live app in both stores. Right now, the path from first visit to an activated user hides those assets at every step where an anxious fertility patient decides whether to trust you, and the app's biggest moment of effort, a 23-question health assessment, ends without giving anything back. Every visitor who bounces there is an install, a research participant, and a future consultation that never happens.</p>
+      </div>
+
+      <hr class="rule">
+
+    </header>
+
+    <!-- ── SCORE HERO ── -->
+    <section class="score-section">
+      <div class="sec-head">
+        <span class="ovl">Activation Score</span>
+        <h2>How Virilitas Labs scores today</h2>
+        <p>A criterion-referenced 0&ndash;100 score of the first-run activation flow (website &rarr; install &rarr; signup &rarr; first value), computed from weighted 0&ndash;10 dimension ratings.</p>
+      </div>
+      <div class="score-hero">
+        <div class="score-meter">
+          <svg width="200" height="200" viewBox="0 0 200 200" role="img" aria-label="Activation Score: 40 out of 100">
+            <circle cx="100" cy="100" r="84" fill="none" stroke="#D5D2CA" stroke-width="12"/>
+            <circle cx="100" cy="100" r="84" fill="none" stroke="#1F5FA6" stroke-width="12"
+                    stroke-linecap="round"
+                    stroke-dasharray="211.12 527.79"
+                    transform="rotate(-90 100 100)"/>
+            <text x="100" y="98" text-anchor="middle"
+                  font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif"
+                  font-size="52" font-weight="600" fill="#292826">40</text>
+            <text x="100" y="126" text-anchor="middle"
+                  font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif"
+                  font-size="13" font-weight="600" letter-spacing="1.5" fill="#8A8884">OUT OF 100</text>
+          </svg>
+        </div>
+        <div class="score-copy">
+          <div class="score-band-name">Friction-Heavy, but Fixable</div>
+          <p class="score-framing">Measured against best-practice activation patterns for health and wellness products, your flow carries friction at several points where users decide whether to continue. Products in this range usually see meaningful signup-to-activation drop-off, and it is the recoverable kind. The top findings in this scorecard are the places to start.</p>
+          <p class="score-method-note">Automated evaluation plus a structured senior-designer walkthrough of your first-run activation flow.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DIMENSION BREAKDOWN ── -->
+    <section class="dims">
+      <div class="sec-head">
+        <span class="ovl">Dimension Breakdown</span>
+        <h2>Where the score comes from</h2>
+        <p>Each in-scope dimension rated 0&ndash;10 against its section of our reference checklist, then weighted. Findings are evidence for ratings, never point deductions.</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Onboarding &amp; Activation</span>
+          <span class="dim-weight">Weight 16</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 30%;"></div>
+        </div>
+        <div class="dim-rating">3</div>
+        <p class="dim-note">The site asks for an install with no product preview (ONB-02, ONB-03), the app opens with no orientation or first task, and the 23-question assessment returns no visible result. Letting new users browse Education and Community before signup is the right staging, and it keeps this rating off the floor.</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Forms &amp; Input</span>
+          <span class="dim-weight">Weight 15</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="dim-rating">5</div>
+        <p class="dim-note">The health assessment is the strongest formwork in the flow: one question per screen, clear progress, correct keyboards (FORM-03, FORM-04). Held back by a signup with no Apple or Google sign-in, UK-only units for US users, and site form labels that go invisible before the background image loads (FORM-01, FORM-05, MOB-05).</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Nielsen's Heuristics</span>
+          <span class="dim-weight">Weight 10</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="dim-rating">5</div>
+        <p class="dim-note">In-app feedback and back navigation work, and dialogs explain themselves (N-01, N-03). Consistency slips between surfaces: the site says "when we launch" beside live store badges, styles CTAs inconsistently, and misspells the company's own name in a title tag (N-04).</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Mobile UX</span>
+          <span class="dim-weight">Weight 10</span>
+          <span class="cap-mark">Capped by Critical finding</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill capped" style="width: 40%;"></div>
+        </div>
+        <div class="dim-rating">4</div>
+        <p class="dim-note">The native app is competent mobile work, but the mobile site's cookie banner covers most of the viewport and blocks the opened menu (MOB-08, N-03). The evidence otherwise supported a 5 to 6; the Critical-cap limits the rating to 4.</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Interaction Design</span>
+          <span class="dim-weight">Weight 9</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="dim-rating">5</div>
+        <p class="dim-note">App interactions acknowledge input and transitions are clean (IXD-01). The AI chat's empty state puts the whole first move on the user: a bare text box with no suggested prompts at the exact moment of intended first value (IXD-04, IXD-05).</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Conversion Entry</span>
+          <span class="dim-weight">Weight 8</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 20%;"></div>
+        </div>
+        <div class="dim-rating">2</div>
+        <p class="dim-note">The hero asks for nothing, the dominant conversion section suppresses the install, product imagery and social proof are absent, and every CTA is styled like a disabled button (CRO-01, CRO-02, CRO-05, CRO-06). Two Critical findings sit in this dimension.</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Content &amp; Copywriting</span>
+          <span class="dim-weight">Weight 8</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 40%;"></div>
+        </div>
+        <div class="dim-rating">4</div>
+        <p class="dim-note">The value proposition is never articulated on either surface, and typos reach as far as the company's own name in a browser tab (COPY-02, COPY-07). In-app microcopy is plain and warm, with a proper AI disclaimer, which holds this above the floor.</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Accessibility</span>
+          <span class="dim-weight">Weight 8</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 30%;"></div>
+        </div>
+        <div class="dim-rating">3</div>
+        <p class="dim-note">Measured contrast failures across the site palette, a suppressed keyboard focus indicator, and no skip link (ACC-06, ACC-10, ACC-16, ACC-21). Form labeling and heading structure are sound; automated checks cover roughly a third of WCAG, so this reflects what was measurable.</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Visual &amp; Brand Design</span>
+          <span class="dim-weight">Weight 6</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="dim-rating">5</div>
+        <p class="dim-note">The app's visual system is the strongest craft in the flow: consistent palette, clear hierarchy, disciplined components. The site drags it down with washed-out headings, screen-tall empty voids, all-stock imagery, and no health-data trust signaling (VD-02, VD-05, VD-06, VD-08).</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Information Architecture</span>
+          <span class="dim-weight">Weight 6</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="dim-rating">5</div>
+        <p class="dim-note">Assessment progress orientation is excellent (IA-03). But app navigation splits across a tab bar and a hamburger menu, leaving Consultations off the primary nav, and the site has no persistent CTA and no product page at all (IA-06, IA-10).</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Bugs &amp; Defects</span>
+          <span class="dim-weight">Weight 4</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 30%;"></div>
+        </div>
+        <div class="dim-rating">3</div>
+        <p class="dim-note">The site's hero ships invisible until a script runs, so first mobile visits can render a headline-less page. In the app, the verification email's "Open App &amp; Login" button lands on a blank sign-in form instead of a session, and an update dialog interrupts the first-ever open.</p>
+      </div>
+
+    </section>
+
+    <!-- ── COMPETITOR BENCHMARK ── -->
+    <section class="bench">
+      <div class="sec-head">
+        <span class="ovl">Benchmark</span>
+        <h2>How Virilitas Labs compares</h2>
+        <p>Virilitas Labs's dimension ratings side by side with named leaders in its vertical, rated on the same rubric. Scroll horizontally to see every column.</p>
+      </div>
+      <div class="bench-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th class="bench-brand">Virilitas Labs</th>
+              <th>Mojo</th>
+              <th>ExSeed Health</th>
+              <th>Legacy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Onboarding &amp; Activation</td>
+              <td>3</td>
+              <td>7</td>
+              <td>5</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>Forms &amp; Input</td>
+              <td>5</td>
+              <td>7</td>
+              <td>5</td>
+              <td>not evaluated</td>
+            </tr>
+            <tr>
+              <td>Nielsen's Heuristics</td>
+              <td>5</td>
+              <td>7</td>
+              <td>6</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>Mobile UX</td>
+              <td>4</td>
+              <td>7</td>
+              <td>not evaluated</td>
+              <td>not evaluated</td>
+            </tr>
+            <tr>
+              <td>Interaction Design</td>
+              <td>5</td>
+              <td>6</td>
+              <td>6</td>
+              <td>not evaluated</td>
+            </tr>
+            <tr>
+              <td>Conversion Entry</td>
+              <td>2</td>
+              <td>7</td>
+              <td>7</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>Content &amp; Copywriting</td>
+              <td>4</td>
+              <td>8</td>
+              <td>7</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>Visual &amp; Brand Design</td>
+              <td>5</td>
+              <td>8</td>
+              <td>7</td>
+              <td>not evaluated</td>
+            </tr>
+            <tr>
+              <td>Information Architecture</td>
+              <td>5</td>
+              <td>6</td>
+              <td>6</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>Bugs &amp; Defects</td>
+              <td>3</td>
+              <td>7</td>
+              <td>3</td>
+              <td>not evaluated</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="bench-footnote">Competitor ratings are timeboxed spot evaluations of each competitor's signup-reachable flows &mdash; not full audits. Dimensions not observable from outside are omitted from this table rather than guessed, so no competitor total is shown. Accessibility is omitted as a row for the same reason. ExSeed Health's Bugs &amp; Defects rating is capped by a Critical: publicly documented app crashes during test submission.</p>
+    </section>
+
+    <!-- ── PRIORITY FRICTION AREAS ── -->
+    <section class="findings-section">
+      <div class="findings-header">
+        <span class="ovl">Friction Areas</span>
+        <h2>Priority Friction Areas</h2>
+        <p>The six highest-priority friction points on the first-run activation flow, covered in depth &mdash; in the order a user hits them, grouped by page. Each is evidence behind a dimension rating above. Select "See more details" on any card for the evidence and fix. Every other issue we logged is listed under Additional Findings below.</p>
+      </div>
+
+      <h3 class="page-head">Website &mdash; Homepage</h3>
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">1</div>
+            <span class="fdim">Conversion Entry</span>
+            <span class="badge bc">Critical</span>
+          </div>
+          <h3 class="fc-title">The homepage never asks for the install, then argues against it</h3>
+          <p class="fc-lead">The hero contains a headline and a photo, and nothing else: no button, no store badge, no link. One scroll later, the page's most visually dominant section says "Join our waitlist&hellip; be the first to know when we launch," directly beside sections linking to the live App Store and Google Play listings.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>For a product-led app company, the homepage is the top of the entire funnel. A visitor primed to install reads "when we launch" and reasonably concludes the app is not out yet, so the strongest section on the page actively suppresses your primary conversion. Fixing this costs a headline and a button, and it touches every visitor you will ever get.</p>
+          </div>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence">
+            <img src="/reports/virilitas-labs-scorecard-b3a81600d74e/screenshots/screenshot_04_waitlist_contradicts_live_app.png" alt="Homepage waitlist section reading 'Join our waitlist be the first to know when we launch' on a site with live app store links">
+            <figcaption>The dominant conversion section tells visitors the product has not launched. The app is live in both stores.</figcaption>
+          </figure>
+          <div class="cids">
+            <span class="cid">CRO-01</span>
+            <span class="cid">CRO-02</span>
+            <span class="cid">CRO-05</span>
+            <span class="cid">N-04</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>Put the primary action in the hero: store badges or a single "Get the app" button, with a secondary "For clinics" link for the B2B audience.</li>
+              <li>Rescope the waitlist section explicitly to the clinic diagnostics ("Clinics: be first to know when our diagnostics launch") or convert it into a patient newsletter signup. Never show "when we launch" beside live store badges.</li>
+              <li>Restyle primary buttons in a darkened brand teal with white text so they no longer read as disabled controls.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-low">Effort: Low</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">2</div>
+            <span class="fdim">Onboarding &amp; Activation</span>
+            <span class="badge bc">Critical</span>
+          </div>
+          <h3 class="fc-title">The install is requested sight unseen: no product preview anywhere</h3>
+          <p class="fc-lead">The only activation path on the site is a pair of store badges. Across all four pages there is not a single app screenshot, demo clip, sample insight, or "how it works" step. The entire product description is one sentence, and every image on the patient-facing pages is stock photography.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>An app install is a high-cost ask on a sensitive health topic where trust thresholds are highest. Visitors cannot form a mental model of what they are installing, and the credibility you have earned in the lab (peer-reviewed publications, an innovation award, credentialed founders) is invisible at the exact moment the decision is made. Every competitor we benchmarked shows the product before asking for anything.</p>
+          </div>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence">
+            <img src="/reports/virilitas-labs-scorecard-b3a81600d74e/screenshots/screenshot_05_get_app_no_product_screenshots.png" alt="The Get the app section: text and store badges only, with no product screenshots">
+            <figcaption>The full "Get the app" section: one sentence and two badges. No screenshots, no preview, no proof.</figcaption>
+          </figure>
+          <div class="cids">
+            <span class="cid">ONB-02</span>
+            <span class="cid">ONB-03</span>
+            <span class="cid">CRO-08</span>
+            <span class="cid">VD-06</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>Add an app showcase section high on the homepage: two to three real app screenshots (Education Hub, AI chat, Community), a 20 to 30 second screen-recording clip, and three outcome-framed bullets.</li>
+              <li>Pair the store badges with a low-commitment preview ("See how it works") so undecided visitors have a step before install.</li>
+              <li>Surface a trust strip near the app CTA: built by University of East Anglia reproductive scientists, research published in PNAS, Innovation &amp; Impact Award 2023.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-med">Effort: Medium</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+      <h3 class="page-head">Website &mdash; Mobile first visit</h3>
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">3</div>
+            <span class="fdim">Mobile UX</span>
+            <span class="badge bc">Critical</span>
+          </div>
+          <h3 class="fc-title">The mobile first impression is a consent wall over a headline-less page</h3>
+          <p class="fc-lead">On a phone, the cookie banner covers roughly three quarters of the screen on arrival, and opening the menu renders the navigation underneath it, unreachable. Separately, the hero headline ships invisible and waits for a script-driven animation, so a first mobile visit can show an empty white frame where the headline should be.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>Most high-intent traffic for an app company lands on mobile: ads, social, and App Store cross-links. Right now that first impression is a legal interstitial followed by a page that looks unfinished, on a brand asking users to trust it with fertility data. Both halves of this are small, contained fixes.</p>
+          </div>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence">
+            <img src="/reports/virilitas-labs-scorecard-b3a81600d74e/screenshots/screenshot_12_mobile_cookie_wall.png" alt="Mobile viewport almost entirely covered by the cookie consent banner">
+            <figcaption>First paint on a 390px viewport: logo, hamburger, and a consent card covering the content.</figcaption>
+          </figure>
+          <div class="cids">
+            <span class="cid">MOB-08</span>
+            <span class="cid">N-03</span>
+            <span class="cid">N-01</span>
+            <span class="cid">CRO-01</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>Switch to a compact bottom-sheet cookie banner (about a quarter of the viewport at most, as on desktop) that never overlays the opened navigation.</li>
+              <li>Make hero content visible by default and let the script add the entrance animation, so no real-world state ever renders the headline invisible.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-low">Effort: Low</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+      <h3 class="page-head">App &mdash; First open</h3>
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">4</div>
+            <span class="fdim">Onboarding &amp; Activation</span>
+            <span class="badge bm">Major</span>
+          </div>
+          <h3 class="fc-title">The app opens with no onboarding: no welcome, no orientation, no first task</h3>
+          <p class="fc-lead">A first-ever open drops the user straight into the Education Hub article list. There is no welcome, no expectation setting, no tour of the four tabs, and no suggested first action. In our recorded session, an "Update Available" dialog interrupted within seconds of the very first launch.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>New users decide in the first session whether this app is for them. Without orientation, the value proposition (education, community, AI guidance, expert consultations) has to be discovered by accident, and the features most likely to retain a user, like Community and the assistant, may never be found. Health onboarding redesigns show some of the largest documented activation lifts in the vertical.</p>
+          </div>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence fc-evidence-app">
+            <img src="/reports/virilitas-labs-scorecard-b3a81600d74e/screenshots/app_01_first_open_education_hub_update_dialog.png" alt="First app open: the Education Hub with an Update Available dialog on top">
+            <figcaption>The first screen a brand-new user sees: an article list, interrupted by an update dialog.</figcaption>
+          </figure>
+          <div class="cids">
+            <span class="cid">ONB-01</span>
+            <span class="cid">ONB-04</span>
+            <span class="cid">ONB-06</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>Add a short, skippable first-run sequence: what Virilitas is for, the four tabs in one screen each, and one clear suggested first action per user goal.</li>
+              <li>Keep it re-findable: a "Getting started" entry in the Profile so dismissed help can be recalled.</li>
+              <li>Suppress the update prompt on the first-ever launch; ask on a later session instead.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-med">Effort: Medium</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+      <h3 class="page-head">App &mdash; Account creation</h3>
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">5</div>
+            <span class="fdim">Bugs &amp; Defects</span>
+            <span class="badge bc">Critical</span>
+          </div>
+          <h3 class="fc-title">Signup dead-ends into an email round trip, then asks the user to log in again</h3>
+          <p class="fc-lead">After completing the signup form, users are told to leave the app and verify their email before logging in. In our recorded session this detour took the user out of the app for over half a minute, and the verification email's "Open App &amp; Login" button landed on a blank sign-in form, requiring username and password to be typed again by hand.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>This is the single most drop-off-prone pattern in signup design: every exit from the app is a chance to never come back, and every re-typed credential multiplies it. Users who arrived with intent are being lost to a mechanical step that competitors have reduced to a single email field or removed entirely with Apple and Google sign-in.</p>
+          </div>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence fc-evidence-app">
+            <img src="/reports/virilitas-labs-scorecard-b3a81600d74e/screenshots/app_02_registration_verify_email_dialog.png" alt="Registration Successful dialog instructing the user to check email and verify before logging in">
+            <figcaption>Signup ends with an instruction to leave the app. The return path lands on an empty login form.</figcaption>
+          </figure>
+          <div class="cids">
+            <span class="cid">FORM-01</span>
+            <span class="cid">ONB-07</span>
+            <span class="cid">N-09</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>Add Sign in with Apple and Google, which removes both the verification round trip and the password for most users.</li>
+              <li>If email verification must stay, let users into the app immediately and verify in the background, or make the email's button deep-link into an authenticated session.</li>
+              <li>Let users sign in with their email address, not a separately remembered username.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-med">Effort: Medium</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+      <h3 class="page-head">App &mdash; AI assistant &amp; health assessment</h3>
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">6</div>
+            <span class="fdim">Onboarding &amp; Activation</span>
+            <span class="badge bm">Major</span>
+          </div>
+          <h3 class="fc-title">The flow's biggest ask pays off with an empty text box</h3>
+          <p class="fc-lead">The 23-question health assessment is the largest effort the app requests, and it is genuinely well built. But completing it returns the user to the same generic chat welcome they saw before: no summary, no personalized insight, no acknowledgment of the answers just given, and no suggested prompts. The aha moment the assessment sets up never arrives.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>This is where activation is won or lost in your product. A user who has just disclosed sensitive health details is maximally invested and maximally expectant; giving nothing back teaches them the effort was not worth it. The fix converts work you have already done (the assessment and the AI) into the moment users will remember and return for.</p>
+          </div>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence fc-evidence-app">
+            <img src="/reports/virilitas-labs-scorecard-b3a81600d74e/screenshots/app_03_post_assessment_empty_chat.png" alt="After completing the 23-question assessment, the assistant shows the same generic welcome and an empty message box">
+            <figcaption>Immediately after a 23-question assessment: the same welcome copy and an empty "Type your message" box.</figcaption>
+          </figure>
+          <div class="cids">
+            <span class="cid">ONB-03</span>
+            <span class="cid">ONB-06</span>
+            <span class="cid">IXD-04</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>On assessment completion, open the chat with a personalized summary: what the answers suggest, two or three areas worth exploring, framed within the existing medical disclaimer.</li>
+              <li>Add three to five tappable suggested prompts to the chat's empty state, personalized from the assessment where available and generic before it ("What does a semen analysis measure?", "What lifestyle changes improve sperm quality?").</li>
+              <li>Explain the message quota ("50 messages remaining") the first time it appears, so it reads as generous rather than as a meter already running down.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-med">Effort: Medium</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- ── ADDITIONAL FINDINGS ── -->
+      <div class="af-block">
+        <h3 class="af-head">Additional Findings</h3>
+        <p class="af-intro">Every other issue we logged on the first-run activation flow, grouped by page in the order a user hits them. Lighter detail than the priority areas above, drawn from the same evidence base.</p>
+
+        <h4 class="page-head">Website &mdash; Homepage</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Conversion Entry</span>
+          </div>
+          <div class="af-title">No social proof at any decision point</div>
+          <p class="af-obs">The homepage shows no ratings, testimonials, press, or credentials; the award and PNAS publications sit at the bottom of interior pages where a deciding visitor never sees them.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Conversion Entry</span>
+          </div>
+          <div class="af-title">Every CTA is styled like a disabled button</div>
+          <p class="af-obs">All buttons use pale beige with grey-brown text at 1.51:1 component contrast, the universal visual language for an inactive control.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Onboarding &amp; Activation</span>
+          </div>
+          <div class="af-title">App Store links hardcoded to the US storefront</div>
+          <p class="af-obs">Both badges point at the US store from an en-GB site; region-locked accounts can hit unavailable-in-your-region dead ends.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Conversion Entry</span>
+          </div>
+          <div class="af-title">No mid-intent path for a research-heavy audience</div>
+          <p class="af-obs">The site offers install or a contact form and nothing between; visitors not ready to install have nowhere to go except away.</p>
+        </div>
+
+        <h4 class="page-head">Website &mdash; Site-wide</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Content &amp; Copywriting</span>
+          </div>
+          <div class="af-title">Typos on a scientific-credibility brand, including the company's own name</div>
+          <p class="af-obs">The Solutions title tag reads "Viriltas"; the 50px waitlist headline is a run-on; Solutions body copy includes "designed to empowering men."</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Visual &amp; Brand Design</span>
+          </div>
+          <div class="af-title">Brand teal fails contrast on light backgrounds</div>
+          <p class="af-obs">Headline teal on white measures 2.11:1 and the "Get the app" heading 2.54:1, below even the large-text minimum, on the words carrying the most conversion weight.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Visual &amp; Brand Design</span>
+          </div>
+          <div class="af-title">No health-data trust or compliance signals anywhere</div>
+          <p class="af-obs">A fertility-data product shows no medical disclaimer, no data-protection statement outside legal pages, and no privacy reassurance near any form.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Accessibility</span>
+          </div>
+          <div class="af-title">Keyboard focus indicator suppressed site-wide</div>
+          <p class="af-obs">Focus outlines are disabled with no replacement style; combined with no skip link, the site is effectively unusable without a mouse.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Accessibility</span>
+          </div>
+          <div class="af-title">Contrast failures across the palette</div>
+          <p class="af-obs">Teal headings, beige buttons, and white-over-image form labels all measure below WCAG minimums on the elements that drive activation.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">SEO &amp; Discoverability</span>
+          </div>
+          <div class="af-title">No Open Graph or Twitter card metadata on any page</div>
+          <p class="af-obs">Links shared in chats and forums, where fertility decisions are actually discussed, render as bare grey URLs with no image or pitch.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">SEO &amp; Discoverability</span>
+          </div>
+          <div class="af-title">Technical SEO baseline missing</div>
+          <p class="af-obs">No canonical tags, no structured data, and a sitemap that returns 404, on a young domain trying to rank in a health category.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Visual &amp; Brand Design</span>
+          </div>
+          <div class="af-title">All-stock imagery on patient-facing pages</div>
+          <p class="af-obs">Every image on Home and Solutions is recognisable stock; the team's real lab footage and founder photography exist but are buried on About and inside a video player.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Visual &amp; Brand Design</span>
+          </div>
+          <div class="af-title">Decorative empty frames read as failed image loads</div>
+          <p class="af-obs">Thin white outline rectangles extend past photo edges or render before content, presenting as broken images in several live states.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Accessibility</span>
+          </div>
+          <div class="af-title">No skip-navigation link</div>
+          <p class="af-obs">Keyboard and screen-reader users must traverse the full navigation on every page.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Accessibility</span>
+          </div>
+          <div class="af-title">Eight of fourteen homepage images carry empty alt text</div>
+          <p class="af-obs">Several appear to be content images marked as decorative; flagged for a manual review of each.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Mobile UX</span>
+          </div>
+          <div class="af-title">Sub-target-size links in the cookie banner and inline copy</div>
+          <p class="af-obs">Policy links render at roughly 16 to 17px tall, half the recommended touch-target size, inside a consent flow.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">SEO &amp; Discoverability</span>
+          </div>
+          <div class="af-title">Title-tag convention issues</div>
+          <p class="af-obs">Trailing periods, a page described as "Services" while the nav says "Solutions," and the brand misspelling surfacing in search results.</p>
+        </div>
+
+        <h4 class="page-head">Website &mdash; Navigation &amp; footer</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Information Architecture</span>
+          </div>
+          <div class="af-title">No persistent CTA in the header and no product page in the site structure</div>
+          <p class="af-obs">The app has no page of its own and no nav presence; a visitor on Solutions or About has no route to the stores without returning home and scrolling.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Forms &amp; Input</span>
+          </div>
+          <div class="af-title">Contact is form-only: no email, phone, or address anywhere</div>
+          <p class="af-obs">A clinic director or skeptical patient who wants to verify the company exists, or email directly, has no path; some clinic procurement requires a verifiable entity.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Information Architecture</span>
+          </div>
+          <div class="af-title">Footer is a bare link list</div>
+          <p class="af-obs">No contact details, social links, trust marks, or company information where skeptical users go to verify a brand.</p>
+        </div>
+
+        <h4 class="page-head">Website &mdash; Solutions page</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Visual &amp; Brand Design</span>
+          </div>
+          <div class="af-title">Viewport-scale empty voids</div>
+          <p class="af-obs">Nearly screen-tall empty bands between content blocks create a false bottom; users reasonably conclude the page is over before reaching the award, video, and publications.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Content &amp; Copywriting</span>
+          </div>
+          <div class="af-title">Patient-facing pages written in academic register</div>
+          <p class="af-obs">Visitors arriving from a support prompt land in grant-proposal language: molecular and genomics approaches, ART acronyms, raw publication titles with no lay summaries.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Information Architecture</span>
+          </div>
+          <div class="af-title">"Solutions" label has weak information scent and serves three audiences at once</div>
+          <p class="af-obs">Patients, clinics, and research recruits are interleaved down one long page whose title tag calls it "Services."</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">B2B &amp; Enterprise</span>
+          </div>
+          <div class="af-title">The clinic buyer gets a teaser and a form</div>
+          <p class="af-obs">Roughly 120 words of clinic-facing content with no mechanism, data, or pilot description; "significantly boost success rates" carries no evidence a clinical buyer can use.</p>
+        </div>
+
+        <h4 class="page-head">Website &mdash; Contact page</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Forms &amp; Input</span>
+          </div>
+          <div class="af-title">Contact form labels are invisible until the background image loads</div>
+          <p class="af-obs">White labels sit over a background image with no fallback colour; on slow connections the clinic-enquiry surface renders white-on-white.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Forms &amp; Input</span>
+          </div>
+          <div class="af-title">Forms set no expectations</div>
+          <p class="af-obs">No form says who reads it, what happens next, or when to expect a reply; validation and confirmation states are flagged for manual QA.</p>
+        </div>
+
+        <h4 class="page-head">App &mdash; Signup &amp; login</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Forms &amp; Input</span>
+          </div>
+          <div class="af-title">No Apple or Google sign-in</div>
+          <p class="af-obs">Signup is four manually typed fields on a phone, for a privacy-sensitive product where one-tap sign-in is the vertical norm.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Forms &amp; Input</span>
+          </div>
+          <div class="af-title">Login requires a username rather than an email</div>
+          <p class="af-obs">Users must recall a separately invented username; email is the credential people actually remember.</p>
+        </div>
+
+        <h4 class="page-head">App &mdash; Browsing &amp; navigation</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Information Architecture</span>
+          </div>
+          <div class="af-title">Consultations lives off the primary navigation</div>
+          <p class="af-obs">A key monetized feature sits in a hamburger menu while four tabs carry the rest of the app; it was also the first place the walkthrough hit a login wall.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Visual &amp; Brand Design</span>
+          </div>
+          <div class="af-title">Zero engagement counts undermine the content</div>
+          <p class="af-obs">Education articles display "0 likes, 0 comments" across the board, an empty-room signal that makes real content feel abandoned.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Bugs &amp; Defects</span>
+          </div>
+          <div class="af-title">Update dialog interrupts the first-ever launch</div>
+          <p class="af-obs">Within seconds of a brand-new user's first open, a native dialog asks them to update the app they just installed.</p>
+        </div>
+
+        <h4 class="page-head">App &mdash; AI assistant &amp; health assessment</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Content &amp; Copywriting</span>
+          </div>
+          <div class="af-title">The message quota is shown but never explained</div>
+          <p class="af-obs">"50 messages remaining" appears in the header before a first message is sent, with no explanation of the limit, the reset period, or what happens at zero.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Forms &amp; Input</span>
+          </div>
+          <div class="af-title">UK-only units and register for a US-storefront audience</div>
+          <p class="af-obs">Height accepts centimetres only, alcohol is asked in "units," and copy says "fizzy drinks" and "personalised" to users installed from the US store.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Forms &amp; Input</span>
+          </div>
+          <div class="af-title">"Prefer not to say" is offered inconsistently on sensitive questions</div>
+          <p class="af-obs">Some sexual-health questions allow declining and some do not, on the most intimate items in the assessment.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ── RE-SCORE PANEL ── -->
+    <section class="rsp">
+      <span class="ovl">Included With This Scorecard</span>
+      <h3>One re-score, within 90 days</h3>
+      <p>Your Scorecard includes one re-run of the Activation Score within 90 days of September 3, 2026. Ship your fixes, then we re-rate every dimension on the same rubric and deliver a per-dimension before/after delta &mdash; old rating, new rating, and change &mdash; plus your new total score and band.</p>
+      <p>To schedule your re-score, reply to your delivery email or write to patti@sarisari.design.</p>
+      <p class="rsp-version">Scored against Rubric 0.2-DRAFT (2026-07-27) &mdash; your re-score uses this same pinned version, so the delta measures your product, not a moved yardstick.</p>
+    </section>
+
+    <!-- ── METHODOLOGY ── -->
+    <div class="mb">
+      <div class="mb-section">
+        <span class="ovl">Methodology</span>
+        <p>Automated evaluation of the public website plus a structured senior-designer walkthrough of the recorded first-run flow (install, browse, signup, email verification, AI assistant, and health assessment), rated across 11 UX dimensions against a criterion-referenced rubric (Activation Score profile; SEO and performance are excluded from the score, though SEO findings are listed above for completeness). Competitor figures are timeboxed spot evaluations of signup-reachable surfaces on the same rubric.</p>
+      </div>
+      <div class="mb-section">
+        <span class="ovl">Evaluation Lens</span>
+        <p>Virilitas Labs is a research spin-out with a live consumer app and a product-led motion: the marketing site is the app's only salesperson, and the first session is where an anxious, research-prone fertility audience decides whether to stay. Every rating here weighs one question: how many visitors make it from the homepage to an installed, opened, personally useful app.</p>
+      </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="report-footer">
+      <p class="disclaimer">
+        This scorecard is based on automated evaluation of Virilitas Labs's public surface and a structured senior-designer walkthrough of the evaluated flow. Ratings are criterion-referenced against best-practice activation patterns for health and wellness products; competitor figures are timeboxed spot evaluations, not full audits.
+      </p>
+      <div class="brand-footer">
+        <span>Sari Sari Design</span> &nbsp;&middot;&nbsp; Activation Scorecard &nbsp;&middot;&nbsp; September 2026
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
