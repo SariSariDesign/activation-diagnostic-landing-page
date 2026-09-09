@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Activation Scorecard — Preview — Virilitas Labs — 2026-09-09
+  Rendered from report-template.html v2.1 (Sari Sari Design).
+  Preview Score sub-profile: recording (rubric §6.3), Rubric 1.0 (2026-07-29).
+  Slug: virilitas-labs-preview-2ed922
+  Derived from the full Activation Scorecard (virilitas-labs-scorecard-b3a81600d74e);
+  top 5 of 42 findings, score recomputed over the 9 recording-observable dimensions.
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activation Scorecard Preview — Virilitas Labs</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap');
+
+    :root {
+      /* Warm gray scale */
+      --grey-100: #F7F5F0;
+      --grey-200: #EDEAE3;
+      --grey-300: #D5D2CA;
+      --grey-400: #BFBDB8;
+      --grey-600: #8A8884;
+      --grey-800: #575452;
+      --grey-1000: #292826;
+
+      /* Blue scale */
+      --blue-100: #EAF1FD;
+      --blue-200: #C2D7F7;
+      --blue-400: #3A84D4;
+      --blue-500: #1F5FA6;
+      --blue-600: #174A82;
+
+      /* Red scale */
+      --red-100: #FCEEF2;
+      --red-200: #F3C8D5;
+      --red-500: #AB4E68;
+
+      /* Orange scale */
+      --orange-100: #FEF4E6;
+      --orange-200: #FDE0B5;
+      --orange-500: #FB8B24;
+
+      /* Green scale */
+      --green-100: #E8F7EE;
+      --green-200: #B0E8C8;
+      --green-500: #2E6B45;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--grey-100);
+      color: var(--grey-1000);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Overline ── */
+    .ovl {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--blue-500);
+      display: block; margin-bottom: 14px;
+    }
+
+    /* ── Header ── */
+    .report-header { padding: 64px 0 48px; }
+
+    .logo-lockup { margin-bottom: 64px; }
+
+    .report-title {
+      font-size: 46px; font-weight: 700; line-height: 1.1;
+      color: var(--grey-1000); margin-bottom: 10px;
+    }
+
+    .report-caption {
+      font-size: 14px; color: var(--grey-600); margin-bottom: 40px;
+    }
+    .report-caption a { color: var(--grey-600); text-decoration: none; }
+
+    /* ── Why This Matters ── */
+    .why-block { margin-bottom: 32px; }
+    .why-block p {
+      font-size: 16px; color: var(--grey-1000); line-height: 1.7;
+    }
+
+    .rule { border: none; border-top: 1px solid var(--grey-300); margin: 32px 0; }
+
+    /* ── Business Properties Grid ── */
+    .profile-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px 32px; margin-bottom: 48px;
+    }
+    .profile-item { display: flex; gap: 8px; }
+    .profile-label {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--grey-600);
+      min-width: 110px; flex-shrink: 0; padding-top: 1px;
+    }
+    .profile-value { color: var(--grey-1000); font-weight: 500; font-size: 13px; }
+
+    /* ── Score Hero (Preview Score) ── */
+    .score-section { margin: 0 0 48px; }
+    .score-hero {
+      background: var(--grey-200); border-radius: 4px;
+      padding: 40px; margin: 0;
+      display: flex; align-items: center; gap: 40px;
+    }
+    .score-meter { flex: 0 0 auto; }
+    .score-meter svg { display: block; }
+    .score-copy { flex: 1 1 auto; min-width: 0; }
+    .score-band-name {
+      font-size: 26px; font-weight: 700; color: var(--grey-1000);
+      line-height: 1.2; margin-bottom: 12px;
+    }
+    .score-framing {
+      font-size: 14px; color: var(--grey-800); line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .score-scope-note {
+      font-size: 13px; color: var(--grey-800); line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .score-method-note {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px; color: var(--grey-600); line-height: 1.6;
+      border-top: 1px solid var(--grey-300); padding-top: 12px;
+    }
+
+    /* ── Findings Section ── */
+    .findings-section { padding: 8px 0 48px; }
+    .findings-header { margin-bottom: 32px; }
+    .findings-header h2 {
+      font-size: 22px; font-weight: 700; color: var(--grey-1000); margin-bottom: 6px;
+    }
+    .findings-header p { font-size: 14px; color: var(--grey-800); }
+
+    /* Page group heading — findings are grouped by page in flow order */
+    .page-head {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--grey-800);
+      margin: 32px 0 14px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--grey-300);
+    }
+    .findings-section > .page-head:first-of-type { margin-top: 4px; }
+
+    /* ── Finding Card ── */
+    .fc {
+      background: var(--grey-200);
+      border-radius: 4px;
+      padding: 32px; margin-bottom: 16px;
+    }
+
+    .fc-meta {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+
+    .fc-num {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px; font-weight: 600; color: var(--grey-100);
+      background: var(--blue-500);
+      width: 26px; height: 26px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .fdim {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--grey-600);
+    }
+
+    /* Severity badges */
+    .badge {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .bc { background: var(--red-100); color: var(--red-500); border: 1px solid var(--red-200); }
+    .bm { background: var(--orange-100); color: var(--orange-500); border: 1px solid var(--orange-200); }
+    .bn { background: var(--blue-100); color: var(--blue-500); border: 1px solid var(--blue-200); }
+
+    .fc-title {
+      font-size: 19px; font-weight: 700; color: var(--blue-400);
+      margin-bottom: 14px; line-height: 1.3;
+    }
+
+    .fc-body p {
+      font-size: 14px; color: var(--grey-1000); line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    /* Why This Finding Matters callout */
+    .fc-why {
+      border-left: 3px solid var(--blue-200);
+      background: var(--grey-100);
+      border-radius: 0 4px 4px 0;
+      padding: 14px 16px;
+      margin: 4px 0 14px;
+    }
+    .fc-why-label {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--blue-500);
+      margin-bottom: 6px; display: block;
+    }
+    .fc-why p {
+      font-size: 13px; color: var(--grey-800); line-height: 1.65; margin: 0;
+    }
+
+    /* Criterion ID chips */
+    .cids { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
+    .cid {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600;
+      color: var(--blue-500); background: var(--blue-100);
+      padding: 2px 8px; border-radius: 4px;
+    }
+
+    /* Recommendation subsection */
+    .fc-rec { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--grey-300); }
+    .fc-rec-label {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--green-500);
+      margin-bottom: 8px; display: block;
+    }
+    .fc-rec ul { padding-left: 18px; margin: 0; }
+    .fc-rec li {
+      font-size: 14px; color: var(--grey-1000); line-height: 1.75;
+      margin-bottom: 4px;
+    }
+    .fc-rec li:last-child { margin-bottom: 0; }
+
+    /* Evidence screenshot */
+    .fc-evidence { margin: 16px 0 4px; }
+    .fc-evidence img {
+      display: block; width: 100%; height: auto;
+      border-radius: 4px; border: 1px solid var(--grey-300);
+    }
+    /* App (portrait) screenshots — constrain to phone width, carried from the
+       full scorecard's design system so app frames don't stretch full-bleed. */
+    .fc-evidence.fc-evidence-app img {
+      max-width: 320px; margin: 0 auto;
+    }
+    .fc-evidence figcaption {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; color: var(--grey-600); margin-top: 6px;
+    }
+
+    /* Effort / Impact tags */
+    .tags-row { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+    .tag {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 500; padding: 4px 12px;
+      border-radius: 100px;
+      background: var(--grey-100);
+      border: 1px solid var(--grey-300);
+      color: var(--grey-600);
+    }
+    .te-low  { color: var(--green-500); border-color: var(--green-200); background: var(--green-100); }
+    .te-med  { color: var(--orange-500); border-color: var(--orange-200); background: var(--orange-100); }
+    .te-high { color: var(--red-500); border-color: var(--red-200); background: var(--red-100); }
+    .ti-high { color: var(--red-500); border-color: var(--red-200); background: var(--red-100); }
+    .ti-med  { color: var(--orange-500); border-color: var(--orange-200); background: var(--orange-100); }
+    .ti-low  { color: var(--grey-600); border-color: var(--grey-300); background: var(--grey-100); }
+
+    /* ── Expandable Finding Card (details/summary) ── */
+    details.fc > summary { list-style: none; cursor: pointer; outline: none; }
+    details.fc > summary::-webkit-details-marker { display: none; }
+    /* Observation lead paragraph — visible while the card is collapsed */
+    .fc-lead {
+      font-size: 14px; color: var(--grey-1000); line-height: 1.75;
+      margin: 0 0 14px;
+    }
+    /* View Details toggle — a button beneath the lead paragraph */
+    .fc-toggle {
+      display: inline-flex; align-items: center; margin-top: 4px;
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--blue-500);
+      padding: 6px 14px; border-radius: 100px;
+      border: 1px solid var(--blue-200); background: var(--blue-100);
+    }
+    .fc-toggle::after { content: 'View Details'; }
+    details.fc[open] .fc-toggle::after { content: 'Hide Details'; }
+    .fc-detail {
+      margin-top: 18px; padding-top: 18px;
+      border-top: 1px solid var(--grey-300);
+    }
+
+    /* ── Activation Path Diagram ── */
+    .apath { margin: 0 0 40px; }
+    .apath-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+    .apath-steps { display: flex; gap: 12px; align-items: stretch; min-width: min-content; }
+    .astep {
+      flex: 0 0 176px; background: var(--grey-200); border-radius: 4px;
+      padding: 16px; position: relative;
+    }
+    .astep:not(:last-child)::after {
+      content: '\2192'; position: absolute; right: -11px; top: 18px;
+      color: var(--grey-400); font-size: 16px; line-height: 1; z-index: 1;
+    }
+    .astep-num {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--blue-500);
+      margin-bottom: 6px; display: block;
+    }
+    .astep-label {
+      font-size: 14px; font-weight: 600; color: var(--grey-1000);
+      line-height: 1.35; margin-bottom: 8px;
+    }
+    .astep-friction {
+      font-size: 12px; color: var(--red-500); line-height: 1.5;
+      border-top: 1px solid var(--grey-300); padding-top: 8px;
+    }
+
+    /* ── Shared section heading (activation path) ── */
+    .sec-head { margin-bottom: 16px; }
+    .sec-head h2 { font-size: 22px; font-weight: 700; color: var(--grey-1000); margin-bottom: 6px; }
+    .sec-head p { font-size: 14px; color: var(--grey-800); }
+
+    @media (max-width: 640px) {
+      .astep { flex-basis: 152px; }
+    }
+
+    /* ── What The Research Says (pattern cards) ── */
+    .research { margin: 0 0 48px; }
+    .rp {
+      background: var(--grey-200); border-radius: 4px;
+      padding: 28px 32px; margin-bottom: 16px;
+    }
+    .rp-title {
+      font-size: 17px; font-weight: 700; color: var(--grey-1000);
+      line-height: 1.3; margin-bottom: 10px;
+    }
+    .rp-stat {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 26px; font-weight: 600; color: var(--blue-500);
+      line-height: 1.2; margin-bottom: 10px;
+    }
+    .rp-body {
+      font-size: 14px; color: var(--grey-1000); line-height: 1.75;
+      margin-bottom: 14px;
+    }
+    .rp-source {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; color: var(--grey-600); letter-spacing: 0.5px;
+      border-top: 1px solid var(--grey-300); padding-top: 10px;
+    }
+
+    /* ── Methodology Block ── */
+    .mb {
+      background: var(--grey-200); border-radius: 4px;
+      padding: 28px 32px; margin: 0 0 0;
+    }
+    .mb-section { margin-bottom: 20px; }
+    .mb-section:last-child { margin-bottom: 0; }
+    .mb-section p {
+      font-size: 14px; color: var(--grey-800); line-height: 1.75;
+    }
+
+    /* ── CTA Block ── */
+    .fcta {
+      background: var(--blue-500);
+      border-radius: 0;
+      padding: 48px 40px;
+      text-align: center;
+      margin: 48px -32px 0;
+    }
+    .fcta .ovl { color: var(--blue-200); }
+    .fcta h3 {
+      font-size: 22px; font-weight: 700; color: var(--grey-100);
+      margin-bottom: 14px; line-height: 1.3;
+    }
+    .fcta p {
+      font-size: 14px; color: var(--blue-200);
+      line-height: 1.75; max-width: 560px;
+      margin: 0 auto 28px;
+    }
+    .cta-btn {
+      display: inline-block;
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--blue-500); background: var(--grey-100);
+      border-radius: 4px; padding: 12px 28px;
+      text-decoration: none;
+    }
+
+    /* ── Report Footer ── */
+    .report-footer { padding: 0 0 64px; }
+
+    .disclaimer {
+      font-size: 12px; color: var(--grey-600); line-height: 1.7;
+      text-align: center; padding: 24px 0;
+      border-top: 1px solid var(--grey-300);
+    }
+
+    .brand-footer {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      text-align: center; margin-top: 24px;
+      font-size: 12px; color: var(--grey-600);
+    }
+    .brand-footer span { color: var(--blue-500); font-weight: 600; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .fcta { margin: 48px -20px 0; padding: 40px 24px; }
+      .report-title { font-size: 32px; }
+      .profile-grid { grid-template-columns: 1fr; }
+      .fc { padding: 24px; }
+      .mb { padding: 24px; }
+      .rp { padding: 24px; }
+      .score-hero {
+        flex-direction: column; align-items: flex-start;
+        gap: 24px; padding: 28px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── HEADER ── -->
+    <header class="report-header">
+
+      <!-- Sari Sari Wordmark — do not remove -->
+      <div class="logo-lockup">
+        <svg width="148" height="33" viewBox="0 0 248 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M113.123 18.9585V21.6722C114.373 19.2441 116.515 18.6371 118.801 18.53V24.5645C118.408 24.5645 116.087 24.4931 115.194 24.9573C114.23 25.4572 113.338 26.0999 113.338 29.6707V37.4191H106.91V18.9585H113.123Z" fill="#1F1D1C"/>
+          <path d="M87.8407 24.7429C88.4477 20.9936 91.5542 18.2441 96.3746 18.2441C100.767 18.2441 105.016 20.1366 105.016 26.8853V31.92C105.016 33.3483 104.98 35.9193 105.373 37.419H99.1597C99.0883 37.169 99.0169 36.6334 99.0169 36.2049V35.3479H98.9812C98.1242 36.8477 96.7674 37.9903 93.518 37.9903C90.0188 37.9903 87.0908 36.0621 87.0908 32.3842C87.0908 27.4923 92.4825 26.5997 94.8035 26.2426C97.1244 25.8855 98.8027 26.0283 98.8027 24.4929C98.8027 23.1718 97.4815 22.6718 96.3389 22.6718C95.1249 22.6718 93.9822 23.1718 93.6609 24.7429H87.8407ZM93.518 31.8843C93.518 32.6342 93.8751 33.5983 95.7676 33.5983C97.4101 33.5983 98.9098 32.4557 98.9098 28.8135V28.3136C98.4456 29.2063 97.4458 29.5991 96.1246 29.8847C93.9465 30.3846 93.518 31.0988 93.518 31.8843Z" fill="#1F1D1C"/>
+          <path d="M80.4265 24.3858C80.1051 23.2075 79.391 22.529 78.1412 22.529C76.8558 22.529 76.2488 23.2075 76.2488 23.8859C76.2488 24.8143 76.6772 25.2428 79.1053 25.9569C79.9623 26.2069 80.8192 26.4211 81.6762 26.6711C85.2826 27.6709 86.3895 29.492 86.3895 32.1343C86.3895 35.1694 83.9971 38.1331 78.1412 38.1331C72.9637 38.1331 70.3571 35.705 69.6787 31.563H75.856C76.0345 32.8127 76.8201 33.7411 78.1055 33.7411C79.6766 33.7411 80.1765 32.9556 80.1765 32.3128C80.1765 30.956 78.9625 30.6346 78.0341 30.3489L75.1776 29.5277C71.7497 28.5279 70.3928 26.7425 70.3928 23.8859C70.3928 20.8508 72.9994 18.2441 78.1055 18.2441C83.0688 18.2441 85.6396 20.6008 86.2467 24.3858H80.4265Z" fill="#1F1D1C"/>
+          <path d="M61.9559 19.216V37.4192H68.3832V19.3505C67.6632 20.3145 66.5133 20.9386 65.2176 20.9386C63.8626 20.9386 62.667 20.2561 61.9559 19.216Z" fill="#1F1D1C"/>
+          <path d="M68.136 16.6469C68.136 18.2587 66.8294 19.5653 65.2176 19.5653C63.6059 19.5653 62.2993 18.2587 62.2993 16.6469C62.2993 15.0351 63.6059 13.7285 65.2176 13.7285C66.8294 13.7285 68.136 15.0351 68.136 16.6469Z" fill="#1F1D1C"/>
+          <path d="M119.705 19.216V37.4192H126.133V19.3505C125.413 20.3145 124.263 20.9386 122.967 20.9386C121.612 20.9386 120.417 20.2561 119.705 19.216Z" fill="#1F1D1C"/>
+          <path d="M125.885 16.6469C125.885 18.2587 124.579 19.5653 122.967 19.5653C121.355 19.5653 120.049 18.2587 120.049 16.6469C120.049 15.0351 121.355 13.7285 122.967 13.7285C124.579 13.7285 125.885 15.0351 125.885 16.6469Z" fill="#1F1D1C"/>
+          <path d="M55.4425 18.9585V21.6722C56.6922 19.2441 58.8346 18.6371 61.1199 18.53V24.5645C60.7271 24.5645 58.4061 24.4931 57.5135 24.9573C56.5494 25.4572 55.6567 26.0999 55.6567 29.6707V37.4191H49.2295V18.9585H55.4425Z" fill="#1F1D1C"/>
+          <path d="M30.162 24.7429C30.769 20.9936 33.8755 18.2441 38.6959 18.2441C43.0878 18.2441 47.3369 20.1366 47.3369 26.8853V31.92C47.3369 33.3483 47.3012 35.9193 47.694 37.419H41.481C41.4096 37.169 41.3382 36.6334 41.3382 36.2049V35.3479H41.3025C40.4455 36.8477 39.0886 37.9903 35.8393 37.9903C32.3401 37.9903 29.4121 36.0621 29.4121 32.3842C29.4121 27.4923 34.8038 26.5997 37.1248 26.2426C39.4457 25.8855 41.1239 26.0283 41.1239 24.4929C41.1239 23.1718 39.8028 22.6718 38.6602 22.6718C37.4461 22.6718 36.3035 23.1718 35.9822 24.7429H30.162ZM35.8393 31.8843C35.8393 32.6342 36.1964 33.5983 38.0889 33.5983C39.7314 33.5983 41.2311 32.4557 41.2311 28.8135V28.3136C40.7669 29.2063 39.7671 29.5991 38.4459 29.8847C36.2678 30.3846 35.8393 31.0988 35.8393 31.8843Z" fill="#1F1D1C"/>
+          <path d="M22.7477 24.3858C22.4264 23.2075 21.7122 22.529 20.4625 22.529C19.1771 22.529 18.57 23.2075 18.57 23.8859C18.57 24.8143 18.9985 25.2428 21.4266 25.9569C22.2836 26.2069 23.1405 26.4211 23.9975 26.6711C27.6039 27.6709 28.7108 29.492 28.7108 32.1343C28.7108 35.1694 26.3184 38.1331 20.4625 38.1331C15.285 38.1331 12.6784 35.705 12 31.563H18.1773C18.3558 32.8127 19.1414 33.7411 20.4268 33.7411C21.9979 33.7411 22.4978 32.9556 22.4978 32.3128C22.4978 30.956 21.2838 30.6346 20.3554 30.3489L17.4988 29.5277C14.071 28.5279 12.7141 26.7425 12.7141 23.8859C12.7141 20.8508 15.3207 18.2441 20.4268 18.2441C25.39 18.2441 27.9609 20.6008 28.5679 24.3858H22.7477Z" fill="#1F1D1C"/>
+          <path d="M217.634 37.4435V19.0203H223.834V21.7642C224.867 19.6618 226.471 18.3789 229.322 18.3789C233.99 18.3789 235.95 21.5148 235.95 27.0382V37.4435H229.536V29.2119C229.536 27.3232 229.714 24.0805 226.899 24.0805C224.76 24.0805 224.048 26.1473 224.048 30.2096V37.4435H217.634Z" fill="#1F1D1C"/>
+          <path d="M209.757 19.02H216.67V34.8062C216.67 42.2539 211.859 44 206.514 44C200.599 44 197.534 40.7216 196.857 37.5145H203.093C203.557 38.7261 204.626 39.4388 206.407 39.4388C209.222 39.4388 209.757 38.0846 209.757 36.3742V33.6659H209.721C209.044 35.2339 207.655 36.4811 205.053 36.4811C200.456 36.4811 196.465 33.7016 196.465 27.4299C196.465 21.1938 200.349 18.4499 204.982 18.4499C207.334 18.4499 209.08 19.5189 209.721 20.98H209.757V19.02ZM202.844 27.4655C202.844 29.7461 204.34 31.6704 206.728 31.6704C209.116 31.6704 210.577 29.7461 210.577 27.4655C210.577 25.2205 209.116 23.2962 206.728 23.2962C204.34 23.2962 202.844 25.2205 202.844 27.4655Z" fill="#1F1D1C"/>
+          <path d="M182.514 24.4365C182.193 23.2605 181.481 22.5835 180.233 22.5835C178.951 22.5835 178.345 23.2605 178.345 23.9376C178.345 24.8641 178.772 25.2917 181.196 26.0044C182.051 26.2539 182.906 26.4677 183.761 26.7171C187.36 27.7149 188.465 29.5323 188.465 32.1692C188.465 35.1982 186.078 38.1559 180.233 38.1559C175.066 38.1559 172.465 35.7327 171.788 31.5991H177.953C178.131 32.8463 178.915 33.7728 180.198 33.7728C181.766 33.7728 182.265 32.9888 182.265 32.3474C182.265 30.9933 181.053 30.6726 180.127 30.3875L177.276 29.5679C173.855 28.5701 172.501 26.7884 172.501 23.9376C172.501 20.9086 175.102 18.3073 180.198 18.3073C185.151 18.3073 187.717 20.6592 188.322 24.4365H182.514Z" fill="#1F1D1C"/>
+          <path d="M171.415 32.0981C170.203 35.4121 166.889 38.156 161.9 38.156C156.199 38.156 151.994 34.2005 151.994 28.2495C151.994 22.548 156.235 18.3431 162.079 18.3431C167.851 18.3431 171.7 22.2985 171.7 28.7128C171.7 28.9622 171.7 29.4968 171.664 30.0313H158.123C158.586 31.8843 160.083 33.1671 161.972 33.1671C163.183 33.1671 164.252 32.7752 164.929 32.0981H171.415ZM158.088 26.2896H165.642C165.428 25.0068 164.502 22.9756 161.972 22.9756C159.976 22.9756 158.515 24.2941 158.088 26.2896Z" fill="#1F1D1C"/>
+          <path d="M139.524 18.4499C142.019 18.4499 143.587 19.5902 144.406 20.98H144.442V12H151.141V37.4432H144.299V35.5189H144.264C143.622 36.5523 142.339 37.9777 139.595 37.9777C134.999 37.9777 130.651 34.4855 130.651 28.2138C130.651 21.9777 134.892 18.4499 139.524 18.4499ZM136.994 28.2494C136.994 31.029 138.526 33.2383 141.056 33.2383C143.587 33.2383 145.154 31.029 145.154 28.2494C145.154 25.5056 143.587 23.2962 141.056 23.2962C138.526 23.2962 136.994 25.5056 136.994 28.2494Z" fill="#1F1D1C"/>
+          <path d="M189.2 19.2167V37.4199H195.628V19.3512C194.908 20.3152 193.758 20.9393 192.462 20.9393C191.107 20.9393 189.911 20.2567 189.2 19.2167Z" fill="#1F1D1C"/>
+          <path d="M195.38 16.6476C195.38 18.2594 194.074 19.566 192.462 19.566C190.85 19.566 189.544 18.2594 189.544 16.6476C189.544 15.0358 190.85 13.7292 192.462 13.7292C194.074 13.7292 195.38 15.0358 195.38 16.6476Z" fill="#1F1D1C"/>
+        </svg>
+      </div>
+
+      <span class="ovl">A Preview of Your Activation Scorecard</span>
+      <h1 class="report-title">Virilitas Labs</h1>
+      <p class="report-caption">
+        <a href="https://virilitaslabs.com/">virilitaslabs.com</a> &nbsp;&middot;&nbsp; September 9, 2026
+      </p>
+
+      <div class="why-block">
+        <span class="ovl">Why This Matters</span>
+        <p>Virilitas Labs has assets most health startups would trade for: peer-reviewed science, credentialed founders, and a live app in both stores. Right now, the path from first visit to an activated user hides those assets at every step where an anxious fertility patient decides whether to trust you, and the app's biggest moment of effort, a 23-question health assessment, ends without giving anything back. Every visitor who bounces there is an install, a research participant, and a future consultation that never happens.</p>
+      </div>
+
+      <hr class="rule">
+
+      <!-- BUSINESS PROPERTIES -->
+      <div class="profile-grid">
+        <div class="profile-item">
+          <span class="profile-label">Industry</span>
+          <span class="profile-value">Health &amp; wellness &mdash; men's fertility</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Stage</span>
+          <span class="profile-value">Research spin-out, live consumer app</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">GTM Model</span>
+          <span class="profile-value">Product-led app install, with a clinic track</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Conversion Goal</span>
+          <span class="profile-value">Install &rarr; signup &rarr; activated first session</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Customer Type</span>
+          <span class="profile-value">Fertility patients, plus clinics</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-label">Competitors</span>
+          <span class="profile-value">Mojo, ExSeed Health, Legacy</span>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- ── SCORE HERO (Preview Score) ── -->
+    <section class="score-section">
+      <div class="sec-head">
+        <span class="ovl">Preview Score</span>
+        <h2>How Virilitas Labs scores today</h2>
+        <p>A criterion-referenced 0&ndash;100 score &mdash; a preview of the full Activation Scorecard.</p>
+      </div>
+      <div class="score-hero">
+        <div class="score-meter">
+          <svg width="200" height="200" viewBox="0 0 200 200" role="img" aria-label="Preview Score: 41 out of 100">
+            <circle cx="100" cy="100" r="84" fill="none" stroke="#D5D2CA" stroke-width="12"/>
+            <circle cx="100" cy="100" r="84" fill="none" stroke="#1F5FA6" stroke-width="12"
+                    stroke-linecap="round"
+                    stroke-dasharray="216.39 527.79"
+                    transform="rotate(-90 100 100)"/>
+            <text x="100" y="98" text-anchor="middle"
+                  font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif"
+                  font-size="52" font-weight="600" fill="#292826">41</text>
+            <text x="100" y="126" text-anchor="middle"
+                  font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif"
+                  font-size="13" font-weight="600" letter-spacing="1.5" fill="#8A8884">OUT OF 100</text>
+          </svg>
+        </div>
+        <div class="score-copy">
+          <div class="score-band-name">Friction-Heavy, but Fixable</div>
+          <p class="score-framing">Measured against best-practice activation patterns for health and wellness products, your flow carries friction at several points where users decide whether to continue. Products in this range usually see meaningful signup-to-activation drop-off, and it is the recoverable kind. The top findings in this scorecard are the places to start.</p>
+          <p class="score-scope-note">Scored from a recording of your first-run activation flow, website through the app's health assessment, across the nine dimensions a recording can show. Performance, accessibility, and defect testing need a live pass and are not part of this preview score.</p>
+          <p class="score-method-note">A preview of the full Activation Scorecard, which scores all eleven dimensions of your actual core flow.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ACTIVATION PATH ── -->
+    <section class="apath">
+      <div class="sec-head">
+        <span class="ovl">Activation Path</span>
+        <h2>The path to first value</h2>
+        <p>Each step a new user moves through to reach activation &mdash; and where they hit friction. Scroll to see the full path.</p>
+      </div>
+      <div class="apath-scroll">
+        <div class="apath-steps">
+          <div class="astep">
+            <span class="astep-num">Step 1</span>
+            <div class="astep-label">Homepage</div>
+            <div class="astep-friction">Never asks for the install, then says "when we launch" beside live app badges.</div>
+          </div>
+          <div class="astep">
+            <span class="astep-num">Step 2</span>
+            <div class="astep-label">Install decision</div>
+            <div class="astep-friction">No screenshots, demo, or proof before a high-trust health-app install.</div>
+          </div>
+          <div class="astep">
+            <span class="astep-num">Step 3</span>
+            <div class="astep-label">Mobile first visit</div>
+            <div class="astep-friction">A consent wall covers the screen and the hero can render headline-less.</div>
+          </div>
+          <div class="astep">
+            <span class="astep-num">Step 4</span>
+            <div class="astep-label">Signup &amp; verify</div>
+            <div class="astep-friction">An email round trip leaves the app, then lands on a blank login form.</div>
+          </div>
+          <div class="astep">
+            <span class="astep-num">Step 5</span>
+            <div class="astep-label">Health assessment &rarr; first value</div>
+            <div class="astep-friction">Twenty-three questions answered, then an empty chat box and no insight.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FINDINGS ── -->
+    <section class="findings-section">
+      <div class="findings-header">
+        <span class="ovl">Findings</span>
+        <h2>Top 5 Findings</h2>
+        <p>The 5 highest-impact friction points, in the order a user hits them &mdash; grouped by page across the flow. Selected from a 42-finding evaluation across nine UX dimensions of your first-run activation flow. Select "View Details" on any finding for the evidence and fix.</p>
+      </div>
+
+      <h3 class="page-head">Website &mdash; Homepage</h3>
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">1</div>
+            <span class="fdim">Conversion Entry</span>
+            <span class="badge bc">Critical</span>
+          </div>
+          <h3 class="fc-title">The homepage never asks for the install, then argues against it</h3>
+          <p class="fc-lead">The hero contains a headline and a photo, and nothing else: no button, no store badge, no link. One scroll later, the page's most visually dominant section says "Join our waitlist&hellip; be the first to know when we launch," directly beside sections linking to the live App Store and Google Play listings.</p>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence">
+            <img src="/reports/virilitas-labs-preview-2ed922/screenshots/screenshot_04_waitlist_contradicts_live_app.png" alt="Homepage waitlist section reading 'Join our waitlist be the first to know when we launch' on a site with live app store links">
+            <figcaption>The dominant conversion section tells visitors the product has not launched. The app is live in both stores.</figcaption>
+          </figure>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>For a product-led app company, the homepage is the top of the entire funnel. A visitor primed to install reads "when we launch" and reasonably concludes the app is not out yet, so the strongest section on the page actively suppresses your primary conversion. Fixing this costs a headline and a button, and it touches every visitor you will ever get.</p>
+          </div>
+          <div class="cids">
+            <span class="cid">CRO-01</span>
+            <span class="cid">CRO-02</span>
+            <span class="cid">CRO-05</span>
+            <span class="cid">N-04</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>Put the primary action in the hero: store badges or a single "Get the app" button, with a secondary "For clinics" link for the B2B audience.</li>
+              <li>Rescope the waitlist section explicitly to the clinic diagnostics ("Clinics: be first to know when our diagnostics launch") or convert it into a patient newsletter signup. Never show "when we launch" beside live store badges.</li>
+              <li>Restyle primary buttons in a darkened brand teal with white text so they no longer read as disabled controls.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-low">Effort: Low</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">2</div>
+            <span class="fdim">Onboarding &amp; Activation</span>
+            <span class="badge bc">Critical</span>
+          </div>
+          <h3 class="fc-title">The install is requested sight unseen: no product preview anywhere</h3>
+          <p class="fc-lead">The only activation path on the site is a pair of store badges. Across all four pages there is not a single app screenshot, demo clip, sample insight, or "how it works" step. The entire product description is one sentence, and every image on the patient-facing pages is stock photography.</p>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence">
+            <img src="/reports/virilitas-labs-preview-2ed922/screenshots/screenshot_05_get_app_no_product_screenshots.png" alt="The Get the app section: text and store badges only, with no product screenshots">
+            <figcaption>The full "Get the app" section: one sentence and two badges. No screenshots, no preview, no proof.</figcaption>
+          </figure>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>An app install is a high-cost ask on a sensitive health topic where trust thresholds are highest. Visitors cannot form a mental model of what they are installing, and the credibility you have earned in the lab (peer-reviewed publications, an innovation award, credentialed founders) is invisible at the exact moment the decision is made. Every competitor we benchmarked shows the product before asking for anything.</p>
+          </div>
+          <div class="cids">
+            <span class="cid">ONB-02</span>
+            <span class="cid">ONB-03</span>
+            <span class="cid">CRO-08</span>
+            <span class="cid">VD-06</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>Add an app showcase section high on the homepage: two to three real app screenshots (Education Hub, AI chat, Community), a 20 to 30 second screen-recording clip, and three outcome-framed bullets.</li>
+              <li>Pair the store badges with a low-commitment preview ("See how it works") so undecided visitors have a step before install.</li>
+              <li>Surface a trust strip near the app CTA: built by University of East Anglia reproductive scientists, research published in PNAS, Innovation &amp; Impact Award 2023.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-med">Effort: Medium</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+      <h3 class="page-head">Website &mdash; Mobile first visit</h3>
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">3</div>
+            <span class="fdim">Mobile UX</span>
+            <span class="badge bc">Critical</span>
+          </div>
+          <h3 class="fc-title">The mobile first impression is a consent wall over a headline-less page</h3>
+          <p class="fc-lead">On a phone, the cookie banner covers roughly three quarters of the screen on arrival, and opening the menu renders the navigation underneath it, unreachable. Separately, the hero headline ships invisible and waits for a script-driven animation, so a first mobile visit can show an empty white frame where the headline should be.</p>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence">
+            <img src="/reports/virilitas-labs-preview-2ed922/screenshots/screenshot_12_mobile_cookie_wall.png" alt="Mobile viewport almost entirely covered by the cookie consent banner">
+            <figcaption>First paint on a 390px viewport: logo, hamburger, and a consent card covering the content.</figcaption>
+          </figure>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>Most high-intent traffic for an app company lands on mobile: ads, social, and App Store cross-links. Right now that first impression is a legal interstitial followed by a page that looks unfinished, on a brand asking users to trust it with fertility data. Both halves of this are small, contained fixes.</p>
+          </div>
+          <div class="cids">
+            <span class="cid">MOB-08</span>
+            <span class="cid">N-03</span>
+            <span class="cid">N-01</span>
+            <span class="cid">CRO-01</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>Switch to a compact bottom-sheet cookie banner (about a quarter of the viewport at most, as on desktop) that never overlays the opened navigation.</li>
+              <li>Make hero content visible by default and let the script add the entrance animation, so no real-world state ever renders the headline invisible.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-low">Effort: Low</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+      <h3 class="page-head">App &mdash; Account creation</h3>
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">4</div>
+            <span class="fdim">Bugs &amp; Defects</span>
+            <span class="badge bc">Critical</span>
+          </div>
+          <h3 class="fc-title">Signup dead-ends into an email round trip, then asks the user to log in again</h3>
+          <p class="fc-lead">After completing the signup form, users are told to leave the app and verify their email before logging in. In our recorded session this detour took the user out of the app for over half a minute, and the verification email's "Open App &amp; Login" button landed on a blank sign-in form, requiring username and password to be typed again by hand.</p>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence fc-evidence-app">
+            <img src="/reports/virilitas-labs-preview-2ed922/screenshots/app_02_registration_verify_email_dialog.png" alt="Registration Successful dialog instructing the user to check email and verify before logging in">
+            <figcaption>Signup ends with an instruction to leave the app. The return path lands on an empty login form.</figcaption>
+          </figure>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>This is the single most drop-off-prone pattern in signup design: every exit from the app is a chance to never come back, and every re-typed credential multiplies it. Users who arrived with intent are being lost to a mechanical step that competitors have reduced to a single email field or removed entirely with Apple and Google sign-in.</p>
+          </div>
+          <div class="cids">
+            <span class="cid">FORM-01</span>
+            <span class="cid">ONB-07</span>
+            <span class="cid">N-09</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>Add Sign in with Apple and Google, which removes both the verification round trip and the password for most users.</li>
+              <li>If email verification must stay, let users into the app immediately and verify in the background, or make the email's button deep-link into an authenticated session.</li>
+              <li>Let users sign in with their email address, not a separately remembered username.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-med">Effort: Medium</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+      <h3 class="page-head">App &mdash; AI assistant &amp; health assessment</h3>
+      <details class="fc">
+        <summary>
+          <div class="fc-meta">
+            <div class="fc-num">5</div>
+            <span class="fdim">Onboarding &amp; Activation</span>
+            <span class="badge bm">Major</span>
+          </div>
+          <h3 class="fc-title">The flow's biggest ask pays off with an empty text box</h3>
+          <p class="fc-lead">The 23-question health assessment is the largest effort the app requests, and it is genuinely well built. But completing it returns the user to the same generic chat welcome they saw before: no summary, no personalized insight, no acknowledgment of the answers just given, and no suggested prompts. The aha moment the assessment sets up never arrives.</p>
+          <span class="fc-toggle"></span>
+        </summary>
+        <div class="fc-detail">
+          <figure class="fc-evidence fc-evidence-app">
+            <img src="/reports/virilitas-labs-preview-2ed922/screenshots/app_03_post_assessment_empty_chat.png" alt="After completing the 23-question assessment, the assistant shows the same generic welcome and an empty message box">
+            <figcaption>Immediately after a 23-question assessment: the same welcome copy and an empty "Type your message" box.</figcaption>
+          </figure>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>This is where activation is won or lost in your product. A user who has just disclosed sensitive health details is maximally invested and maximally expectant; giving nothing back teaches them the effort was not worth it. The fix converts work you have already done (the assessment and the AI) into the moment users will remember and return for.</p>
+          </div>
+          <div class="cids">
+            <span class="cid">ONB-03</span>
+            <span class="cid">ONB-06</span>
+            <span class="cid">IXD-04</span>
+          </div>
+          <div class="fc-rec">
+            <span class="fc-rec-label">Recommendation</span>
+            <ul>
+              <li>On assessment completion, open the chat with a personalized summary: what the answers suggest, two or three areas worth exploring, framed within the existing medical disclaimer.</li>
+              <li>Add three to five tappable suggested prompts to the chat's empty state, personalized from the assessment where available and generic before it ("What does a semen analysis measure?", "What lifestyle changes improve sperm quality?").</li>
+              <li>Explain the message quota ("50 messages remaining") the first time it appears, so it reads as generous rather than as a meter already running down.</li>
+            </ul>
+          </div>
+          <div class="tags-row">
+            <span class="tag te-med">Effort: Medium</span>
+            <span class="tag ti-high">Impact: High</span>
+          </div>
+        </div>
+      </details>
+
+    </section>
+
+    <!-- ── WHAT THE RESEARCH SAYS ── -->
+    <section class="research">
+      <div class="sec-head">
+        <span class="ovl">What The Research Says</span>
+        <h2>Patterns that bear on this flow</h2>
+        <p>Documented research and case studies matched to the weakest areas of this flow &mdash; what moved the numbers for comparable products.</p>
+      </div>
+      <div class="rp">
+        <h3 class="rp-title">Give the intake a payoff: Ieso's onboarding redesign</h3>
+        <div class="rp-stat">27.6% &rarr; 46.2%</div>
+        <p class="rp-body">Ieso, a mental-health app, lifted onboarding completion by 67% (27.6% to 46.2%) and weekly engagement by 50% by removing dead-end steps and clarifying what each step was for. Your 23-question assessment is exactly this kind of high-effort moment, and right now it ends on an empty chat box instead of a result. Closing that loop with a personalized summary is the same move that moved Ieso's numbers.</p>
+        <p class="rp-source">Source: Ieso Health onboarding redesign (Vanda Cacais)</p>
+      </div>
+      <div class="rp">
+        <h3 class="rp-title">Take friction out of signup: Sequoia Health</h3>
+        <div class="rp-stat">14.2% &rarr; 38.9%</div>
+        <p class="rp-body">Sequoia Health nearly tripled registration (14.2% to 38.9%) and cut drop-off on its name screen tenfold by making fields optional, simplifying privacy consent, and softening the tone. Your signup does the opposite: it sends users out to email, then asks them to type a username and password again by hand. Removing that round trip, and adding Apple and Google sign-in, targets the same friction Sequoia removed.</p>
+        <p class="rp-source">Source: Sequoia Health onboarding redesign (company blog)</p>
+      </div>
+    </section>
+
+    <!-- ── METHODOLOGY ── -->
+    <div class="mb">
+      <div class="mb-section">
+        <span class="ovl">Methodology</span>
+        <p>Nine UX dimensions rated against a criterion-referenced rubric grounded in the Nielsen Norman Group framework (Preview Score recording sub-profile), from a structured walkthrough of a recording of your first-run flow: site, install, signup, email verification, the AI assistant, and the health assessment. Performance, accessibility, and defect testing need a live pass and are excluded from this preview score.</p>
+      </div>
+      <div class="mb-section">
+        <span class="ovl">Evaluation Lens</span>
+        <p>Virilitas Labs is a research spin-out with a live consumer app and a product-led motion: the marketing site is the app's only salesperson, and the first session is where an anxious, research-prone fertility audience decides whether to stay. Every rating weighs one question: how many visitors make it from the homepage to an installed, opened, personally useful app.</p>
+      </div>
+    </div>
+
+    <!-- ── CTA ── -->
+    <div class="fcta">
+      <span class="ovl">Ready to go deeper?</span>
+      <h3>Get the full 21-Day Activation Diagnostic.</h3>
+      <p>This preview scored what we could reach from outside. The 21-Day Activation Diagnostic scores the core flow of your actual product &mdash; with test-environment access, a senior-designer walkthrough, and your analytics folded in &mdash; plus a screen-by-screen Annotated User Journey Map.</p>
+      <a href="https://activation-diagnostic.sarisari.design" class="cta-btn">Start the 21-Day Activation Diagnostic</a>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="report-footer">
+      <p class="disclaimer">
+        This preview is based on Virilitas Labs's public site and a recording of its first-run app flow. Direct access to the product, supporting flows, analytics, and user data would enable a deeper, more comprehensive review.
+      </p>
+      <div class="brand-footer">
+        <span>Sari Sari Design</span> &nbsp;&middot;&nbsp; Activation Scorecard Preview &nbsp;&middot;&nbsp; September 2026
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
