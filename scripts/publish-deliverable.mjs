@@ -1,102 +1,124 @@
 #!/usr/bin/env node
 /**
- * publish-deliverable.mjs — allocate a slug + directory for an Activation
- * Diagnostic deliverable (scorecard / preview / re-score) and print the
- * publish contract as one JSON line.
+ * Activation Scorecard deliverable publisher.
  *
- * This is the shared publish contract consumed by the vault skills
- * `activation-scorecard` and `activation-scorecard-preview`:
+ * Commands:
+ *   allocate --company "Acme" --type preview|scorecard [legacy default]
+ *   publish --source-dir /abs/report --slug acme-preview-abcdef
+ *     --company "Acme" --type preview [--update]
+ *   verify --slug acme-preview-abcdef --publish-id 0123456789abcdef
  *
- *   node scripts/publish-deliverable.mjs \
- *     --company "Acme Health" \
- *     --type scorecard|preview \
- *     --surface website|platform|app \
- *     --date YYYY-MM-DD \
- *     --audit-folder /abs/path/to/ux-audit-output   (optional)
- *
- * Output (single JSON line on stdout):
- *   { "slug": "...", "dir": "...", "screenshotsDir": "...", "url": "..." }
- *
- * Behaviour:
- *   - slug = <company-slug>-<type>-<6 hex chars>, unguessable and unique
- *     (regenerated on collision). Matches the existing convention under
- *     public/reports/ (e.g. ashley-boyd-marketing-7ad3e6).
- *   - Creates public/reports/<slug>/screenshots/.
- *   - If --audit-folder is given and contains a screenshots/ directory, its
- *     images are copied into the deliverable's screenshots/ dir.
- *   - Idempotent-ish: pass --slug <existing> to reuse a previously allocated
- *     slug (e.g. re-render without re-publishing).
- *
- * The caller then writes the rendered HTML to <dir>/index.html, referencing
- * screenshots by ABSOLUTE path /reports/<slug>/screenshots/<file>, commits,
- * and pushes to main — the GitHub → Vercel integration deploys production.
- * Reports are served at https://activation-diagnostic.sarisari.design/reports/<slug>/
- * (static, noindex via next.config headers; analytics injected at build by
- * scripts/inject-analytics.mjs).
+ * Standard output is reserved for one JSON result. Progress and errors go to
+ * standard error so agents can parse the result without scraping logs.
  */
 
-import { cpSync, existsSync, mkdirSync, readdirSync } from "node:fs";
-import { randomBytes } from "node:crypto";
-import { join, dirname } from "node:path";
+import { mkdirSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const REPORTS_DIR = join(__dirname, "..", "public", "reports");
-const BASE_URL = "https://activation-diagnostic.sarisari.design/reports";
+import {
+  DEFAULT_BASE_URL,
+  PublishError,
+  allocateSlug,
+  copyAuditScreenshots,
+  parseCli,
+  publishArtifact,
+  verifyDeployment,
+} from "./publish-deliverable-lib.mjs";
 
-function arg(name) {
-  const i = process.argv.indexOf(`--${name}`);
-  return i > -1 && process.argv[i + 1] ? process.argv[i + 1] : undefined;
+const scriptDir = dirname(fileURLToPath(import.meta.url));
+const appRoot = join(scriptDir, "..");
+const reportsDir = join(appRoot, "public", "reports");
+const baseUrl = process.env.DEPLOY_BASE_URL || DEFAULT_BASE_URL;
+
+function emit(result) {
+  process.stdout.write(`${JSON.stringify(result)}\n`);
 }
 
-const company = arg("company");
-const type = arg("type");
-const surface = arg("surface") ?? "website";
-const date = arg("date") ?? new Date().toISOString().slice(0, 10);
-const auditFolder = arg("audit-folder");
-const reuseSlug = arg("slug");
-
-if (!company || !type) {
-  console.error(
-    'Usage: publish-deliverable.mjs --company "Name" --type scorecard|preview [--surface s] [--date YYYY-MM-DD] [--audit-folder /abs/path] [--slug existing-slug]'
-  );
-  process.exit(1);
+function log(message) {
+  process.stderr.write(`[publish-deliverable] ${message}\n`);
 }
 
-const companySlug = company
-  .toLowerCase()
-  .normalize("NFKD")
-  .replace(/[̀-ͯ]/g, "")
-  .replace(/[^a-z0-9]+/g, "-")
-  .replace(/^-+|-+$/g, "");
-
-let slug = reuseSlug;
-if (!slug) {
-  do {
-    slug = `${companySlug}-${type}-${randomBytes(3).toString("hex")}`;
-  } while (existsSync(join(REPORTS_DIR, slug)));
-}
-
-const dir = join(REPORTS_DIR, slug);
-const screenshotsDir = join(dir, "screenshots");
-mkdirSync(screenshotsDir, { recursive: true });
-
-let copied = 0;
-if (auditFolder) {
-  const src = join(auditFolder, "screenshots");
-  if (existsSync(src)) {
-    for (const f of readdirSync(src)) {
-      cpSync(join(src, f), join(screenshotsDir, f));
-      copied++;
-    }
-  } else {
-    console.error(`note: no screenshots/ dir in --audit-folder (${auditFolder}); nothing copied`);
+function timeoutFromEnvironment() {
+  const raw = process.env.PUBLISH_VERIFY_TIMEOUT_MS;
+  if (!raw) return undefined;
+  const timeoutMs = Number(raw);
+  if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
+    throw new PublishError("invalid_arguments", `Invalid PUBLISH_VERIFY_TIMEOUT_MS: ${raw}`);
   }
+  return timeoutMs;
 }
 
-console.error(
-  `allocated ${slug} (${type}, ${surface}, ${date}); copied ${copied} screenshot(s)`
-);
-console.log(
-  JSON.stringify({ slug, dir, screenshotsDir, url: `${BASE_URL}/${slug}/` })
-);
+async function allocate(options) {
+  const type = options.type;
+  const slug = allocateSlug({
+    company: options.company,
+    type,
+    reportsDir,
+    reuseSlug: options.slug,
+  });
+  const dir = join(reportsDir, slug);
+  const screenshotsDir = join(dir, "screenshots");
+  mkdirSync(screenshotsDir, { recursive: true });
+  const copied = copyAuditScreenshots(options.auditFolder, screenshotsDir);
+  const surface = options.surface ?? "website";
+  const date = options.date ?? new Date().toISOString().slice(0, 10);
+  log(`allocated ${slug} (${type}, ${surface}, ${date}); copied ${copied} screenshot(s)`);
+  emit({
+    slug,
+    dir,
+    screenshotsDir,
+    url: `${baseUrl.replace(/\/+$/, "")}/${slug}/`,
+  });
+}
+
+async function publish(options) {
+  const result = await publishArtifact({
+    appRoot,
+    sourceDir: options.sourceDir,
+    slug: options.slug,
+    company: options.company,
+    type: options.type,
+    update: options.update === true,
+    baseUrl,
+    verifyImpl: (verifyOptions) => verifyDeployment({
+      ...verifyOptions,
+      timeoutMs: timeoutFromEnvironment(),
+    }),
+    logger: log,
+  });
+  emit(result);
+  if (result.status !== "published") process.exitCode = 1;
+}
+
+async function verify(options) {
+  const verified = await verifyDeployment({
+    slug: options.slug,
+    publishId: options.publishId,
+    baseUrl,
+    timeoutMs: timeoutFromEnvironment(),
+  });
+  emit({
+    status: "published",
+    slug: options.slug,
+    publishId: options.publishId,
+    url: verified.url,
+    verifiedAssets: verified.verifiedAssets,
+  });
+}
+
+async function main() {
+  const { command, options } = parseCli(process.argv.slice(2));
+  if (command === "allocate") return allocate(options);
+  if (command === "publish") return publish(options);
+  if (command === "verify") return verify(options);
+  throw new PublishError("invalid_arguments", `Unknown command: ${command}`);
+}
+
+main().catch((error) => {
+  const code = error instanceof PublishError ? error.code : "failed";
+  const message = error instanceof Error ? error.message : String(error);
+  log(message);
+  emit({ status: code, error: message, details: error?.details ?? {} });
+  process.exitCode = 1;
+});

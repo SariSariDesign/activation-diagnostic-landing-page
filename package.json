@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "next dev",
     "inject-analytics": "node scripts/inject-analytics.mjs",
+    "publish:deliverable": "node scripts/publish-deliverable.mjs",
     "prebuild": "node scripts/inject-analytics.mjs",
     "build": "next build",
     "start": "next start",
