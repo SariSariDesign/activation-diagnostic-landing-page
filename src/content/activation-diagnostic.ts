@@ -245,6 +245,10 @@ export const diagnostic = {
         body: "One round on the prototype, scoped in the agreement, plus a mid-engagement check-in so we catch misalignment early. With a thorough diagnosis up front, feedback tends to be directional, not \u201Cstart over.\u201D",
       },
       {
+        label: "Do you guarantee this will raise our activation rate?",
+        body: "No, and you should be skeptical of anyone who does. Your activation rate depends on more than the product itself: positioning, pricing, and how you bring users in all move it too. What we can commit to is the work. The diagnosis shows where users drop off, and the prototype goes after the change inside the product that the evidence points to as the biggest lever.",
+      },
+      {
         label: "What happens after the three weeks?",
         body: "You own everything we deliver. If you want to keep going, your 90-day roadmap is the starting point for a retainer. If not, you've got a diagnosis and a prototype you can run with on your own.",
       },
