@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activation Diagnostic Report: Nervana</title>
+  <title>Activation Scorecard — Nervana</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap');
 
@@ -83,19 +84,107 @@
 
     .rule { border: none; border-top: 1px solid var(--grey-300); margin: 32px 0; }
 
-    /* ── Business Properties Grid ── */
-    .profile-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 12px 32px; margin-bottom: 48px;
+    /* ── Shared section heading ── */
+    .sec-head { margin-bottom: 16px; }
+    .sec-head h2 { font-size: 22px; font-weight: 700; color: var(--grey-1000); margin-bottom: 6px; }
+    .sec-head p { font-size: 14px; color: var(--grey-800); }
+
+    /* ── Score Hero ── */
+    .score-hero {
+      background: var(--grey-200); border-radius: 4px;
+      padding: 40px; margin: 0 0 48px;
+      display: flex; align-items: center; gap: 40px;
     }
-    .profile-item { display: flex; gap: 8px; }
-    .profile-label {
+    .score-meter { flex: 0 0 auto; }
+    .score-meter svg { display: block; }
+    .score-copy { flex: 1 1 auto; min-width: 0; }
+    .score-band-name {
+      font-size: 26px; font-weight: 700; color: var(--grey-1000);
+      line-height: 1.2; margin-bottom: 12px;
+    }
+    .score-framing {
+      font-size: 14px; color: var(--grey-800); line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .score-method-note {
       font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--grey-600);
-      min-width: 110px; flex-shrink: 0; padding-top: 1px;
+      font-size: 12px; color: var(--grey-600); line-height: 1.6;
+      border-top: 1px solid var(--grey-300); padding-top: 12px;
     }
-    .profile-value { color: var(--grey-1000); font-weight: 500; font-size: 13px; }
+
+    /* ── Dimension Breakdown ── */
+    .dims { margin: 0 0 48px; }
+    .dim-row {
+      display: grid;
+      grid-template-columns: 220px 1fr 34px;
+      gap: 8px 16px; align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--grey-300);
+    }
+    .dim-row:last-child { border-bottom: none; }
+    .dim-name-cell { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .dim-name { font-size: 14px; font-weight: 600; color: var(--grey-1000); }
+    .dim-weight {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+      color: var(--grey-600); background: var(--grey-100);
+      border: 1px solid var(--grey-300);
+      padding: 1px 8px; border-radius: 100px; white-space: nowrap;
+    }
+    .dim-bar-track {
+      background: var(--grey-300); border-radius: 100px;
+      height: 8px; overflow: hidden;
+    }
+    .dim-bar-fill {
+      background: var(--blue-500); border-radius: 100px;
+      height: 100%;
+    }
+    .dim-rating {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 14px; font-weight: 600; color: var(--grey-1000);
+      text-align: right; white-space: nowrap;
+    }
+    .dim-note {
+      grid-column: 1 / -1;
+      font-size: 13px; color: var(--grey-800); line-height: 1.6;
+    }
+    /* Critical-cap marker — dimension rating capped at 4 by a Critical finding */
+    .cap-mark {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--red-500); background: var(--red-100);
+      border: 1px solid var(--red-200);
+      padding: 1px 8px; border-radius: 100px; white-space: nowrap;
+    }
+    .dim-bar-fill.capped { background: var(--red-500); }
+
+    /* ── Competitor Benchmark Table ── */
+    .bench { margin: 0 0 48px; }
+    .bench-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 4px; }
+    .bench table {
+      border-collapse: collapse; width: 100%; min-width: 520px;
+      background: var(--grey-200); border-radius: 4px;
+    }
+    .bench th, .bench td {
+      text-align: left; padding: 12px 16px; font-size: 13px;
+      border-bottom: 1px solid var(--grey-300); color: var(--grey-1000);
+      vertical-align: top;
+    }
+    .bench thead th {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--grey-600); white-space: nowrap;
+    }
+    .bench thead th.bench-brand { color: var(--blue-500); }
+    .bench tbody tr:last-child td { border-bottom: none; }
+    .bench td:first-child, .bench thead th:first-child {
+      font-weight: 600; position: sticky; left: 0; background: var(--grey-200);
+    }
+    .bench-footnote {
+      font-size: 12px; color: var(--grey-600); line-height: 1.7;
+      margin-top: 12px;
+    }
 
     /* ── Findings Section ── */
     .findings-section { padding: 8px 0 48px; }
@@ -241,79 +330,105 @@
       font-size: 14px; color: var(--grey-1000); line-height: 1.75;
       margin: 0 0 14px;
     }
-    /* View Details toggle — a button beneath the lead paragraph */
+    /* Reveal toggle — a real button with a caret, shaped unlike the severity
+       pills (rounded rectangle, sentence case) so it reads as clickable. */
     .fc-toggle {
-      display: inline-flex; align-items: center; margin-top: 4px;
+      display: inline-flex; align-items: center; gap: 7px; margin-top: 4px;
       font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--blue-500);
-      padding: 6px 14px; border-radius: 100px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.2px;
+      color: var(--blue-500);
+      padding: 8px 14px; border-radius: 6px;
       border: 1px solid var(--blue-200); background: var(--blue-100);
+      transition: background 0.15s ease, border-color 0.15s ease;
     }
-    .fc-toggle::after { content: 'View Details'; }
-    details.fc[open] .fc-toggle::after { content: 'Hide Details'; }
+    .fc-toggle::before { content: 'See more details'; }
+    .fc-toggle::after {
+      content: '\25BE'; display: inline-block; font-size: 10px; line-height: 1;
+      transition: transform 0.15s ease;
+    }
+    summary:hover .fc-toggle { background: var(--blue-200); border-color: var(--blue-400); }
+    details[open] > summary .fc-toggle::before { content: 'Hide details'; }
+    details[open] > summary .fc-toggle::after { transform: rotate(180deg); }
     .fc-detail {
       margin-top: 18px; padding-top: 18px;
       border-top: 1px solid var(--grey-300);
     }
 
-    /* ── Activation Path Diagram ── */
-    .apath { margin: 0 0 40px; }
-    .apath-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
-    .apath-steps { display: flex; gap: 12px; align-items: stretch; min-width: min-content; }
-    .astep {
-      flex: 0 0 176px; background: var(--grey-200); border-radius: 4px;
-      padding: 16px; position: relative;
+    /* ── Additional Findings (lighter list, no screenshots/recs) ── */
+    .af-block {
+      margin-top: 40px; padding-top: 32px;
+      border-top: 1px solid var(--grey-300);
     }
-    .astep:not(:last-child)::after {
-      content: '\2192'; position: absolute; right: -11px; top: 18px;
-      color: var(--grey-400); font-size: 16px; line-height: 1; z-index: 1;
+    .af-head {
+      font-size: 22px; font-weight: 700; color: var(--grey-1000);
+      margin: 0 0 6px;
     }
-    .astep-num {
+    .af-intro { font-size: 14px; color: var(--grey-800); margin: 0 0 18px; line-height: 1.6; }
+    .af-item { padding: 16px 0; border-bottom: 1px solid var(--grey-300); }
+    .af-item:last-child { border-bottom: none; }
+    .af-meta {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 8px; flex-wrap: wrap;
+    }
+    .af-title {
+      font-size: 15px; font-weight: 700; color: var(--grey-1000);
+      margin-bottom: 6px; line-height: 1.4;
+    }
+    .af-obs { font-size: 13px; color: var(--grey-800); line-height: 1.65; margin: 0; }
+
+    /* ── Analytics Panel (optional) ── */
+    .anl { margin: 0 0 48px; }
+    .anl-narrative {
+      font-size: 14px; color: var(--grey-1000); line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .anl-stats {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .anl-stat {
+      flex: 1 1 160px; background: var(--grey-200); border-radius: 4px;
+      padding: 16px;
+    }
+    .anl-stat-value {
       font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10px; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--blue-500);
-      margin-bottom: 6px; display: block;
+      font-size: 24px; font-weight: 600; color: var(--grey-1000);
+      line-height: 1.2; margin-bottom: 4px;
     }
-    .astep-label {
-      font-size: 14px; font-weight: 600; color: var(--grey-1000);
-      line-height: 1.35; margin-bottom: 8px;
+    .anl-stat-label {
+      font-size: 12px; color: var(--grey-800); line-height: 1.5;
+      margin-bottom: 8px;
     }
-    .astep-friction {
-      font-size: 12px; color: var(--red-500); line-height: 1.5;
-      border-top: 1px solid var(--grey-300); padding-top: 8px;
-    }
-
-    /* ── Competitor Benchmark Table ── */
-    .bench { margin: 0 0 40px; }
-    .bench-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 4px; }
-    .bench table {
-      border-collapse: collapse; width: 100%; min-width: 520px;
-      background: var(--grey-200); border-radius: 4px;
-    }
-    .bench th, .bench td {
-      text-align: left; padding: 12px 16px; font-size: 13px;
-      border-bottom: 1px solid var(--grey-300); color: var(--grey-1000);
-      vertical-align: top;
-    }
-    .bench thead th {
+    .anl-stat-tag {
       font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11px; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--grey-600); white-space: nowrap;
-    }
-    .bench thead th.bench-brand { color: var(--blue-500); }
-    .bench tbody tr:last-child td { border-bottom: none; }
-    .bench td:first-child, .bench thead th:first-child {
-      font-weight: 600; position: sticky; left: 0; background: var(--grey-200);
+      font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--grey-600); background: var(--grey-100);
+      border: 1px solid var(--grey-300);
+      padding: 1px 8px; border-radius: 100px;
+      display: inline-block;
     }
 
-    /* ── Shared section heading (activation path, benchmark) ── */
-    .sec-head { margin-bottom: 16px; }
-    .sec-head h2 { font-size: 22px; font-weight: 700; color: var(--grey-1000); margin-bottom: 6px; }
-    .sec-head p { font-size: 14px; color: var(--grey-800); }
-
-    @media (max-width: 640px) {
-      .astep { flex-basis: 152px; }
+    /* ── Re-score Panel ── */
+    .rsp {
+      background: var(--blue-100);
+      border: 1px solid var(--blue-200);
+      border-radius: 4px;
+      padding: 28px 32px; margin: 0 0 48px;
+    }
+    .rsp h3 {
+      font-size: 18px; font-weight: 700; color: var(--blue-600);
+      margin-bottom: 10px; line-height: 1.3;
+    }
+    .rsp p {
+      font-size: 14px; color: var(--grey-800); line-height: 1.75;
+      margin-bottom: 10px;
+    }
+    .rsp p:last-of-type { margin-bottom: 0; }
+    .rsp-version {
+      font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px; color: var(--grey-600); letter-spacing: 0.5px;
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--blue-200);
     }
 
     /* ── Methodology Block ── */
@@ -347,9 +462,15 @@
     @media (max-width: 640px) {
       .container { padding: 0 20px; }
       .report-title { font-size: 32px; }
-      .profile-grid { grid-template-columns: 1fr; }
       .fc { padding: 24px; }
       .mb { padding: 24px; }
+      .rsp { padding: 24px; }
+      .score-hero {
+        flex-direction: column; align-items: flex-start;
+        gap: 24px; padding: 28px 24px;
+      }
+      .dim-row { grid-template-columns: 1fr 34px; }
+      .dim-name-cell { grid-column: 1 / -1; }
     }
   </style>
 </head>
@@ -358,6 +479,7 @@
 
     <header class="report-header">
 
+      <!-- Sari Sari Wordmark — do not remove -->
       <div class="logo-lockup">
         <svg width="148" height="33" viewBox="0 0 248 56" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M113.123 18.9585V21.6722C114.373 19.2441 116.515 18.6371 118.801 18.53V24.5645C118.408 24.5645 116.087 24.4931 115.194 24.9573C114.23 25.4572 113.338 26.0999 113.338 29.6707V37.4191H106.91V18.9585H113.123Z" fill="#1F1D1C"/>
@@ -380,543 +502,373 @@
         </svg>
       </div>
 
-      <span class="ovl">Activation Diagnostic &middot; Full Report</span>
+      <span class="ovl">Activation Scorecard</span>
       <h1 class="report-title">Nervana</h1>
       <p class="report-caption">
-        <a href="https://www.trynervana.com/">trynervana.com</a> &nbsp;&middot;&nbsp; Website checkout and iOS app &nbsp;&middot;&nbsp; September 17, 2026
+        <a href="https://www.trynervana.com">trynervana.com</a> &nbsp;&middot;&nbsp; iOS app and website checkout &nbsp;&middot;&nbsp; September 24, 2026
       </p>
 
       <div class="why-block">
         <span class="ovl">Why This Matters</span>
-        <p>About 3 in 10 new profiles start a trial within 14 days, and the first conversation with the coach is where paying members are made: members with a meaningful first call paid at 32.6%, against 17.6% for those who skipped it and 4.8% for those whose call didn&#x27;t complete (client-provided). In this walkthrough, the path to that conversation ran through a device switch, an eight-screen story, repeated symptom questions, a free AI session that never replied, and a lesson, cost survey and check-in before Coaching unlocked. The findings below are ordered by where members meet them, so the fixes can start at the top of the funnel and work down.</p>
+        <p>About 3 in 10 new accounts start a trial within 14 days, and about 6 in 10 trials become paying members (client-provided). The biggest measured loss is between account creation and the trial, which is exactly the stretch this scorecard rates. Members who have a real first conversation with the coach start trials and pay at roughly twice the rate of members who skip it, so the path to that call, and what happens right after it, is where this score can move fastest. In the walkthrough it took 20 minutes to reach the first call and another 30 minutes on the Today screen before the first coaching session, inside a trial that lasts 3 days on the monthly plan.</p>
       </div>
 
       <hr class="rule">
 
-      <div class="profile-grid">
-        <div class="profile-item">
-          <span class="profile-label">Industry</span>
-          <span class="profile-value">Digital health, mind-body coaching for chronic symptoms</span>
-        </div>
-        <div class="profile-item">
-          <span class="profile-label">Stage</span>
-          <span class="profile-value">Early-stage, founder-led</span>
-        </div>
-        <div class="profile-item">
-          <span class="profile-label">GTM Model</span>
-          <span class="profile-value">App subscription with free trial, clinician referrals, founder-led content</span>
-        </div>
-        <div class="profile-item">
-          <span class="profile-label">Conversion Goal</span>
-          <span class="profile-value">Signup to trial to first AI coaching conversation</span>
-        </div>
-        <div class="profile-item">
-          <span class="profile-label">Customer Type</span>
-          <span class="profile-value">B2C, adults living with chronic symptoms</span>
-        </div>
-        <div class="profile-item">
-          <span class="profile-label">Competitors</span>
-          <span class="profile-value">Curable, Nerva</span>
-        </div>
-      </div>
-
     </header>
 
-    <section class="apath">
+    <section class="score-section">
       <div class="sec-head">
-        <span class="ovl">Activation Path</span>
-        <h2>The path to first value</h2>
-        <p>Each step a new user moves through to reach activation — and where they hit friction. Scroll to see the full path.</p>
+        <span class="ovl">Activation Score</span>
+        <h2>How Nervana scores today</h2>
+        <p>A criterion-referenced 0&ndash;100 score of the signup to first coaching session flow, computed from weighted 0&ndash;10 dimension ratings. Ten of eleven dimensions were rated; Accessibility is omitted for this native app and the remaining weights are renormalized.</p>
       </div>
-      <div class="apath-scroll">
-        <div class="apath-steps">
-          <div class="astep">
-            <span class="astep-num">Step 1</span>
-            <div class="astep-label">Website checkout</div>
-            <div class="astep-friction">Monthly plan quietly shortens the trial.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 2</span>
-            <div class="astep-label">Website to app</div>
-            <div class="astep-friction">Pay on the website, then switch to the phone and sign in again.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 3</span>
-            <div class="astep-label">Welcome</div>
-            <div class="astep-friction">Clear promise, one tap to begin.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 4</span>
-            <div class="astep-label">Intro story</div>
-            <div class="astep-friction">Eight screens before the first question.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 5</span>
-            <div class="astep-label">Goals and fit screener</div>
-            <div class="astep-friction">Dense statements; checking nothing leads to a stop screen.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 6</span>
-            <div class="astep-label">Sign up</div>
-            <div class="astep-friction">Newsletter bundled into account creation.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 7</span>
-            <div class="astep-label">Intake and setup</div>
-            <div class="astep-friction">Symptoms asked again, before the privacy screen.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 8</span>
-            <div class="astep-label">Free AI session</div>
-            <div class="astep-friction">The coach never replied, and onboarding continued.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 9</span>
-            <div class="astep-label">Plan ready and reminders</div>
-            <div class="astep-friction">Rating prompt, then a notification request.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 10</span>
-            <div class="astep-label">Tour</div>
-            <div class="astep-friction">Five forward-only slides over Today.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 11</span>
-            <div class="astep-label">Today</div>
-            <div class="astep-friction">Coaching locked behind three steps.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 12</span>
-            <div class="astep-label">Lesson</div>
-            <div class="astep-friction">Seven parts of long text with matching narration.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 13</span>
-            <div class="astep-label">Care Burden Baseline</div>
-            <div class="astep-friction">ER visits and spending before the first session.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 14</span>
-            <div class="astep-label">Weekly check-in</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 15</span>
-            <div class="astep-label">First coaching session</div>
-            <div class="astep-friction">No mute, pause, or way out of the mind-body framing.</div>
-          </div>
-          <div class="astep">
-            <span class="astep-num">Step 16</span>
-            <div class="astep-label">Session debrief</div>
-            <div class="astep-friction">Cards mark themselves done.</div>
-          </div>
+      <div class="score-hero">
+        <div class="score-meter">
+          
+          <svg width="200" height="200" viewBox="0 0 200 200" role="img" aria-label="Activation Score: 51 out of 100">
+            <circle cx="100" cy="100" r="84" fill="none" stroke="#D5D2CA" stroke-width="12"/>
+            <circle cx="100" cy="100" r="84" fill="none" stroke="#1F5FA6" stroke-width="12"
+                    stroke-linecap="round"
+                    stroke-dasharray="269.17 527.79"
+                    transform="rotate(-90 100 100)"/>
+            <text x="100" y="98" text-anchor="middle"
+                  font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif"
+                  font-size="52" font-weight="600" fill="#292826">51</text>
+            <text x="100" y="126" text-anchor="middle"
+                  font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif"
+                  font-size="13" font-weight="600" letter-spacing="1.5" fill="#8A8884">OUT OF 100</text>
+          </svg>
+        </div>
+        <div class="score-copy">
+          <div class="score-band-name">Friction-Heavy, but Fixable</div>
+          
+          <p class="score-framing">Measured against best-practice activation patterns for health and wellness products, your flow carries friction at several points where users decide whether to continue. Products in this range usually see meaningful signup-to-activation drop-off, and it is the recoverable kind. The top findings in this scorecard are the places to start.</p>
+          <p class="score-method-note">Automated evaluation plus a structured senior-designer walkthrough of your signup to first coaching session flow.</p>
         </div>
       </div>
     </section>
 
-    
+    <section class="dims">
+      <div class="sec-head">
+        <span class="ovl">Dimension Breakdown</span>
+        <h2>Where the score comes from</h2>
+        <p>Each in-scope dimension rated 0&ndash;10 against its section of our reference checklist, then weighted. Findings are evidence for ratings, never point deductions.</p>
+      </div>
+
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Onboarding &amp; Activation</span>
+          <span class="dim-weight">Weight 18</span>
+          
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 40%;"></div>
+        </div>
+        <div class="dim-rating">4</div>
+        <p class="dim-note">Eight story screens before the first question (ONB-02, ONB-03), date of birth and symptoms before the privacy promise (ONB-07), a forced five-slide tour (ONB-01), and coaching gated behind a lesson, a cost survey and a check-in (ONB-02). The free AI session before the paywall is the flow's real strength.</p>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Forms &amp; Input</span>
+          <span class="dim-weight">Weight 15</span>
+          
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="dim-rating">5</div>
+        <p class="dim-note">Single-column, tap-to-select intake keeps typing low (FORM-03, FORM-06), but sign-up uses placeholder-only labels (FORM-05), bundles a newsletter with no opt-out, repeats symptom questions already asked on the website, and requires free text for &ldquo;Other&rdquo; (FORM-01, FORM-07).</p>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Nielsen&rsquo;s 10 Heuristics</span>
+          <span class="dim-weight">Weight 10</span>
+          
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="dim-rating">5</div>
+        <p class="dim-note">Back navigation and status are mostly present, but a call that never connects is treated as a finished conversation (N-01, N-09), the voice session has no mute, pause or timer (N-03), and the coach has no path for members who don&rsquo;t see their symptoms as mind-body (N-02).</p>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Mobile UX</span>
+          <span class="dim-weight">Weight 10</span>
+          
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 60%;"></div>
+        </div>
+        <div class="dim-rating">6</div>
+        <p class="dim-note">Native iOS, thumb-reachable primary actions and chip-based input (MOB-01, MOB-02, MOB-05). Lessons are seven parts of long text rather than mobile-composed content (MOB-04), and billing hands off to a Stripe web page.</p>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Interaction Design</span>
+          <span class="dim-weight">Weight 9</span>
+          
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="dim-rating">5</div>
+        <p class="dim-note">Connecting and analyzing states exist (IXD-01), but the call shows no listening or speaking state, the rating prompt, reminders request and tour stack up before Today (IXD-05), and selection feedback differs across the symptom picker (IXD-03).</p>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Conversion Rate Optimization</span>
+          <span class="dim-weight">Weight 8</span>
+          
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="dim-rating">5</div>
+        <p class="dim-note">The opening screens pass the 5-second test (CRO-01, CRO-05). The trial length that changes by plan is not shown before a plan is chosen (CRO-10), and the in-app paywall was not reached in this walkthrough (see Methodology).</p>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Content &amp; Copywriting</span>
+          <span class="dim-weight">Weight 8</span>
+          
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 60%;"></div>
+        </div>
+        <div class="dim-rating">6</div>
+        <p class="dim-note">Warm, plain language throughout (COPY-07, COPY-10). The fit screener is dense (COPY-06), the 90% claim has no source (COPY-08), &ldquo;practice safety&rdquo; reads two ways, and the first lesson is seven parts of article-length text (COPY-13).</p>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Visual &amp; Brand Design</span>
+          <span class="dim-weight">Weight 6</span>
+          
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 70%;"></div>
+        </div>
+        <div class="dim-rating">7</div>
+        <p class="dim-note">Consistent, polished dark UI with clear hierarchy and real clinicians and coaches (VD-01, VD-02, VD-08). Icon mismatches, an orb that reads as a pill, and an all-male advisory board are the lapses (VD-06).</p>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Information Architecture</span>
+          <span class="dim-weight">Weight 4</span>
+          
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="dim-rating">5</div>
+        <p class="dim-note">The progress bar disappears after the story (IA-03), locked Today cards don&rsquo;t say what unlocks them (IA-10), and finished lessons leave Today without a pointer to where they went (IA-06).</p>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Bugs &amp; Defects</span>
+          <span class="dim-weight">Weight 4</span>
+          <span class="cap-mark">Capped by Critical finding</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill capped" style="width: 40%;"></div>
+        </div>
+        <div class="dim-rating">4</div>
+        <p class="dim-note">The free onboarding session never replied and the app continued as if it had (Critical, capped at 4). Saving a PDF and opening Session Analysis mark debrief items done on their own.</p>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name-cell">
+          <span class="dim-name">Accessibility</span>
+          <span class="dim-weight">Weight 8</span>
+        </div>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width: 0%;"></div>
+        </div>
+        <div class="dim-rating">&ndash;</div>
+        <p class="dim-note">Not rated. The evaluated flow is a native iOS app, so the automated WCAG scan in our method could not run. Visually obvious issues (placeholder-only labels, a dimmed disclaimer card) are logged under other dimensions. The score is computed over the ten rated dimensions with their weights renormalized.</p>
+      </div>
+
+    </section>
+
+    <section class="bench">
+      <div class="sec-head">
+        <span class="ovl">Benchmark</span>
+        <h2>How Nervana compares</h2>
+        <p>Nervana's dimension ratings side by side with named leaders in its vertical, rated on the same rubric. Scroll horizontally to see every column. Curable and Nerva were spot-evaluated on September 24 in timeboxed real-account passes from App Store listing to home screen; dimensions a pass did not surface read &ldquo;not evaluated&rdquo; rather than a guess.</p>
+      </div>
+      <div class="bench-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th class="bench-brand">Nervana</th>
+              <th>Curable</th>
+              <th>Nerva</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Onboarding &amp; Activation</td>
+              <td>4</td>
+              <td>6</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Forms &amp; Input</td>
+              <td>5</td>
+              <td>4</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td>Nielsen&rsquo;s 10 Heuristics</td>
+              <td>5</td>
+              <td>5</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Mobile UX</td>
+              <td>6</td>
+              <td>not evaluated</td>
+              <td>not evaluated</td>
+            </tr>
+            <tr>
+              <td>Interaction Design</td>
+              <td>5</td>
+              <td>5</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td>Conversion Rate Optimization</td>
+              <td>5</td>
+              <td>5</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>Content &amp; Copywriting</td>
+              <td>6</td>
+              <td>7</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>Visual &amp; Brand Design</td>
+              <td>7</td>
+              <td>not evaluated</td>
+              <td>not evaluated</td>
+            </tr>
+            <tr>
+              <td>Information Architecture</td>
+              <td>5</td>
+              <td>6</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Bugs &amp; Defects</td>
+              <td>4</td>
+              <td>7</td>
+              <td>7</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="bench-footnote"><strong>What the Curable pass showed.</strong> Curable opens straight into a text chat with its guide, &ldquo;Clara&rdquo;, and asks for email and password inside that chat about a minute in, before any value and with no password-manager support (FORM-01, FORM-05). Symptom questions are free text with a tap to continue after every message, and nothing says how long the questions will take (IXD-05, ONB-03). Then it does the thing Nervana&rsquo;s flow makes members wait for: about four minutes in, it asks whether symptoms are bothering you right now and offers a short guided relief practice, which can be closed with one tap into a congratulatory &ldquo;all done&rdquo; (ONB-02, N-03). The paywall follows at roughly minute six, hands off to a web page, shows one annual price with no monthly breakdown, and returns the member to the app with a single button (CRO-10). The first-run tour is short, skippable, and points at the panic button and the four areas of the app rather than explaining everything (ONB-01, IA-10). No defects were observed. The evaluator&rsquo;s summary: landed on the home screen knowing what to do next, though the chat is text on a screen with no voice and little personalization. The comparison that matters for Nervana is time to first value: Curable reached a relief practice in about four minutes and its offer in six, Nerva reflected the member&rsquo;s answers back at three and reached its offer at six and a half; Nervana&rsquo;s walkthrough reached the free AI session at minute 20.</p>
+      <p class="bench-footnote"><strong>What the Nerva pass showed.</strong> Nerva also asks for an account before it has shown anything (ONB-07), and its name fields are faded enough to be hard to read (FORM-05). From there it does three things Nervana&rsquo;s onboarding doesn&rsquo;t. At minute two it asks whether a healthcare professional referred you, answers &ldquo;that&rsquo;s okay&rdquo; if not, and offers an access code at the paywall for members who came through a clinician. At minute three it reflects the member&rsquo;s own answers back (&ldquo;your experience fits the common DGBI pattern&rdquo;) and interleaves short education tied to those answers, so the questions feel heard rather than collected (ONB-02, COPY-02). Before the offer it sets the program&rsquo;s shape in plain terms (six weeks, 15 minutes a day, at least five days a week), asks for one goal, and turns it into a dated commitment the member holds to confirm, which frames the price before the price appears (CRO-10). The paywall lands at about six and a half minutes with a 7-day trial, cancel anytime, a satisfaction guarantee, and Apple Pay through Stripe. The clinical baseline (validated symptom scale, mood questions, a research questionnaire) comes after payment and before the first session, the same gating pattern as Nervana&rsquo;s Care Burden Baseline, but explained as the measure progress will be checked against and asked once. The evaluator&rsquo;s summary: a lot of screens, but tidbits of value along the way and a sense of being heard. Nothing on the way says how many questions remain (ONB-03), and no defects were observed. Nerva is IBS-specific, so its symptom set is narrower than Nervana&rsquo;s; the flow shape is what the comparison is about.</p>
+      <p class="bench-footnote">Competitor ratings are timeboxed spot evaluations of each competitor's signup-reachable flows &mdash; not full audits. Dimensions not observable from outside are omitted from this table rather than guessed, so no competitor total is shown.</p>
+    </section>
 
     <section class="findings-section">
       <div class="findings-header">
-        <span class="ovl">Findings</span>
-        <h2>Full Findings</h2>
-        <p>All 31 findings from an evaluation across 10 UX dimensions — grouped by page in the order a user moves through the flow, and by severity then impact within each page. Select "View Details" on any finding for the evidence and fix.</p>
+        <span class="ovl">Friction Areas</span>
+        <h2>Priority Friction Areas</h2>
+        <p>The six highest-priority friction points on the signup to first coaching session flow, covered in depth &mdash; in the order a user hits them, grouped by page. Each is evidence behind a dimension rating above. Select "View Details" on any card for the evidence and fix. Every other issue we logged is listed under Additional Findings below.</p>
       </div>
 
-      <h3 class="page-head">Website checkout</h3>
+<h3 class="page-head">Intro story and intake</h3>
       <details class="fc">
         <summary>
           <div class="fc-meta">
             <div class="fc-num">1</div>
-            <span class="fdim">Conversion Rate Optimization</span>
-            <span class="badge bm">Major</span>
-          </div>
-          <h3 class="fc-title">Choosing the monthly plan cuts the free trial from 7 days to 3</h3>
-          <p class="fc-lead">On the website, the plan step leads with the annual plan. Choosing the flexible, no-commitment monthly option changes the trial to three days. In the walkthrough, the shorter trial read like an error until the tester connected it to the plan choice.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Trial length is part of the offer a member agrees to at checkout. 59.7% of observed trial cancellations happened within 24 hours (client-provided), so a surprise in the trial terms lands right where members decide whether to stay.</p>
-          </div>
-          <div class="cids"><span class="cid">CRO-10</span><span class="cid">N-05</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Show the trial length on each plan option before it is selected, for example &quot;7 days free&quot; and &quot;3 days free&quot;.</li>
-              <li>Add one line under the plan choice explaining why the trial differs by plan.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-high">Impact: High</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Website to app handoff</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">2</div>
-            <span class="fdim">Interaction Design</span>
-            <span class="badge bm">Major</span>
-          </div>
-          <h3 class="fc-title">After paying on the website, members have to move to their phone to start</h3>
-          <p class="fc-lead">After checkout, the confirmation explains that coaching sessions and practices live in the mobile app, not on the website. The member scans a code with their phone, installs the app and signs in again with the checkout email.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>The member has just paid and is ready to begin, and the next step is switching devices. Website visits are not yet linked to profiles (client-provided), so drop-off at this handoff is not measured today.</p>
-          </div>
-          <div class="cids"><span class="cid">CRO-08</span><span class="cid">IXD-05</span><span class="cid">CRO-10</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Offer &quot;Text me the app link&quot; next to the QR code on the confirmation page.</li>
-              <li>Send a one-tap sign-in link to the checkout email so the app opens already signed in.</li>
-              <li>Track app installs and first app opens after web checkout as their own funnel step.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-med">Effort: Med</span>
-            <span class="tag ti-high">Impact: High</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">App Store listing</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">3</div>
-            <span class="fdim">Visual &amp; Brand Design</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">The App Store listing looks different from the website</h3>
-          <p class="fc-lead">The App Store screenshots use the app&#x27;s dark palette, while the website uses a lighter look. In the walkthrough, the tester paused on the listing to wonder which look the app would have.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>A consistent look across the handoff reassures a member who just paid that they are in the right place.</p>
-          </div>
-          <div class="cids"><span class="cid">VD-07</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Lead the App Store screenshots with the same headline and imagery the website uses, then move into the dark app screens.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-low">Impact: Low</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Intro story</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">4</div>
             <span class="fdim">Onboarding &amp; Activation</span>
             <span class="badge bm">Major</span>
           </div>
-          <h3 class="fc-title">Eight story screens run before the app asks its first question</h3>
-          <p class="fc-lead">After Begin, the app plays an eight-screen story: &quot;You are not alone&quot;, &quot;The search for relief can take a toll&quot;, how Nervana works, the clinical advisory board, and a founder video with Education, Career and Personal sections. In the walkthrough, the founder&#x27;s credentials read more like a professional profile than an app screen.</p>
+          <h3 class="fc-title">Twenty minutes of story and questions run before the first conversation with the coach</h3>
+          <p class="fc-lead">After Begin, the app plays an eight-screen story (&ldquo;You are not alone&rdquo;, how Nervana works, the clinical advisory board, and a founder video with Education, Career and Personal sections) before its first question. Goals and patterns follow, then sign-up, then date of birth, symptoms by category, primary symptom, duration, a proof point, privacy, attribution and voice choice. In the walkthrough the first question arrived on screen ten and the free AI session at minute 20. Several questions repeat what the website symptom quiz already asked.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>The first call is the moment Nora&rsquo;s own data points to: members with a meaningful first call paid at 33% within 14 days, against 17% for members who skipped it (client-provided). Every screen before it is a place to leave, and the aligned screen events show the welcome preview, questionnaire and symptom picker are the three slowest steps, with median view-to-completion times of 52, 54 and 82 seconds (client-provided). The founder video and advisory board are real trust assets; placed this early, they delay the thing that actually earns the trial.</p>
+          </div>
           <span class="fc-toggle"></span>
         </summary>
         <div class="fc-detail">
           <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s04_intro_story.webp" alt="Three story screens: You are not alone, the clinical advisory board, and the founder section with Education expanded">
-            <figcaption>Story screen one, the advisory board, and the founder section.</figcaption>
+            <img src="/reports/nervana-scorecard-a78a84/screenshots/s04_intro_story.webp" alt="Story screen one, the advisory board, and the founder section">
+            <figcaption>Story screen one, the clinical advisory board, and the founder section with its expandable credentials.</figcaption>
           </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>The founder video and advisory board are real trust assets. Placed up front, they push the first thing a member does for themselves, answering a question, to screen ten.</p>
-          </div>
-          <div class="cids"><span class="cid">ONB-02</span><span class="cid">ONB-03</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Cut the story before the first question to three screens: what Nervana is, how a session works, and who built it.</li>
-              <li>Keep the founder video, and move the Education, Career and Personal details to a card on Today or the Coaches tab.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-med">Effort: Med</span>
-            <span class="tag ti-high">Impact: High</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">5</div>
-            <span class="fdim">Visual &amp; Brand Design</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">The clinical advisory board shows three men, while most members are women</h3>
-          <p class="fc-lead">&quot;Developed with experts&quot; lists three physicians on the clinical advisory board, all men.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
           <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s06_advisory_board.webp" alt="The Developed with experts screen listing three physicians">
-            <figcaption>The clinical advisory board screen.</figcaption>
+            <img src="/reports/nervana-scorecard-a78a84/screenshots/s09_repeat_questions.webp" alt="Goals and patterns before sign-up, and the symptom picker after it">
+            <figcaption>Goals and patterns before sign-up, then the symptom picker after it. Members who took the website quiz answer a third time.</figcaption>
           </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>316 of 512 new profiles and 115 of 164 trial starters since April are women (client-provided). Seeing a clinician who reflects them is one of the quickest trust signals this screen can give.</p>
+          <div class="cids">
+            <span class="cid">ONB-02</span>
+            <span class="cid">ONB-03</span>
+            <span class="cid">ONB-07</span>
+            <span class="cid">FORM-01</span>
+            <span class="cid">IXD-05</span>
           </div>
-          <div class="cids"><span class="cid">VD-08</span><span class="cid">CRO-07</span></div>
           <div class="fc-rec">
             <span class="fc-rec-label">Recommendation</span>
             <ul>
-              <li>Add a woman clinician who already works with Nervana to this screen, as an advisor or a featured clinician.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">6</div>
-            <span class="fdim">Information Architecture</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">The progress bar disappears when the questions start</h3>
-          <p class="fc-lead">A progress bar runs along the bottom of the story screens, with the founder screen at step eight. It disappears on &quot;What are your main goals?&quot; and does not return for the rest of onboarding.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s05_progress_bar.webp" alt="The founder screen with the progress bar, and the goals screen without it">
-            <figcaption>The last story screen with its progress bar, and the goals screen without one.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>The intake after the story is longer than the story itself. Without a progress bar, members can&#x27;t tell how much is left.</p>
-          </div>
-          <div class="cids"><span class="cid">IA-03</span><span class="cid">N-01</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
+              <li>Cut the story before the first question to three screens: what Nervana is, how a session works, and who built it. Keep the founder video; move Education, Career and Personal to a card on Today or the Coaches tab.</li>
+              <li>Combine goals and patterns into one screen, and keep the longer pattern statements behind &ldquo;Why we ask&rdquo;.</li>
+              <li>Ask only what the coach needs before the call: primary symptom and how long. Defer date of birth, symptom categories and attribution to after &ldquo;Your plan is ready&rdquo;.</li>
+              <li>Pass website quiz answers into the app and pre-fill or skip the matching questions.</li>
               <li>Run one progress indicator from the first story screen through the free AI session.</li>
             </ul>
           </div>
           <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">7</div>
-            <span class="fdim">Visual &amp; Brand Design</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">Some story visuals don&#x27;t match what they illustrate</h3>
-          <p class="fc-lead">On &quot;Your path with Nervana&quot;, the goal &quot;Your nervous system settles and symptoms begin to ease&quot; uses a shield with a check mark. In the walkthrough, the tester also noted a gauge illustration whose indicator sat off-center.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s07_story_icons.webp" alt="Your path with Nervana screen with a shield icon beside the goal">
-            <figcaption>The goal line uses a shield icon.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>This is the screen that introduces the coach and how the program works, so small mismatches draw attention away from the message.</p>
-          </div>
-          <div class="cids"><span class="cid">VD-06</span><span class="cid">VD-04</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Use icons from one set whose meaning matches the line they sit beside.</li>
-              <li>Center the gauge indicator on the learned-pattern screen.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-low">Impact: Low</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Goals and fit screener</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">8</div>
-            <span class="fdim">Content &amp; Copywriting</span>
-            <span class="badge bm">Major</span>
-          </div>
-          <h3 class="fc-title">The fit screener is dense, and checking nothing leads to a stop screen before sign-up</h3>
-          <p class="fc-lead">&quot;Which patterns feel familiar?&quot; lists nine statements, several long and personal, such as &quot;If you learned that a child you care about was growing up exactly as you did, you would feel sad or angry.&quot; With nothing checked, Continue opened &quot;Let&#x27;s check one thing first&quot;, which recommends seeing a healthcare provider before continuing. With any pattern checked, the result reads &quot;You&#x27;re in the right place&quot;, and in the walkthrough it wasn&#x27;t clear whether any answer would lead there.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s08_fit_screener.webp" alt="The screener with nothing checked, the Let us check one thing first screen, and the You are in the right place screen">
-            <figcaption>The screener with nothing checked, the screen that followed, and the result once a pattern is checked.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>This screen comes before account creation, so anyone who stops here leaves with no account and no way for Nervana to follow up. A member who is unsure gets the same response as someone the screen is meant to redirect.</p>
-          </div>
-          <div class="cids"><span class="cid">COPY-06</span><span class="cid">COPY-07</span><span class="cid">N-05</span><span class="cid">FORM-01</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Add &quot;None of these&quot; and &quot;I&#x27;m not sure&quot; options, and route &quot;I&#x27;m not sure&quot; forward with a short explanation.</li>
-              <li>Shorten each statement to one plain line, and keep the longer detail behind &quot;Why we ask&quot;.</li>
-              <li>Let members create an account from the provider recommendation screen so they can return after seeing their provider.</li>
-              <li>Reflect the member&#x27;s own answers on &quot;You&#x27;re in the right place&quot;, for example the patterns they checked.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
+            <span class="tag te-med">Effort: Med</span>
             <span class="tag ti-high">Impact: High</span>
           </div>
         </div>
       </details>
+<h3 class="page-head">Sign up and privacy</h3>
       <details class="fc">
         <summary>
           <div class="fc-meta">
-            <div class="fc-num">9</div>
-            <span class="fdim">Forms &amp; Input</span>
-            <span class="badge bm">Major</span>
-          </div>
-          <h3 class="fc-title">Symptom questions come up three times before the first session</h3>
-          <p class="fc-lead">Before sign-up, the app asks for goals and which patterns feel familiar. After sign-up, it asks for symptoms by category, the primary symptom and how long it has lasted. In the walkthrough, the goals screen also felt like a repeat of the symptom quiz on the website.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s09_repeat_questions.webp" alt="The goals screen, the patterns screener and the symptom picker">
-            <figcaption>Goals and patterns before sign-up, and the symptom picker after it.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>The symptom quiz has been a main website call to action since late August (client-provided), so many members answer similar questions twice. Each repeat adds time before the coach and suggests the app didn&#x27;t keep what they already said.</p>
-          </div>
-          <div class="cids"><span class="cid">FORM-01</span><span class="cid">ONB-07</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Pass website quiz answers into the app, and skip or pre-fill the matching questions.</li>
-              <li>Combine goals and patterns into a single screen.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-med">Effort: Med</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Sign up</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">10</div>
-            <span class="fdim">Forms &amp; Input</span>
-            <span class="badge bm">Major</span>
-          </div>
-          <h3 class="fc-title">Creating an account also subscribes the member to the founder&#x27;s newsletter</h3>
-          <p class="fc-lead">Under the password field, the sign-up screen reads &quot;By creating an account, you&#x27;ll also receive Finding Nervana, Nora&#x27;s newsletter. Unsubscribe anytime.&quot; There is no way to decline.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s10_sign_up.webp" alt="The sign-up screen with the newsletter line under the password field">
-            <figcaption>The newsletter line sits between the password field and Sign Up.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>A few screens later, the app promises that a member&#x27;s story stays theirs. An automatic sign-up at account creation works against that promise right before the health questions begin.</p>
-          </div>
-          <div class="cids"><span class="cid">FORM-01</span><span class="cid">VD-08</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Add an unchecked newsletter opt-in to the sign-up screen, and apply it to Google and Apple sign-in too.</li>
-              <li>Offer the newsletter again after a member&#x27;s first week.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">11</div>
-            <span class="fdim">Forms &amp; Input</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">Sign-up fields use placeholder text instead of labels</h3>
-          <p class="fc-lead">First name, Last name, Email and Password appear only as placeholder text inside each field, and disappear once the member starts typing.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s10_sign_up.webp" alt="The sign-up screen with placeholder-only fields">
-            <figcaption>Each field is labeled only by placeholder text.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Members who switch apps to find a password or pause mid-form lose track of which field is which.</p>
-          </div>
-          <div class="cids"><span class="cid">FORM-05</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Put a persistent label above each field.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-low">Impact: Low</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Intake and setup</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">12</div>
+            <div class="fc-num">2</div>
             <span class="fdim">Onboarding &amp; Activation</span>
             <span class="badge bm">Major</span>
           </div>
-          <h3 class="fc-title">Symptoms and history are collected before the privacy promise and the Terms</h3>
-          <p class="fc-lead">After sign-up, the app asks for date of birth, gender, symptoms, the primary symptom and how long it has lasted. &quot;Your story stays yours&quot; and the required Terms checkbox come after all of that. On that screen, &quot;De-identified&quot; says Nervana follows clinical standards without naming them, and the &quot;Nervana is not medical care&quot; card is dimmed.</p>
+          <h3 class="fc-title">Date of birth, symptoms and history are collected before the privacy promise and the Terms, and account creation bundles a newsletter</h3>
+          <p class="fc-lead">After sign-up, the app asks for date of birth, gender, symptoms, the primary symptom and how long it has lasted. &ldquo;Your story stays yours&rdquo; and the required Terms checkbox come after all of that. On that screen, &ldquo;De-identified&rdquo; says Nervana follows clinical standards without naming them, and the &ldquo;Nervana is not medical care&rdquo; card is dimmed. One screen earlier, sign-up reads &ldquo;By creating an account, you&rsquo;ll also receive Finding Nervana, Nora&rsquo;s newsletter&rdquo; with no way to decline.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>Nervana already has the reassurance a health buyer looks for. It arrives after the member has shared their most sensitive details, and one of its lines raises the question it is meant to answer. Health onboarding research puts a number on this order: an AI health companion saw 42% abandonment when sensitive data was requested before privacy was established, and recovered it by moving privacy to the front of the flow. A forced newsletter at the same moment works against the promise that follows.</p>
+          </div>
           <span class="fc-toggle"></span>
         </summary>
         <div class="fc-detail">
           <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s11_intake_before_privacy.webp" alt="Date of birth screen, the symptom picker, and the Your story stays yours privacy screen">
+            <img src="/reports/nervana-scorecard-a78a84/screenshots/s11_intake_before_privacy.webp" alt="Date of birth and symptoms come before the privacy screen and Terms">
             <figcaption>Date of birth and symptoms come before the privacy screen and Terms.</figcaption>
           </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Nervana already has the reassurance a health buyer looks for. It arrives after the member has shared their most sensitive details, and one of its lines is vague enough to raise the question it is meant to answer.</p>
+          <figure class="fc-evidence">
+            <img src="/reports/nervana-scorecard-a78a84/screenshots/s10_sign_up.webp" alt="The newsletter line sits between the password field and Sign Up">
+            <figcaption>The newsletter line sits between the password field and Sign Up, and the fields are labeled only by placeholder text.</figcaption>
+          </figure>
+          <div class="cids">
+            <span class="cid">ONB-07</span>
+            <span class="cid">FORM-01</span>
+            <span class="cid">FORM-05</span>
+            <span class="cid">COPY-08</span>
+            <span class="cid">VD-08</span>
           </div>
-          <div class="cids"><span class="cid">ONB-07</span><span class="cid">FORM-01</span><span class="cid">COPY-08</span></div>
           <div class="fc-rec">
             <span class="fc-rec-label">Recommendation</span>
             <ul>
-              <li>Move &quot;Your story stays yours&quot; and the Terms checkbox to directly after sign-up, before date of birth.</li>
-              <li>Name the standard behind &quot;De-identified&quot;, or describe what de-identification means in one plain line.</li>
-              <li>Show the &quot;Nervana is not medical care&quot; card at full contrast.</li>
+              <li>Move &ldquo;Your story stays yours&rdquo; and the Terms checkbox to directly after sign-up, before any health question.</li>
+              <li>Name the standard behind &ldquo;De-identified&rdquo;, or describe what de-identification means in one plain line, and show the &ldquo;not medical care&rdquo; card at full contrast.</li>
+              <li>Replace the newsletter line with an unchecked opt-in, applied to Google and Apple sign-in too. Offer it again after the first week.</li>
+              <li>Put a persistent label above each sign-up field.</li>
             </ul>
           </div>
           <div class="tags-row">
@@ -925,164 +877,42 @@
           </div>
         </div>
       </details>
+<h3 class="page-head">Free AI session</h3>
       <details class="fc">
         <summary>
           <div class="fc-meta">
-            <div class="fc-num">13</div>
-            <span class="fdim">Content &amp; Copywriting</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">The 90% proof point and the refund both land at session ten</h3>
-          <p class="fc-lead">The member experience screen reads &quot;90% of people who use Nervana find it helpful by their 10th session&quot;, with no source shown. The money-back promise asks members to complete 10 Nervana AI sessions first. In the walkthrough, the specific number read as honest, and ten sessions read as a long commitment at the point of signing up.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s13_proof_point.webp" alt="The member experience screen with the 90% figure and the money-back promise">
-            <figcaption>The member experience screen.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>At the recommended one to three sessions a week, session ten comes weeks after a 3-day or 7-day trial has ended, so the strongest reason to stay sits past the billing decision.</p>
-          </div>
-          <div class="cids"><span class="cid">COPY-08</span><span class="cid">CRO-10</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Add a tap-to-expand note on who was asked for the 90% figure, how many, and when.</li>
-              <li>Pair it with something members can reach inside the trial, such as what members notice after their first session.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">14</div>
-            <span class="fdim">Forms &amp; Input</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">Choosing &quot;Other&quot; for attribution requires free text that capitalizes like a name</h3>
-          <p class="fc-lead">On &quot;Where did you hear about Nervana?&quot;, choosing Other opens a required &quot;Please specify&quot; field. The keyboard capitalizes every word, as it would for a name.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s14_attribution.webp" alt="The attribution dropdown, and the Other field with the keyboard capitalizing">
-            <figcaption>The attribution question, and the required field under Other.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Source attribution is mostly self-reported: 417 profiles answered the question and 53 have no known source (client-provided). Clinician referrals pay at 40.8% against 16.1% for social (client-provided), so clean answers here shape where Nora spends outreach time.</p>
-          </div>
-          <div class="cids"><span class="cid">FORM-01</span><span class="cid">FORM-07</span><span class="cid">MOB-05</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Make sure the list covers the common answers, such as clinician, friend or family, and podcast, so fewer members need Other.</li>
-              <li>Make &quot;Please specify&quot; optional, and turn off word capitalization in that field.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">15</div>
-            <span class="fdim">Forms &amp; Input</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">&quot;How long has this been going on?&quot; has no option for not sure</h3>
-          <p class="fc-lead">The duration question offers only years and months. In the walkthrough, the tester wasn&#x27;t sure and entered an estimate.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s12_duration.webp" alt="The duration question with years and months fields">
-            <figcaption>Years and months are the only options.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Many members with long-running symptoms don&#x27;t know when they started, and a forced guess makes this answer less useful for personalization.</p>
-          </div>
-          <div class="cids"><span class="cid">FORM-01</span><span class="cid">FORM-06</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Add a &quot;Not sure&quot; option alongside years and months.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-low">Impact: Low</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">16</div>
-            <span class="fdim">Interaction Design</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">The symptom picker shows selections two different ways</h3>
-          <p class="fc-lead">In the symptom picker, a category with one selected symptom showed only an outline around its card, while a category with two or more showed a count.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Members scanning the list can miss a category where they already picked something.</p>
-          </div>
-          <div class="cids"><span class="cid">IXD-01</span><span class="cid">N-04</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Show the count badge from the first selection.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-low">Impact: Low</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Free AI session</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">17</div>
+            <div class="fc-num">3</div>
             <span class="fdim">Bugs &amp; Defects</span>
             <span class="badge bc">Critical</span>
           </div>
-          <h3 class="fc-title">The free AI session didn&#x27;t respond, and onboarding carried on as if it had</h3>
-          <p class="fc-lead">The tester tapped Start Free Conversation, allowed the microphone and spoke. The orb glowed, but the coach never replied. After ending the call, the app showed &quot;Analyzing Your Conversation&quot; and then &quot;Your plan is ready.&quot;</p>
+          <h3 class="fc-title">The free AI session can be skipped in one tap, and when it didn&rsquo;t connect the app carried on as if it had</h3>
+          <p class="fc-lead">&ldquo;Try a free Nervana AI session&rdquo; offers Start Free Conversation with a plain &ldquo;Skip call&rdquo; link beneath it. In the walkthrough the tester tapped Start, allowed the microphone and spoke. The orb glowed, but the coach never replied. After ending the call, the app showed &ldquo;Analyzing Your Conversation&rdquo; and then &ldquo;Your plan is ready&rdquo;, built on a conversation that never happened.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>This screen is the activation moment. Of 201 members who reached it, 73 confirmed Skip (36%) and 114 started a call (client-provided). Members with a meaningful first call paid at 33% within 14 days; members who skipped paid at 17%, and members who started a call without a meaningful completion paid at 5% (client-provided). A silent call that ends in a &ldquo;plan&rdquo; puts a member in that last group at the moment the product is meant to prove itself, and it is logged as a completed onboarding rather than a failure. Nora has said she doesn&rsquo;t want to force the call; the goal here is to make skipping less attractive than trying, and to make a failed try recoverable.</p>
+          </div>
           <span class="fc-toggle"></span>
         </summary>
         <div class="fc-detail">
           <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s15_onboarding_ai_session.webp" alt="Connecting state, the call with only an End Conversation button, the End conversation dialog, and Analyzing Your Conversation">
+            <img src="/reports/nervana-scorecard-a78a84/screenshots/s15_onboarding_ai_session.webp" alt="Connecting, the call with no reply, ending it, and the analysis screen that followed">
             <figcaption>Connecting, the call with no reply, ending it, and the analysis screen that followed.</figcaption>
           </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>This is the member&#x27;s first conversation with the coach. Members with a meaningful first call paid at 32.6% within 14 days, and members who started a call without a meaningful completion paid at 4.8% (client-provided). A silent call followed by a plan built on it reads as broken at the moment the product is meant to prove itself.</p>
+          <div class="cids">
+            <span class="cid">N-01</span>
+            <span class="cid">N-09</span>
+            <span class="cid">IXD-01</span>
+            <span class="cid">ONB-03</span>
+            <span class="cid">CRO-08</span>
           </div>
-          <div class="cids"><span class="cid">N-01</span><span class="cid">N-09</span><span class="cid">IXD-01</span></div>
           <div class="fc-rec">
             <span class="fc-rec-label">Recommendation</span>
             <ul>
-              <li>Show whether the coach is listening, thinking or speaking, and show a clear message if audio doesn&#x27;t connect within a few seconds.</li>
-              <li>Offer &quot;Try again&quot; and &quot;Switch to chat&quot; when the coach doesn&#x27;t reply.</li>
-              <li>Skip &quot;Analyzing Your Conversation&quot; when nothing was said, and log these calls as failed rather than completed.</li>
+              <li>Show whether the coach is listening, thinking or speaking, and show a clear message if audio doesn&rsquo;t connect within a few seconds.</li>
+              <li>Offer &ldquo;Try again&rdquo; and &ldquo;Switch to text&rdquo; when the coach doesn&rsquo;t reply. The text coach already exists inside the app; surfacing it here turns a failed call into a second chance instead of a skip.</li>
+              <li>Skip &ldquo;Analyzing Your Conversation&rdquo; when nothing was said, and log these calls as failed rather than completed so the meaningful-call measure stays honest.</li>
+              <li>Replace &ldquo;Skip call&rdquo; with a secondary choice that keeps the member in a conversation: &ldquo;I&rsquo;d rather type&rdquo; first, then a smaller &ldquo;Skip for now&rdquo;. Keep the &ldquo;are you sure?&rdquo; prompt and record how many people go back from it, which isn&rsquo;t tracked today (client-provided).</li>
+              <li>Tell the member what the call is for in one line: two or three questions, about four minutes, and the plan on the other side is built from it.</li>
             </ul>
           </div>
           <div class="tags-row">
@@ -1091,172 +921,94 @@
           </div>
         </div>
       </details>
+<h3 class="page-head">Plan ready and paywall</h3>
       <details class="fc">
         <summary>
           <div class="fc-meta">
-            <div class="fc-num">18</div>
-            <span class="fdim">Visual &amp; Brand Design</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">The coach&#x27;s orb reads like a pill and isn&#x27;t introduced</h3>
-          <p class="fc-lead">A glowing round orb sits at the top of most onboarding screens. It isn&#x27;t named as the coach, and up close its sound-wave marks look like a pill imprint.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s16_coach_orb.webp" alt="Try a free Nervana AI session screen with the orb">
-            <figcaption>The orb on the free AI session screen.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>For members who have tried many treatments, an image that resembles medication sends a mixed signal in a program about retraining the nervous system.</p>
-          </div>
-          <div class="cids"><span class="cid">VD-06</span><span class="cid">N-02</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Introduce the orb the first time it appears, for example &quot;This is your Nervana coach.&quot;</li>
-              <li>Animate the marks as a waveform so they read as sound.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-low">Impact: Low</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Plan ready and reminders</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">19</div>
-            <span class="fdim">Interaction Design</span>
+            <div class="fc-num">4</div>
+            <span class="fdim">Conversion Rate Optimization</span>
             <span class="badge bm">Major</span>
           </div>
-          <h3 class="fc-title">The App Store rating prompt fires before the member has used the app</h3>
-          <p class="fc-lead">The iOS prompt &quot;Enjoying Nervana? Tap a star to rate it on the App Store&quot; appears over &quot;Your plan is ready&quot;, before the first lesson or coaching session. In the walkthrough, the tester dismissed it because there was nothing to rate yet.</p>
+          <h3 class="fc-title">&ldquo;Your plan is ready&rdquo; shows the same two lines to everyone, then the rating prompt, reminders and the paywall follow before the plan is used</h3>
+          <p class="fc-lead">After the call, &ldquo;Your plan is ready&rdquo; lists &ldquo;Practice with Nervana AI&rdquo; and &ldquo;Go deeper when you want&rdquo; with the three human coaches. Nothing on it reflects what the member just said: no symptom, no pattern, no first-session focus. The iOS rating prompt fires over this screen, the reminders request follows, and then the membership paywall. In this walkthrough the paywall itself was not captured because the tester had already paid on the website; on the website, choosing the monthly plan cut the trial from 7 days to 3 without saying so before the plan was picked.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>This is where a member decides whether the call was worth a trial. Of 241 members, 151 reached the paywall and 73 started a trial (client-provided), so about half of the people who see the offer take it. The screen just before it is the only place the app can show that it listened, and today it doesn&rsquo;t. Trial length matters at the offer too: 59.7% of observed trial cancellations happened within 24 hours, and monthly trials (100 of 147) last 3 days (client-provided). A plan that reads as personal, followed by an offer whose terms are clear, is the cheapest lift on this page.</p>
+          </div>
           <span class="fc-toggle"></span>
         </summary>
         <div class="fc-detail">
           <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s17_rating_prompt.webp" alt="The App Store rating prompt over Your plan is ready">
-            <figcaption>The rating prompt over the plan screen.</figcaption>
+            <img src="/reports/nervana-scorecard-a78a84/screenshots/s18_plan_copy.webp" alt="The plan screen">
+            <figcaption>&ldquo;Your plan is ready&rdquo; reads the same for every member, and &ldquo;practice safety&rdquo; can be read two ways.</figcaption>
           </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>iOS allows this prompt only a few times a year. Spending it here gives up the chance to ask right after a good coaching session, when a rating would help App Store conversion.</p>
-          </div>
-          <div class="cids"><span class="cid">ONB-07</span><span class="cid">IXD-05</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Ask for a rating after a member finishes their first full coaching session and debrief.</li>
-              <li>Show it only to members who gave positive feedback on that session.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">20</div>
-            <span class="fdim">Content &amp; Copywriting</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">&quot;Practice safety&quot; can be read two ways</h3>
-          <p class="fc-lead">&quot;Your plan is ready&quot; says &quot;Use Nervana AI a few times each week to practice safety, reflect, and notice patterns.&quot; In the walkthrough, &quot;practice safety&quot; read as either practicing feeling safe or practicing safely.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
           <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s18_plan_copy.webp" alt="Your plan is ready screen">
-            <figcaption>The plan screen.</figcaption>
+            <img src="/reports/nervana-scorecard-a78a84/screenshots/s17_rating_prompt.webp" alt="The rating prompt over the plan screen">
+            <figcaption>The App Store rating prompt fires over the plan screen, before the member has used the app.</figcaption>
           </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>This is the one line that tells members what the plan asks of them.</p>
+          <div class="cids">
+            <span class="cid">CRO-10</span>
+            <span class="cid">ONB-07</span>
+            <span class="cid">COPY-02</span>
+            <span class="cid">IXD-05</span>
           </div>
-          <div class="cids"><span class="cid">COPY-07</span></div>
           <div class="fc-rec">
             <span class="fc-rec-label">Recommendation</span>
             <ul>
-              <li>Rewrite as &quot;to help your body feel safe, reflect, and notice patterns.&quot;</li>
+              <li>Rebuild &ldquo;Your plan is ready&rdquo; from the call: the member&rsquo;s primary symptom, one thing the coach heard, and what the first session will work on. Three lines, in the member&rsquo;s own words where possible.</li>
+              <li>Move the App Store rating prompt to after the first full coaching session and debrief, and show it only to members who rated that session well.</li>
+              <li>On the paywall and on the website plan step, show the trial length on each plan before it is selected (&ldquo;7 days free&rdquo;, &ldquo;3 days free&rdquo;) with one line on why they differ, and say what happens on the last day.</li>
+              <li>Rewrite &ldquo;practice safety&rdquo; as &ldquo;help your body feel safe&rdquo;.</li>
+              <li>Record the in-app paywall in the next walkthrough so the offer itself can be rated.</li>
             </ul>
           </div>
           <div class="tags-row">
             <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-low">Impact: Low</span>
+            <span class="tag ti-high">Impact: High</span>
           </div>
         </div>
       </details>
-      <h3 class="page-head">Tour</h3>
+<h3 class="page-head">Today</h3>
       <details class="fc">
         <summary>
           <div class="fc-meta">
-            <div class="fc-num">21</div>
+            <div class="fc-num">5</div>
             <span class="fdim">Onboarding &amp; Activation</span>
             <span class="badge bm">Major</span>
           </div>
-          <h3 class="fc-title">A notification request and a five-slide tour stack up before Today</h3>
-          <p class="fc-lead">A reminders screen and the iOS notification dialog come first. Today then opens under a five-slide modal: how we&#x27;ll work together, preparation, the call, next steps and human coaching. Slides only move forward, so the tester couldn&#x27;t return to the first one, and in the walkthrough the amount of information at once felt like a lot to remember.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s19_reminders_tour.webp" alt="Notification dialog and three slides of the modal tour over Today">
-            <figcaption>The notification request and three of the five tour slides.</figcaption>
-          </figure>
+          <h3 class="fc-title">The first coaching session sits behind a five-slide tour, a seven-part lesson, a cost survey and a check-in</h3>
+          <p class="fc-lead">Today opens under a five-slide modal that only moves forward. Beneath it, &ldquo;We&rsquo;ll start with some preparation before our call&rdquo;: the active step is a seven-part lesson, with Care Burden Baseline (urgent care visits, appointments, missed days and out-of-pocket spending over 90 days) and Weekly Check In locked below it, with no reason given. Coaching appears only after all three are done. In the walkthrough that took 32 minutes, and by the check-in the tester said it felt like preparing for something that hadn&rsquo;t arrived yet.</p>
           <div class="fc-why">
             <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Many members arrive anxious about their symptoms. Loading the whole program at once is harder to take in than learning each step when it arrives, and Today already shows the Prepare, Session, Debrief track.</p>
+            <p>The coach is what members are trialing, and a monthly trial lasts 3 days. Within 14 days, 67 of 241 members completed the Session 1 lesson, 60 the check-in and 56 the coaching session (client-provided), so each required step ahead of the coach is where some of them stop. Nora has already described the cost survey as data collection for insurance pathways rather than member value. Financial questions before the first session cost trust in a health flow, and the tour repeats what the Prepare, Session, Debrief track on Today already shows.</p>
           </div>
-          <div class="cids"><span class="cid">ONB-01</span><span class="cid">N-03</span><span class="cid">IXD-05</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Replace the tour with a one-line hint on each Today step the first time it appears.</li>
-              <li>If a tour stays, cut it to three slides and allow swiping back.</li>
-              <li>Show the reminders screen after the first lesson, when &quot;One small practice is ready&quot; has something behind it.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Today</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">22</div>
-            <span class="fdim">Onboarding &amp; Activation</span>
-            <span class="badge bm">Major</span>
-          </div>
-          <h3 class="fc-title">The first coaching session sits behind a lesson, a cost survey and a check-in</h3>
-          <p class="fc-lead">Today opens with &quot;We&#x27;ll start with some preparation before our call.&quot; The active step is a seven-part lesson, with Care Burden Baseline and Weekly Check In locked below it and no reason given. Closing the lesson early returns to Today, where the lesson is still the only way forward. Coaching appears only after all three are done, and by the check-in the tester said it felt like preparing for something that hadn&#x27;t arrived yet.</p>
           <span class="fc-toggle"></span>
         </summary>
         <div class="fc-detail">
           <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s20_coaching_gated.webp" alt="Today with two locked cards, the Care Burden Baseline intro, and Today with Coaching unlocked">
+            <img src="/reports/nervana-scorecard-a78a84/screenshots/s20_coaching_gated.webp" alt="Today on first open, the cost baseline, and Coaching once the three steps are done">
             <figcaption>Today on first open, the cost baseline, and Coaching once the three steps are done.</figcaption>
           </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>The coach is what members are trialing. 24.3% of new profiles complete a coaching session within 7 days (client-provided), and each required step before it is a place a member can stop partway through a trial.</p>
+          <figure class="fc-evidence">
+            <img src="/reports/nervana-scorecard-a78a84/screenshots/s19_reminders_tour.webp" alt="The notification request and three of the five tour slides">
+            <figcaption>The notification request and three of the five forward-only tour slides that arrive before Today.</figcaption>
+          </figure>
+          <div class="cids">
+            <span class="cid">ONB-01</span>
+            <span class="cid">ONB-02</span>
+            <span class="cid">ONB-03</span>
+            <span class="cid">ONB-07</span>
+            <span class="cid">IA-10</span>
+            <span class="cid">N-03</span>
           </div>
-          <div class="cids"><span class="cid">ONB-02</span><span class="cid">ONB-03</span><span class="cid">ONB-07</span><span class="cid">IA-10</span></div>
           <div class="fc-rec">
             <span class="fc-rec-label">Recommendation</span>
             <ul>
-              <li>Unlock Coaching right after onboarding, and offer the lesson as optional preparation.</li>
-              <li>Move Care Burden Baseline to after the first coaching session.</li>
+              <li>Unlock Coaching the moment onboarding ends, and offer the lesson as optional preparation the member can do before or after the session.</li>
+              <li>Move Care Burden Baseline to after the first coaching session, or into week two, and explain the four icons or remove them.</li>
+              <li>Replace the tour with a one-line hint on each Today step the first time it appears. If a tour stays, cut it to three slides and allow swiping back.</li>
               <li>On each locked card, say what unlocks it and how long it takes.</li>
+              <li>Show the reminders screen after the first session, when &ldquo;One small practice is ready&rdquo; has something behind it; 88 of 169 members skipped it where it sits today (client-provided).</li>
             </ul>
           </div>
           <div class="tags-row">
@@ -1265,334 +1017,295 @@
           </div>
         </div>
       </details>
+<h3 class="page-head">First coaching session</h3>
       <details class="fc">
         <summary>
           <div class="fc-meta">
-            <div class="fc-num">23</div>
-            <span class="fdim">Nielsen&#x27;s 10 Heuristics</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">The weekly goal says &quot;0 of 1&quot; and marks three options as recommended</h3>
-          <p class="fc-lead">The weekly goal ring reads &quot;0 of 1&quot; without saying one of what. In the goal picker, 1, 2 and 3 sessions a week all carry a Recommended tag.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s21_weekly_goal.webp" alt="The weekly goal picker with three recommended options, and the explanation sheet">
-            <figcaption>The goal picker and its explanation.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Members have to work out the unit and choose between three recommendations on their first visit to Today.</p>
-          </div>
-          <div class="cids"><span class="cid">N-06</span><span class="cid">IXD-04</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Label the ring &quot;0 of 1 sessions&quot;.</li>
-              <li>Tag one default as recommended, and keep 2 to 3 sessions as &quot;for extra support&quot;.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-low">Impact: Low</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Lesson</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">24</div>
-            <span class="fdim">Content &amp; Copywriting</span>
+            <div class="fc-num">6</div>
+            <span class="fdim">Nielsen&rsquo;s 10 Heuristics</span>
             <span class="badge bm">Major</span>
           </div>
-          <h3 class="fc-title">The lesson reads like an article, with narration that repeats the text</h3>
-          <p class="fc-lead">The Missing Link In Recovery has seven parts. Each has a Listen player that reads the paragraphs below it word for word, without saying the text is the transcript, and there is no playback speed control. Most parts pair long text with a header image; &quot;So How Does It Actually Work?&quot; is the one diagram.</p>
+          <h3 class="fc-title">The coach has no way out when a member doesn&rsquo;t see their symptoms as mind-body, and the session has no mute, pause or timer</h3>
+          <p class="fc-lead">In the first coaching session, the tester described their pain in physical, structural terms more than once. The coach returned to a nervous-system explanation each time, and nothing in the session lets the member say the framing doesn&rsquo;t fit. During the 10 to 15 minute call the screen shows the orb, a background brush and End Conversation: no mute, no pause, no time elapsed.</p>
+          <div class="fc-why">
+            <span class="fc-why-label">Why This Finding Matters</span>
+            <p>This is the session that has to earn the second day, and second-day return is Nora&rsquo;s repeat-value candidate (43 of 241 completed actions on two dates in week one, client-provided). One member wrote after a voice session that it &ldquo;makes me feel heard and understood&rdquo;; another wrote at session ten that the app &ldquo;makes me feel like all I need to do is think different and I will be cured&rdquo; and asked for physical causes to be acknowledged (client-provided). The same coach produces both, and the difference is whether it can hold a member&rsquo;s own explanation without dropping the method.</p>
+          </div>
           <span class="fc-toggle"></span>
         </summary>
         <div class="fc-detail">
           <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s22_lesson.webp" alt="Lesson part one with player and text, the diagram in part four, and long text in part four">
-            <figcaption>Part one, the diagram in part four, and the text beneath it.</figcaption>
+            <img src="/reports/nervana-scorecard-a78a84/screenshots/s25_coaching_call.webp" alt="What to expect, and the in-call screen">
+            <figcaption>What to expect, and the in-call screen with End Conversation as the only control.</figcaption>
           </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>The lesson is required before the first coaching session, and 27.9% of new profiles complete a lesson within 7 days (client-provided). Concepts like fight-or-flight and brain-body signals are easier to grasp as short visuals than as paragraphs.</p>
+          <div class="cids">
+            <span class="cid">N-02</span>
+            <span class="cid">N-03</span>
+            <span class="cid">N-01</span>
           </div>
-          <div class="cids"><span class="cid">COPY-06</span><span class="cid">COPY-13</span><span class="cid">VD-06</span></div>
           <div class="fc-rec">
             <span class="fc-rec-label">Recommendation</span>
             <ul>
-              <li>Label the text as the transcript, so members know they can listen or read.</li>
-              <li>Add playback speed options.</li>
-              <li>Turn each part&#x27;s main concept into a short diagram like &quot;So How Does It Actually Work?&quot;</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-med">Effort: Med</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">25</div>
-            <span class="fdim">Information Architecture</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">Finished lessons leave Today with no pointer to where they went</h3>
-          <p class="fc-lead">After the check-in, the lesson card is replaced by the Coaching card. Today doesn&#x27;t say where to find the lesson again.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s23_lessons_disappear.webp" alt="Today with the lesson checked, and Today after check-in with only Coaching">
-            <figcaption>Before and after the check-in.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Members who want to revisit an idea before their next session have to go looking for it.</p>
-          </div>
-          <div class="cids"><span class="cid">IA-06</span><span class="cid">ONB-04</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Add &quot;Find this in Toolkit&quot; to the completed lesson card before it leaves Today.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Care Burden Baseline</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">26</div>
-            <span class="fdim">Forms &amp; Input</span>
-            <span class="badge bm">Major</span>
-          </div>
-          <h3 class="fc-title">A cost survey sits in the preparation step before the first session</h3>
-          <p class="fc-lead">Care Burden Baseline asks about urgent care or ER visits, appointments, missed days and out-of-pocket spending over 90 days. Its intro says the answers support making Nervana lower-cost or covered by insurance, and shows four icons (Time, Care, Missed life, Spending) with no explanation. In the walkthrough, the questions assumed the member already thinks of these experiences as symptoms.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s24_care_burden_baseline.webp" alt="Care Burden Baseline intro, ER visits question, and out-of-pocket spending question">
-            <figcaption>The intro and two of the four questions.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Its stated purpose is lower cost and insurance coverage, which matters, but it sits between the member and their first coaching session. Financial questions early in a health flow cost trust.</p>
-          </div>
-          <div class="cids"><span class="cid">ONB-07</span><span class="cid">FORM-01</span><span class="cid">COPY-07</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Move Care Burden Baseline to after the first coaching session, or into week two.</li>
-              <li>Add &quot;Not sure&quot; to each question.</li>
-              <li>Explain the four icons, or remove them.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">First coaching session</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">27</div>
-            <span class="fdim">Nielsen&#x27;s 10 Heuristics</span>
-            <span class="badge bm">Major</span>
-          </div>
-          <h3 class="fc-title">The coach has no way out when a member doesn&#x27;t see their symptoms as mind-body</h3>
-          <p class="fc-lead">In the first coaching session, the tester described their pain in physical, structural terms more than once. The coach returned to a nervous-system explanation each time, and the session offers no way for the member to say the framing doesn&#x27;t fit.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Onboarding asks members to rule out structural causes first, and one member wrote after a voice session that it &quot;makes me feel heard and understood&quot; (client-provided). When the coach keeps returning to one explanation, the same member can feel unheard in the session meant to prove the product.</p>
-          </div>
-          <div class="cids"><span class="cid">N-02</span><span class="cid">N-03</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Give the coach a path for members who attribute symptoms to a diagnosed physical cause: acknowledge it, point to their clinician, and offer a practice that doesn&#x27;t depend on agreeing.</li>
-              <li>Add a &quot;This doesn&#x27;t fit me&quot; option during or after the session.</li>
-              <li>Review session transcripts where a member repeats the same point three or more times.</li>
+              <li>Give the coach a path for members who attribute symptoms to a diagnosed physical cause: acknowledge it, point to their clinician, and offer a practice that doesn&rsquo;t depend on agreeing.</li>
+              <li>Add a &ldquo;This doesn&rsquo;t fit me&rdquo; option during or after the session, and review transcripts where a member repeats the same point three or more times.</li>
+              <li>Add mute and pause controls, and show time elapsed against the 10 to 15 minute session.</li>
             </ul>
           </div>
           <div class="tags-row">
             <span class="tag te-med">Effort: Med</span>
             <span class="tag ti-high">Impact: High</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">28</div>
-            <span class="fdim">Nielsen&#x27;s 10 Heuristics</span>
-            <span class="badge bm">Major</span>
-          </div>
-          <h3 class="fc-title">The voice session has no mute, pause or timer</h3>
-          <p class="fc-lead">During the 10 to 15 minute voice session, the screen shows the orb, a background brush and End Conversation. There is no mute, no pause and no time elapsed. The walkthrough noted fast replies, and background noise didn&#x27;t interrupt the call.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s25_coaching_call.webp" alt="What to expect panel before the call, and the call screen with only End Conversation">
-            <figcaption>What to expect, and the in-call screen.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Members take these sessions at home, where interruptions happen. With no mute or pause, ending the session is the only option.</p>
-          </div>
-          <div class="cids"><span class="cid">N-03</span><span class="cid">N-01</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Add mute and pause controls.</li>
-              <li>Show time elapsed against the 10 to 15 minute session.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-med">Effort: Med</span>
-            <span class="tag ti-med">Impact: Med</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">29</div>
-            <span class="fdim">Nielsen&#x27;s 10 Heuristics</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">The coach voice is chosen before the first conversation and can&#x27;t be changed from the session</h3>
-          <p class="fc-lead">Members pick a voice from short previews during onboarding. In the session, the calm, slow voice felt mismatched once the conversation got harder, and the connect screen notes the session mode can&#x27;t be changed once started.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s27_voice_choice.webp" alt="Voice picker in onboarding, and the connect screen">
-            <figcaption>The voice picker, and the connect screen before a session.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>A voice that suits a breathing exercise can feel slow in a problem-solving conversation, and members won&#x27;t know which they need until they talk.</p>
-          </div>
-          <div class="cids"><span class="cid">N-07</span><span class="cid">IXD-05</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Let members change voice and pace on the connect screen before each session.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-low">Impact: Low</span>
-          </div>
-        </div>
-      </details>
-      <h3 class="page-head">Session debrief</h3>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">30</div>
-            <span class="fdim">Bugs &amp; Defects</span>
-            <span class="badge bm">Major</span>
-          </div>
-          <h3 class="fc-title">Debrief items mark themselves done</h3>
-          <p class="fc-lead">Saving the action items as a PDF marked the action item Done, though the practice hadn&#x27;t been tried. Opening Session Analysis from Today also marked it complete, and Today then showed all four debrief cards checked.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s28_debrief_checks.webp" alt="Action items before and after saving a PDF, and Today with all debrief cards checked">
-            <figcaption>Before saving the PDF, after it, and Today afterwards.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>&quot;Any completed action&quot; and &quot;completed actions on two dates&quot; are two of Nervana&#x27;s candidate activation measures (client-provided). If opening or saving counts as completing, those numbers overstate activation.</p>
-          </div>
-          <div class="cids"><span class="cid">N-01</span><span class="cid">N-05</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Mark an action item done only when the member taps &quot;Mark as done&quot;.</li>
-              <li>Mark debrief cards complete only after a clear finishing action, such as saving a reflection.</li>
-              <li>Check the events behind the candidate activation measures for other automatic completions.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-high">Impact: High</span>
-          </div>
-        </div>
-      </details>
-      <details class="fc">
-        <summary>
-          <div class="fc-meta">
-            <div class="fc-num">31</div>
-            <span class="fdim">Nielsen&#x27;s 10 Heuristics</span>
-            <span class="badge bn">Minor</span>
-          </div>
-          <h3 class="fc-title">Three separate save or print buttons, and no back arrow on Session Analysis</h3>
-          <p class="fc-lead">Session Analysis, the transcript and Action Items each have their own save or print button. Session Analysis has Continue but no back arrow.</p>
-          <span class="fc-toggle"></span>
-        </summary>
-        <div class="fc-detail">
-          <figure class="fc-evidence">
-            <img src="/reports/nervana-scorecard-a78a84/screenshots/s29_save_print.webp" alt="Action Items screen with its Save or Print PDF button">
-            <figcaption>One of the three save or print buttons.</figcaption>
-          </figure>
-          <div class="fc-why">
-            <span class="fc-why-label">Why This Finding Matters</span>
-            <p>Members can&#x27;t tell which button saves what, or how to leave the analysis without moving forward.</p>
-          </div>
-          <div class="cids"><span class="cid">N-04</span><span class="cid">N-03</span></div>
-          <div class="fc-rec">
-            <span class="fc-rec-label">Recommendation</span>
-            <ul>
-              <li>Replace the three buttons with one &quot;Save session summary&quot; that includes all three.</li>
-              <li>Add a back arrow to Session Analysis.</li>
-            </ul>
-          </div>
-          <div class="tags-row">
-            <span class="tag te-low">Effort: Low</span>
-            <span class="tag ti-low">Impact: Low</span>
           </div>
         </div>
       </details>
 
+      
+      <div class="af-block">
+        <h3 class="af-head">Additional Findings</h3>
+        <p class="af-intro">Every other issue we logged on the signup to first coaching session flow, grouped by page in the order a user hits them. Lighter detail than the priority areas above, drawn from the same evidence base.</p>
+
+        <h4 class="page-head">Website checkout</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Conversion Rate Optimization</span>
+          </div>
+          <div class="af-title">Choosing the monthly plan cuts the free trial from 7 days to 3</div>
+          <p class="af-obs">The plan step leads with the annual plan; picking the flexible monthly option changes the trial to three days, and the shorter trial read like an error until the tester connected it to the plan choice.</p>
+        </div>
+        <h4 class="page-head">Website to app handoff</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Interaction Design</span>
+          </div>
+          <div class="af-title">After paying on the website, members have to move to their phone to start</div>
+          <p class="af-obs">The confirmation explains that sessions live in the mobile app; the member scans a code, installs the app and signs in again. Only 15 of 281 accounts were created on the website, and 8 of those 15 have no later app onboarding event (client-provided).</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Visual &amp; Brand Design</span>
+          </div>
+          <div class="af-title">The App Store listing looks different from the website</div>
+          <p class="af-obs">App Store screenshots use the dark app palette while the website is light; the tester paused to wonder which look the app would have.</p>
+        </div>
+        <h4 class="page-head">Intro story</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Visual &amp; Brand Design</span>
+          </div>
+          <div class="af-title">The clinical advisory board shows three men, while most members are women</div>
+          <p class="af-obs">&ldquo;Developed with experts&rdquo; lists three physicians, all men; 316 of 512 profiles and 115 of 164 trial starters are women (client-provided).</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Information Architecture</span>
+          </div>
+          <div class="af-title">The progress bar disappears when the questions start</div>
+          <p class="af-obs">A progress bar runs along the story screens and vanishes on &ldquo;What are your main goals?&rdquo;, though the intake after the story is longer than the story.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Visual &amp; Brand Design</span>
+          </div>
+          <div class="af-title">Some story visuals don&rsquo;t match what they illustrate</div>
+          <p class="af-obs">&ldquo;Your nervous system settles&rdquo; uses a shield with a check mark, and a gauge illustration&rsquo;s indicator sits off-center.</p>
+        </div>
+        <h4 class="page-head">Goals and fit screener</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Content &amp; Copywriting</span>
+          </div>
+          <div class="af-title">The fit screener is dense, and checking nothing leads to a stop screen before sign-up</div>
+          <p class="af-obs">Nine long, personal statements; with nothing checked, Continue opens a screen recommending a healthcare provider, with no account and no way for Nervana to follow up. 13 of 205 in-app screeners scored zero (client-provided).</p>
+        </div>
+        <h4 class="page-head">Intake and setup</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Content &amp; Copywriting</span>
+          </div>
+          <div class="af-title">The 90% proof point and the money-back promise both land at session ten</div>
+          <p class="af-obs">&ldquo;90% of people who use Nervana find it helpful by their 10th session&rdquo; shows no source, and the refund requires ten sessions, weeks past a 3-day or 7-day trial.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Forms &amp; Input</span>
+          </div>
+          <div class="af-title">Choosing &ldquo;Other&rdquo; for attribution requires free text that capitalizes like a name</div>
+          <p class="af-obs">&ldquo;Please specify&rdquo; is required and the keyboard capitalizes every word. 53 profiles have no known source and clinician referrals pay at 40.8% against 16.1% for social (client-provided).</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Forms &amp; Input</span>
+          </div>
+          <div class="af-title">&ldquo;How long has this been going on?&rdquo; has no option for not sure</div>
+          <p class="af-obs">Years and months are the only options; the tester wasn&rsquo;t sure and entered an estimate.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Interaction Design</span>
+          </div>
+          <div class="af-title">The symptom picker shows selections two different ways</div>
+          <p class="af-obs">A category with one selected symptom shows only an outline; a category with two or more shows a count.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Visual &amp; Brand Design</span>
+          </div>
+          <div class="af-title">The coach&rsquo;s orb reads like a pill and isn&rsquo;t introduced</div>
+          <p class="af-obs">The orb sits at the top of most onboarding screens, is never named as the coach, and its sound-wave marks look like a pill imprint up close.</p>
+        </div>
+        <h4 class="page-head">Tour</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Onboarding &amp; Activation</span>
+          </div>
+          <div class="af-title">A notification request and a five-slide tour stack up before Today</div>
+          <p class="af-obs">The reminders screen and iOS notification dialog come first, then a five-slide modal that only moves forward. Covered under priority area 5.</p>
+        </div>
+        <h4 class="page-head">Today</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Nielsen&rsquo;s 10 Heuristics</span>
+          </div>
+          <div class="af-title">The weekly goal says &ldquo;0 of 1&rdquo; and marks three options as recommended</div>
+          <p class="af-obs">The ring doesn&rsquo;t say one of what, and 1, 2 and 3 sessions a week all carry a Recommended tag.</p>
+        </div>
+        <h4 class="page-head">Lesson</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Content &amp; Copywriting</span>
+          </div>
+          <div class="af-title">The lesson reads like an article, with narration that repeats the text</div>
+          <p class="af-obs">Seven parts, each with a Listen player that reads the paragraphs word for word, no speed control, and one diagram among mostly text. The lesson is required before the first session.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Information Architecture</span>
+          </div>
+          <div class="af-title">Finished lessons leave Today with no pointer to where they went</div>
+          <p class="af-obs">After the check-in the lesson card is replaced by Coaching, and Today doesn&rsquo;t say where to find the lesson again.</p>
+        </div>
+        <h4 class="page-head">Care Burden Baseline</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Forms &amp; Input</span>
+          </div>
+          <div class="af-title">A cost survey sits in the preparation step before the first session</div>
+          <p class="af-obs">Urgent care visits, appointments, missed days and out-of-pocket spending over 90 days, with four unexplained icons. &ldquo;Prefer not to say&rdquo; is offered; placement is the issue. Covered under priority area 5.</p>
+        </div>
+        <h4 class="page-head">First coaching session</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Nielsen&rsquo;s 10 Heuristics</span>
+          </div>
+          <div class="af-title">The coach voice is chosen before the first conversation and can&rsquo;t be changed from the session</div>
+          <p class="af-obs">The calm, slow voice chosen from short previews felt mismatched once the conversation got harder, and the connect screen says the mode can&rsquo;t change once started.</p>
+        </div>
+        <h4 class="page-head">Session debrief</h4>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bm">Major</span>
+            <span class="fdim">Bugs &amp; Defects</span>
+          </div>
+          <div class="af-title">Debrief items mark themselves done</div>
+          <p class="af-obs">Saving the action items as a PDF marked the item Done, and opening Session Analysis from Today marked it complete. &ldquo;Any completed action&rdquo; is a candidate activation measure, so automatic completions overstate it.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-meta">
+            <span class="badge bn">Minor</span>
+            <span class="fdim">Nielsen&rsquo;s 10 Heuristics</span>
+          </div>
+          <div class="af-title">Three separate save or print buttons, and no back arrow on Session Analysis</div>
+          <p class="af-obs">Session Analysis, the transcript and Action Items each have their own save or print button; Session Analysis has Continue but no back arrow.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="anl">
+      <div class="sec-head">
+        <span class="ovl">Analytics Context</span>
+        <h2>What your numbers add to the story</h2>
+        <p>Client-provided metrics that sharpen where to start. They inform the narrative and prioritization &mdash; never the score arithmetic.</p>
+      </div>
+      <p class="anl-narrative">Nora&rsquo;s aligned June 20 to September 16 export is why the priority areas concentrate on the stretch from the first screen to the first coaching session. Most accounts are created in the app (200 of 281, with 15 on the website), and the paywall comes after the free AI session, so the in-app onboarding is the funnel, not a step after it. The first-call split is the sharpest signal in the pack: members with a meaningful call paid at roughly twice the rate of members who skipped, and 36% of members who reached the call screen skipped it. One tension worth naming: per-screen completion counts look high (most screens show near-identical viewed and completed counts), which could argue against a low Onboarding rating. Those counts are coverage, not sequence, and Nora has confirmed they cannot yet locate where pre-trial loss happens; the rating stands on the walkthrough evidence, and the next export should add ordered drop-off so the two can be reconciled.</p>
+      <div class="anl-stats">
+        <div class="anl-stat">
+          <div class="anl-stat-value">30.3%</div>
+          <div class="anl-stat-label">of new accounts started a trial within 14 days (73 of 241)</div>
+          <span class="anl-stat-tag">Client-provided</span>
+        </div>
+        <div class="anl-stat">
+          <div class="anl-stat-value">60.3%</div>
+          <div class="anl-stat-label">of trial starters paid within 14 days of the trial (44 of 73)</div>
+          <span class="anl-stat-tag">Client-provided</span>
+        </div>
+        <div class="anl-stat">
+          <div class="anl-stat-value">36%</div>
+          <div class="anl-stat-label">of members who reached the free AI session confirmed Skip (73 of 201)</div>
+          <span class="anl-stat-tag">Client-provided</span>
+        </div>
+        <div class="anl-stat">
+          <div class="anl-stat-value">33% vs 17%</div>
+          <div class="anl-stat-label">paid within 14 days: meaningful first call vs skipped call</div>
+          <span class="anl-stat-tag">Client-provided</span>
+        </div>
+        <div class="anl-stat">
+          <div class="anl-stat-value">21.6%</div>
+          <div class="anl-stat-label">completed a coaching session within 7 days of signup (52 of 241)</div>
+          <span class="anl-stat-tag">Client-provided</span>
+        </div>
+        <div class="anl-stat">
+          <div class="anl-stat-value">59.7%</div>
+          <div class="anl-stat-label">of observed trial cancellations happened within 24 hours (40 of 67, April to September)</div>
+          <span class="anl-stat-tag">Client-provided</span>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="rsp">
+      <span class="ovl">Included With This Scorecard</span>
+      <h3>One re-score, within 90 days</h3>
+      <p>Your Scorecard includes one re-run of the Activation Score within 90 days of September 24, 2026. Ship your fixes, then we re-rate every dimension on the same rubric and deliver a per-dimension before/after delta &mdash; old rating, new rating, and change &mdash; plus your new total score and band.</p>
+      <p>To schedule your re-score, reply to your delivery email or write to patti@sarisari.design.</p>
+      <p class="rsp-version">Scored against Rubric 1.0 (July 29, 2026) &mdash; your re-score uses this same pinned version, so the delta measures your product, not a moved yardstick.</p>
     </section>
 
     <div class="mb">
       <div class="mb-section">
         <span class="ovl">Methodology</span>
-        <p>An AI-assisted analyst reviewed a narrated designer walkthrough of Nervana&#x27;s website checkout and iOS app, from plan selection through the first coaching session and debrief, across 10 UX dimensions of a Nielsen Norman Group grounded framework, with client-provided analytics used to prioritize.</p>
+        <p>Automated evaluation of Nervana&rsquo;s public surface plus a structured senior-designer walkthrough of the signup to first coaching session flow, recorded on September 8, 2026 with one test account on one iPhone, rated across ten UX dimensions against a criterion-referenced rubric (Activation Score profile; Accessibility omitted for this native app, SEO and performance out of scope behind auth). Client-provided analytics were used to prioritize, never to score. The walkthrough predates the September 16 production update (1.0.56), which changed the opening headline and the post-call human-coaching copy; those screens should be re-recorded before the Teardown. The in-app paywall was not reached in this walkthrough because the tester had already subscribed on the website. A free Preview Score was produced on September 14 from the public surface only; it rated what could be seen from outside and is not comparable to this score.</p>
       </div>
       <div class="mb-section">
         <span class="ovl">Evaluation Lens</span>
-        <p>Nervana has to show that its AI coach is worth paying for inside a short trial, to adults who have often tried a lot already. Each step was judged by whether it moves a new member toward a meaningful first conversation with the coach, and whether members come away feeling heard.</p>
+        <p>Nervana has to show that its AI coach is worth a trial inside a single sitting, to adults who have often tried a lot already, and most of them meet the product in the app rather than on the website. Each step was judged by whether it moves a new member toward a meaningful first conversation with the coach, whether the offer that follows is clear, and whether the first paid day makes them want a second.</p>
       </div>
     </div>
 
+    
     <footer class="report-footer">
       <p class="disclaimer">
-        This audit is based on a designer walkthrough of Nervana's website checkout and iOS app, recorded September 8, 2026, together with client-provided analytics. The walkthrough used one test account on one iPhone. Direct access to the product, supporting flows, analytics, and user data would enable a deeper, more comprehensive review.
+        This scorecard is based on automated evaluation of Nervana's public surface and a structured senior-designer walkthrough of the evaluated flow. Ratings are criterion-referenced against best-practice activation patterns for health and wellness products; competitor figures are timeboxed spot evaluations, not full audits. Client-provided metrics were shared in confidence and are not for publication.
       </p>
       <div class="brand-footer">
-        <span>Sari Sari Design</span> &nbsp;&middot;&nbsp; Activation Diagnostic &nbsp;&middot;&nbsp; September 2026
+        <span>Sari Sari Design</span> &nbsp;&middot;&nbsp; Activation Scorecard &nbsp;&middot;&nbsp; September 2026
       </div>
     </footer>
 
